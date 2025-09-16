@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | TallyTrack Africa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <style>
+        /* Font Face */
+        @font-face {
+            font-family:'Adam-Medium';
+            src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Variables */
+        :root {
+            --primary-dark: #1D260B;
+            --primary-gold: linear-gradient(135deg, #D4AF37 0%, #F1E5B9 100%);
+            --primary-gold-solid: #D4AF37;
+            --light-gold: #F1E5B9;
+            --white: #FFFFFF;
+            --black: #000000;
+            --dark-bg: #0A0E05;
+            --card-bg: rgba(29, 38, 11, 0.8);
+            --text-light: #E2E8F0;
+            --text-gray: #A0AEC0;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+            --inactive: rgba(160, 174, 192, 0.3);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove blue outline when buttons/links are tapped or focused */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-color-dark); /* or any color you like */
+  outline-offset: 2px;
+}
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Adam-Medium', sans-serif;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--light-gold);
+            border: 2px solid var(--primary-gold-solid);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn-outline:hover {
+            color: var(--primary-dark);
+        }
+
+        .btn-outline:hover::before {
+            left: 0;
+        }
+
+        .btn-inactive {
+            background: transparent;
+            color: var(--inactive);
+            border: 2px solid var(--inactive);
+            cursor: not-allowed;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2.5rem 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(10, 14, 5, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .header.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-family: 'Adam-Medium', sans-serif;
+            font-size: 1.8rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2.5rem;
+            margin-right:10px;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            justify-items: center;
+            align-items: center;
+            text-align: center;
+            margin-right:50px;
+            font-family: 'Adam-Medium';
+            font-size: 21px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--light-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .auth-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-gold-solid);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+.mobile-menu-toggle i{
+   display: none;
+}
+
+        /* Hero Section with Sliding Animation */
+        .category-hero {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 14, 5, 0.7), rgba(10, 14, 5, 0.9));
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1.5s ease forwards 0.5s;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-family: 'Adam-Medium', sans-serif;
+        }
+
+        .hero-title span {
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-gray);
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--dark-bg) 50%);
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .intro-content.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .section-subtitle {
+            color: var(--primary-gold-solid);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        /* Categories Grid */
+        .categories-grid-section {
+            padding: 6rem 0;
+            background: var(--dark-bg);
+        }
+
+        .category-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 8rem;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .category-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .category-item:nth-child(even) .category-image {
+            order: 2;
+        }
+
+        .category-item:nth-child(even) .category-content {
+            order: 1;
+            text-align: right;
+        }
+
+        .category-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--glow);
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .category-content {
+            padding: 2rem;
+        }
+
+        .category-name {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .category-description {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .nominee-count {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-gold);
+        }
+
+        .nominee-count.zero {
+            background: var(--inactive);
+            color: var(--text-gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 0;
+            background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
+            z-index: 1;
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            background: var(--primary-dark);
+            padding: 5rem 0 2rem;
+            overflow: hidden;
+        }
+
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                linear-gradient(45deg, transparent 49%, rgba(212, 175, 55, 0.05) 50%, transparent 51%);
+            background-size: cover, cover, 10px 10px;
+            z-index: 0;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .footer-links li i{
+            color: #D4AF37;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+
+        .footer-link {
+            color: var(--text-gray);
+            transition: var(--transition);
+            position: relative;
+            padding-left: 0;
+            transition: var(--transition);
+        }
+
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--light-gold);
+            padding-left: 10px;
+        }
+
+        .footer-link:hover::before {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .category-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .category-item:nth-child(even) .category-image {
+                order: 1;
+            }
+
+            .category-item:nth-child(even) .category-content {
+                order: 2;
+                text-align: left;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav, .auth-container {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: inline;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .category-name {
+                font-size: 1.8rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-content {
+        padding: 1rem 0;
+    }
+    
+    .main-nav {
+  display: none;
+  flex-direction: column;
+  background:var(--primary-dark); /* or dark if you prefer */
+  position: absolute;
+  top: 75px; /* below header */
+  right: 20px;
+  width: 200px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 999;
+  border-radius: 10px;
+    }
+    
+    .main-nav.active {
+  display: flex;
+}
+    
+    .nav-link {
+        padding: 0rem 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        width: 100%;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        display: block;
+        z-index: 1001;
+        top: -20px;
+        color: #ffcc00;
+    }
+
+    .mobile-menu-toggle i{
+       color: #ffcc00; 
+    }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .category-image img {
+                height: 300px;
+            }
+            .header-content {
+        padding: 1rem 0;
+    }
+    
+    .main-nav {
+  display: none;
+  flex-direction: column;
+  background:var(--primary-dark); /* or dark if you prefer */
+  position: absolute;
+  top: 75px; /* below header */
+  right: 20px;
+  width: 200px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 999;
+    }
+    
+    .main-nav.active {
+  display: flex;
+}
+    
+    .nav-link {
+        
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        width: 100%;
+    }
+    
+    .mobile-menu-toggle {
+    display: inline-block;
+        position: relative;
+        display: block;
+        z-index: 1001;
+        top: -20px;
+        color: #ffcc00;
+    }
+
+    .mobile-menu-toggle i{
+        display: inline-block;
+       color: #ffcc00; 
+    }
+
+        /* Prevent horizontal overflow */
+
+        }
+        html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="Assets/img/Asset7.png" alt="TallyTrack Africa" class="logo-img" onclick="window.location.href='index.html'">
+                    <span class="logo-text" style="display:none;">TALLYTRACK</span>
+                </div>
+                
+                <nav class="main-nav">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="#home" class="nav-link active">Categories</a>
+                    <a href="About_Us.html" class="nav-link">About</a>
+                    <a href="Contact_US.html" class="nav-link">Contact Us</a>
+                </nav>
+                
+                <div class="auth-container" style="display:none;">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Register</a>
+                </div>
+                
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Sliding Animation -->
+    <section class="category-hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Award <span>Categories</span></h1>
+                <p class="hero-description">Discover the diverse range of categories celebrating excellence across Africa. Each category represents a unique field where exceptional individuals are making remarkable contributions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <span class="section-subtitle">Celebrating Excellence</span>
+                <h2 class="section-title">Recognizing Outstanding Achievements</h2>
+                <p class="section-description">
+                    TallyTrack Africa Awards showcases the brightest talents and most impactful contributors across various industries. 
+                    Our categories are carefully curated to represent the diverse spectrum of excellence found throughout the African continent. 
+                    From innovative entrepreneurs to inspiring content creators, each category tells a story of dedication, passion, and remarkable achievement.
+                </p>
+                <p class="section-description">
+                    Browse through our categories below to learn more about each field of recognition and discover the nominees who are shaping Africa's future.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Grid Section -->
+    <section class="categories-grid-section" id="categories">
+        <div class="container">
+            <!-- Philanthropist of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Philanthropist of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Philanthropist of the Year</h3>
+                    <div class="nominee-count">12 Nominees</div>
+                    <p class="category-description">
+                        Recognizing individuals who have demonstrated exceptional generosity and commitment to charitable causes, making significant positive impacts on communities across Africa through their philanthropic efforts and humanitarian initiatives.
+                    </p>
+                    <a href="dashboard.html#philanthropist" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Brand Ambassador of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1563013546-7e567a0cbbded?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brand Ambassador of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Brand Ambassador of the Year</h3>
+                    <div class="nominee-count">8 Nominees</div>
+                    <p class="category-description">
+                        Celebrating individuals who have exceptionally represented brands with authenticity and influence, effectively bridging the gap between companies and consumers while building meaningful connections across diverse African markets.
+                    </p>
+                    <a href="dashboard.html#ambassador" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Blogger of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Blogger of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Blogger of the Year</h3>
+                    <div class="nominee-count">6 Nominees</div>
+                    <p class="category-description">
+                        Honoring exceptional writers and content creators who have built engaged communities through their insightful blogs, sharing unique perspectives on African culture, lifestyle, business, and innovation with authentic storytelling.
+                    </p>
+                    <a href="dashboard.html#blogger" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Content Creator of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Content Creator of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Content Creator of the Year</h3>
+                    <div class="nominee-count">24 Nominees</div>
+                    <p class="category-description">
+                        Celebrating innovative creators who produce engaging, original content across multiple platforms, captivating audiences with their unique voice, creativity, and ability to tell compelling stories that resonate with African audiences.
+                    </p>
+                    <a href="dashboard.html#content-creator" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Entrepreneur of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Entrepreneur of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Entrepreneur of the Year</h3>
+                    <div class="nominee-count">16 Nominees</div>
+                    <p class="category-description">
+                        Recognizing visionary business leaders who have demonstrated exceptional innovation, resilience, and growth in their ventures, contributing significantly to economic development and job creation across African markets.
+                    </p>
+                    <a href="dashboard.html#entrepreneur" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Youth Leader of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Youth Leader of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Youth Leader of the Year</h3>
+                    <div class="nominee-count">9 Nominees</div>
+                    <p class="category-description">
+                        Honoring young visionaries who are driving positive change in their communities, demonstrating exceptional leadership, initiative, and impact in various sectors while inspiring the next generation of African leaders.
+                    </p>
+                    <a href="dashboard.html#youth-leader" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Innovator of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Innovator of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Innovator of the Year</h3>
+                    <div class="nominee-count">14 Nominees</div>
+                    <p class="category-description">
+                        Celebrating brilliant minds who have developed groundbreaking solutions to African challenges, demonstrating exceptional creativity, technical expertise, and potential for significant impact across various industries and communities.
+                    </p>
+                    <a href="dashboard.html#innovator" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Comedian of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Comedian of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Comedian of the Year</h3>
+                    <div class="nominee-count">11 Nominees</div>
+                    <p class="category-description">
+                        Recognizing talented comedians who have brought laughter and joy to audiences across Africa, using humor to address social issues, bridge cultural divides, and showcase the vibrant diversity of African comedy.
+                    </p>
+                    <a href="dashboard.html#comedian" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Community Champion of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Community Champion of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Community Champion of the Year</h3>
+                    <div class="nominee-count">15 Nominees</div>
+                    <p class="category-description">
+                        Honoring individuals who have made exceptional contributions to their local communities, demonstrating selflessness, dedication, and significant positive impact through various initiatives and development projects.
+                    </p>
+                    <a href="dashboard.html#community-champion" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Influencer of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Influencer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Influencer of the Year</h3>
+                    <div class="nominee-count">13 Nominees</div>
+                    <p class="category-description">
+                        Celebrating digital creators who have built substantial influence and engaged communities, using their platforms to inspire, educate, and drive positive change while authentically representing African culture and values.
+                    </p>
+                    <a href="dashboard.html#influencer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- DJ of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="DJ of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">DJ of the Year</h3>
+                    <div class="nominee-count">18 Nominees</div>
+                    <p class="category-description">
+                        Recognizing exceptional disc jockeys who have showcased remarkable talent, innovation, and influence in the music industry, shaping soundscapes and entertaining audiences across Africa and beyond with their unique mixes.
+                    </p>
+                    <a href="dashboard.html#dj" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Podcast of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1589903308904-d969a5ad15d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Podcast of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Podcast of the Year</h3>
+                    <div class="nominee-count">7 Nominees</div>
+                    <p class="category-description">
+                        Celebrating outstanding podcasts that have captivated audiences with compelling content, exceptional production quality, and meaningful conversations that highlight African stories, perspectives, and expertise across various topics.
+                    </p>
+                    <a href="dashboard.html#podcast" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Facebook Page of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Facebook Page of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Facebook Page of the Year</h3>
+                    <div class="nominee-count">10 Nominees</div>
+                    <p class="category-description">
+                        Honoring Facebook pages that have demonstrated exceptional engagement, content quality, and community building, effectively utilizing the platform to share valuable information, entertainment, and meaningful connections.
+                    </p>
+                    <a href="dashboard.html#facebook" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- TikTok Page of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="TikTok Page of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">TikTok Page of the Year</h3>
+                    <div class="nominee-count">20 Nominees</div>
+                    <p class="category-description">
+                        Recognizing TikTok creators who have mastered short-form video content, demonstrating creativity, viral appeal, and significant cultural impact while entertaining and engaging with diverse audiences across Africa.
+                    </p>
+                    <a href="dashboard.html#tiktok" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- CEO of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">CEO of the Year</h3>
+                    <div class="nominee-count">30 Nominees</div>
+                    <p class="category-description">
+                        Celebrating exceptional chief executives who have demonstrated visionary leadership, strategic acumen, and remarkable results in steering their organizations to new heights while creating significant value and impact.
+                    </p>
+                    <a href="dashboard.html#ceo" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Instagram Page of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Instagram Page of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Instagram Page of the Year</h3>
+                    <div class="nominee-count">22 Nominees</div>
+                    <p class="category-description">
+                        Honoring Instagram creators who have built engaging communities through visually stunning content, authentic storytelling, and meaningful interactions, effectively utilizing the platform's features to connect with audiences.
+                    </p>
+                    <a href="dashboard.html#instagram" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Twitter Page of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Twitter Page of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Twitter Page of the Year</h3>
+                    <div class="nominee-count">5 Nominees</div>
+                    <p class="category-description">
+                        Recognizing Twitter accounts that have mastered the art of concise communication, driving meaningful conversations, sharing valuable insights, and building engaged communities around relevant topics and discussions.
+                    </p>
+                    <a href="dashboard.html#twitter" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- YouTube Channel of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="YouTube Channel of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">YouTube Channel of the Year</h3>
+                    <div class="nominee-count">17 Nominees</div>
+                    <p class="category-description">
+                        Celebrating outstanding YouTube channels that have consistently delivered high-quality video content, built substantial subscriber bases, and made significant cultural impact through entertainment, education, or inspiration.
+                    </p>
+                    <a href="dashboard.html#youtube" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Artist of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artist of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Artist of the Year</h3>
+                    <div class="nominee-count">19 Nominees</div>
+                    <p class="category-description">
+                        Honoring visual artists who have demonstrated exceptional creativity, technical skill, and cultural relevance through their work, contributing to the vibrant and diverse contemporary art scene across Africa.
+                    </p>
+                    <a href="dashboard.html#artist" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Designer of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1562142355-4c0df6727233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Designer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Designer of the Year</h3>
+                    <div class="nominee-count">4 Nominees</div>
+                    <p class="category-description">
+                        Recognizing talented designers who have demonstrated exceptional creativity, innovation, and impact in their respective design fields, whether in fashion, graphics, product, or interior design, with work that reflects African aesthetics.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Gamer of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gamer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Gamer of the Year</h3>
+                    <div class="nominee-count">0 Nominees</div>
+                    <p class="category-description">
+                        Celebrating exceptional gamers who have demonstrated remarkable skill, sportsmanship, and contribution to the gaming community, whether through competitive achievements, content creation, or community building efforts.
+                    </p>
+                    <a href="dashboard.html#gamer" class="btn btn-inactive">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Photographer of the Year -->
+            <div class="category-item">
+                <div class="category-image">
+                    <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Photographer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Photographer of the Year</h3>
+                    <div class="nominee-count">1 Nominee</div>
+                    <p class="category-description">
+                        Honoring photographers who have captured compelling images that tell powerful stories, showcase African beauty, and demonstrate exceptional technical skill, creativity, and artistic vision in their photographic work.
+                    </p>
+                    <a href="dashboard.html#photographer" class="btn btn-inactive">View Nominees</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-pattern"></div>
+        <div class="container">
+            <div class="cta-content">
+                <span class="section-subtitle">Ready to Explore?</span>
+                <h2 class="section-title">Discover All Nominees in Our Dashboard</h2>
+                <p class="section-description">
+                    Dive deeper into each category and explore the remarkable individuals who have been nominated. 
+                    Our interactive dashboard allows you to learn more about each nominee, track voting progress, and stay updated on award developments.
+                </p>
+                <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-pattern"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html" class="footer-link">Home</a></li>
+                            <li><a href="dashboard.html" class="footer-link">Dashboard</a></li>
+                            <li><a href="Nominee.html" class="footer-link">Be A Nominee</a></li>
+                            <li><a href="Learn.html" class="footer-link">Voting Process</a></li>
+                            <li><a href="Contact_US.html" class="footer-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Categories</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-chevron-right"></i><a href="#categories" class="footer-link">All Categories</a></li>
+                            <li><i class="fas fa-chevron-right"></i><a href="dashboard.html" class="footer-link">Nominees</a></li>
+                            <li><i class="fas fa-chevron-right"></i><a href="#" class="footer-link">Voting Process</a></li>
+                            <li><i class="fas fa-chevron-right"></i><a href="#" class="footer-link">Past Winners</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-chevron-right"></i><a href="#" class="footer-link">FAQs</a></li>
+                            <li><i class="fas fa-chevron-right"></i><a href="#" class="footer-link">News & Updates</a></li>
+                            <li><i class="fas fa-chevron-right"></i><a href="#" class="footer-link">Terms of Service</a></li>
+                            <li><i class="fas fa-chevron-right"></i><a href="#" class="footer-link">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i><a href="#" class="footer-link">123 Award Street, Accra, Ghana</a></li>
+                            <li><i class="fas fa-phone"></i><a href="#" class="footer-link">+233 123 456 789</a></li>
+                            <li><i class="fas fa-envelope"></i><a href="Contact.html" class="footer-link">info@tallytrack.africa</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 TallyTrack Africa. All rights reserved. | Celebrating Excellence Across Africa</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate intro section
+            const introContent = document.querySelector('.intro-content');
+            introContent.classList.add('animated');
+            
+            // Animate category items
+            const categoryItems = document.querySelectorAll('.category-item');
+            
+            function checkScroll() {
+                categoryItems.forEach(item => {
+                    const position = item.getBoundingClientRect();
+                    
+                    // If item is in viewport
+                    if(position.top < window.innerHeight - 100) {
+                        item.classList.add('animated');
+                    }
+                });
+            }
+            
+            // Check on load and scroll
+            checkScroll();
+            window.addEventListener('scroll', checkScroll);
+            
+            // Simulate loading unavailable categories
+            setTimeout(() => {
+                // These would normally come from an API
+                const unavailableCategories = ['Gamer of the Year', 'Photographer of the Year'];
+                
+                categoryItems.forEach(item => {
+                    const categoryName = item.querySelector('.category-name').textContent;
+                    
+                    if (unavailableCategories.includes(categoryName)) {
+                        const button = item.querySelector('.btn');
+                        const count = item.querySelector('.nominee-count');
+                        
+                        if (categoryName === 'Gamer of the Year') {
+                            count.textContent = '0 Nominees';
+                            count.classList.add('zero');
+                            button.classList.remove('btn-primary');
+                            button.classList.add('btn-inactive');
+                        } else if (categoryName === 'Photographer of the Year') {
+                            count.textContent = '1 Nominee';
+                            count.classList.add('zero');
+                            button.classList.remove('btn-primary');
+                            button.classList.add('btn-inactive');
+                        }
+                    }
+                });
+            }, 1000);
+        });
+         // Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const mobileOverlay = document.createElement('div');
+    
+    // Create mobile menu overlay
+    mobileOverlay.className = 'mobile-menu-overlay';
+    document.body.appendChild(mobileOverlay);
+    
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        mainNav.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+        
+        // Change icon based on menu state
+        const icon = mobileMenuToggle.querySelector('i');
+        if (mainNav.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
+    
+    // Toggle menu when clicking the button
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    
+    // Close menu when clicking overlay
+    mobileOverlay.addEventListener('click', toggleMobileMenu);
+    
+    // Close menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', toggleMobileMenu);
+    });
+    
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+            toggleMobileMenu();
+        }
+    });
+    
+    // Make mobile menu toggle visible
+    mobileMenuToggle.style.alignItems = 'center';
+    mobileMenuToggle.style.justifyContent = 'center';
+    mobileMenuToggle.style.width = '44px';
+    mobileMenuToggle.style.height = '44px';
+    mobileMenuToggle.style.fontSize = '1.5rem';
+    mobileMenuToggle.style.color = 'var(--primary-gold)';
+    mobileMenuToggle.style.zIndex = '1002';
+});
+    </script>
+</body>
+</html>

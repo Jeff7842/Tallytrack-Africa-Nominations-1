@@ -1,0 +1,3297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be A Nominee | TallyTrack Africa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp" />
+    <link rel="stylesheet" href="Assets/css/Nominee.css">
+    <style>
+      /* Font Face */
+      @font-face {
+        font-family: 'Adam-Medium';
+        src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* Variables */
+      :root {
+        --primary-dark: #1d260b;
+        --primary-gold: linear-gradient(135deg, #d4af37 0%, #f1e5b9 100%);
+        --primary-gold-solid: #d4af37;
+        --light-gold: #f1e5b9;
+        --white: #ffffff;
+        --black: #000000;
+        --dark-bg: #0a0e05;
+        --card-bg: rgba(29, 38, 11, 0.8);
+        --text-light: #e2e8f0;
+        --text-gray: #a0aec0;
+        --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+      }
+
+      /* Reset & Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove blue outline when buttons/links are tapped or focused */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--primary-color-dark); /* or any color you like */
+  outline-offset: 2px;
+}
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: 'Adam-Medium', sans-serif;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section {
+        padding: 5rem 0;
+        position: relative;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: var(--transition);
+        text-align: center;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        border: none;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--light-gold);
+        border: 2px solid var(--primary-gold-solid);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .btn-outline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-gold);
+        transition: var(--transition);
+        z-index: -1;
+      }
+
+      .btn-outline:hover {
+        color: var(--primary-dark);
+      }
+
+      .btn-outline:hover::before {
+        left: 0;
+      }
+
+      /* Header Styles */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 2.5rem 0;
+        transition: var(--transition);
+        background: transparent;
+      }
+
+      .header.scrolled {
+        background: rgba(10, 14, 5, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .logo-img {
+        height: 50px;
+        width: auto;
+      }
+
+      .header.scrolled .logo-img {
+        height: 40px;
+      }
+
+      .logo-text {
+        font-family: 'Adam-Medium', sans-serif;
+        font-size: 1.8rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .main-nav {
+        display: flex;
+        gap: 2.5rem;
+        margin-right: 10px;
+      }
+
+      .nav-link {
+        position: relative;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        transition: var(--transition);
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        margin-right: 50px;
+        font-family: 'Adam-Medium';
+        font-size: 21px;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gold);
+        transition: var(--transition);
+      }
+
+      .nav-link:hover {
+        color: var(--light-gold);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .auth-container {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .mobile-menu-toggle {
+        position: relative;
+        display: block;
+        z-index: 10001;
+        top: -10px;
+        display: none;
+        background: none;
+        border: none;
+        font-size: larger;
+      }
+
+      .mobile-menu-toggle i {
+        display: none;
+      }
+
+      /* Nominee Hero Section */
+      .nominee-hero {
+        height: 60vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nominee-hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transform: translateY(50px);
+        animation: fadeInUp 1.5s ease forwards 0.5s;
+      }
+
+      .nominee-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 14, 5, 0.7),
+          rgba(10, 14, 5, 0.9)
+        );
+      }
+
+      .nominee-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .nominee-hero-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-family: 'Adam-Medium', sans-serif;
+      }
+
+      .nominee-hero-title span {
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .nominee-hero-description {
+        font-size: 1.2rem;
+        color: var(--text-gray);
+      }
+
+      /* Info Section */
+      .info-section {
+        padding: 6rem 0;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-dark) 0%,
+          var(--dark-bg) 50%
+        );
+      }
+
+      .info-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .info-content {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+
+      .info-content.animated {
+        opacity: 1;
+        transform: translateX(0);
+        transition: var(--transition);
+      }
+
+      .section-subtitle {
+        color: var(--primary-gold-solid);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .section-title {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .section-description {
+        font-size: 1.1rem;
+        color: var(--text-gray);
+        margin-bottom: 2rem;
+      }
+
+      .process-steps {
+        margin-top: 2rem;
+      }
+
+      .process-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .step-number {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      .step-content h4 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .step-content p {
+        color: var(--text-gray);
+      }
+
+      .info-image {
+        opacity: 0;
+        transform: translateX(50px);
+        position: relative;
+      }
+
+      .info-image.animated {
+        opacity: 1;
+        transform: translateX(0);
+        transition: var(--transition);
+      }
+
+      .info-image img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: var(--glow);
+      }
+
+      .info-image::before {
+        content: '';
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 100%;
+        height: 100%;
+        border: 2px solid var(--primary-gold-solid);
+        border-radius: 20px;
+        z-index: -1;
+        opacity: 0.5;
+      }
+
+      .phone-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .country-code-select {
+            flex: 0 0 80px;
+        }
+
+        .country-code-select option {
+            background: black;
+            color: white;
+            padding: 1px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .phone-input {
+            flex: 1;
+            border: none;
+            border-radius:0px;
+        }
+
+
+        /* Dropdown list background and border */
+
+/* Style the entire dropdown background */
+.iti__country-list {
+  background-color: #1e1e2f;   /* dark background */
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #373737;              /* default text color */
+}
+
+/* Each country option */
+.iti__country {
+  padding: 8px 12px;
+  background-color: transparent;  /* transparent by default */
+  color: #000000;                 /* text color */
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.iti__country:hover {
+  background-color: #3a3a55;   /* hover background */
+  color: #ffcc00;              /* hover text color */
+}
+
+/* Highlighted (selected) option */
+.iti__country.iti__highlight {
+  background-color: #4a90e2;   /* highlight background */
+  color: #373737;                 /* highlight text */
+}
+
+/* Dial code color (optional) */
+.iti__dial-code {
+  color: #2f3d34;
+}
+ #countryCode{
+    margin-left:0px;
+ }
+
+      /* Form Section */
+      .form-section {
+        padding: 6rem 0;
+        background: var(--dark-bg);
+      }
+
+      .form-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+      }
+
+      .form-header {
+        margin-bottom: 2rem;
+      }
+
+      .form-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .form-subtitle {
+        color: var(--text-gray);
+        font-size: 1.1rem;
+      }
+
+      .nominee-form {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 3rem;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-light);
+      }
+
+      
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-light);
+        font-family: 'Inter', sans-serif;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-gold-solid);
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+      }
+
+      .form-group input.invalid,
+      .form-group select.invalid,
+      .form-group textarea.invalid {
+        outline: none;
+        border: 1px solid #f42525;
+        box-shadow: 0 0 0 2px rgba(212, 55, 55, 0.5);
+        animation: error-shake 200ms;
+      }
+
+      .form-group input.invalid ~ .error-icon ,
+.form-group select.invalid ~  .error-icon,
+.form-group textarea.invalid ~ .error-icon
+ {
+    visibility: visible;
+    
+}
+.form-group input.invalid ~ .hint-text ,
+.form-group select.invalid ~  .hint-text,
+.form-group textarea.invalid ~ .hint-text {
+    visibility: visible;
+    animation: error-shake 200ms;
+}
+
+.form-group .error-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ed4141;
+    visibility:hidden;
+   
+}
+
+/* Terms and Agreement styles */
+.terms-group {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  display: flex;
+  align-items:bottom;
+  gap: 8px;
+  font-weight:300;
+}
+
+.terms-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  accent-color: #d4af37; /* gold-colored checkmark */
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  top:-4.0px;
+  scale:0.8;
+  margin-right: -30px;
+}
+
+/* Checked state: gold background + black tick */
+.terms-group input[type="checkbox"]:checked {
+  background: #d4af37; /* gold */
+  border-color: #d4af37;
+}
+
+.terms-group input[type="checkbox"]:checked::after {
+  content: "\ea5e";
+  font-family: "tabler-icons";
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 18px;
+  color: #000000; /* black tick */
+  font-weight: bold;
+}
+
+/* icon container injected by JS — placed right after the input */
+.terms-check-icon {
+  margin-left: 0px; /* small separation from checkbox to text; won't affect positioning */
+  position: relative;
+  left: -28px; /* visually place the icon over the checkbox */
+  top: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* icon doesn't capture clicks */
+  opacity: 0;
+  transition: opacity .12s linear, transform .18s cubic-bezier(.2,.9,.3,1);
+  transform: translateY(0);
+  z-index: 2;
+}
+
+/* Show icon when underlying input is checked (works because JS inserts icon immediately after input) */
+.terms-group input[type="checkbox"]:checked + .terms-check-icon {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* style the Tabler icon itself */
+.terms-check-icon .ti {
+  font-size: 18px;
+  color: #000; /* black tick */
+  line-height: 0;
+  visibility: hidden;
+}
+
+.terms-group a {
+  color: #d4af37;  /* gold */
+  text-decoration: underline;
+  font-weight: 800;
+  transition: color 0.3s ease;
+}
+
+.terms-group a:hover {
+  color: #f1e5b9; /* lighter gold on hover */
+}
+
+/* Custom inline error for terms */
+.terms-error {
+  position:absolute;
+  margin-top: 60px;
+  margin-left: 35px;
+  font-size: 0.85rem;
+  color: #ed4141; /* red for error */
+  display: none;
+  font-weight: 400;
+}
+.btn-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px; /* match button radius */
+  z-index: 10;
+  display: none;
+}
+
+.btn-overlay.visible {
+  display: block;
+}
+
+
+.form-group.error .error-icon {
+    display: block;
+}
+.error-icon {
+            font-size: 1rem;
+            position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ed4141;
+    visibility:hidden;
+        }
+.form-group .hint-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color:#ed4141;
+    visibility:hidden;
+}
+
+.form-group.error .hint-text {
+    display: block;
+    color: #ed4141;
+}
+
+/* Error states for form elements */
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2) !important;
+}
+
+.form-group.error .error-icon {
+  visibility: visible !important;
+}
+
+.form-group.error .hint-text {
+  visibility: visible !important;
+}
+
+/* Error animation */
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.form-group.error {
+  animation: error-shake 0.2s ease;
+}
+
+
+
+/* Make sure error icons are properly positioned */
+.form-group .input-container {
+  position: relative;
+}
+
+.form-group .error-icon {
+  position: absolute;
+  right: 12px;
+  top: 35%;
+  transform: translateY(-50%);
+  color: #ed4141;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.form-group .hint-text {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #ed4141;
+  visibility: hidden;
+}
+
+/* Select dropdown error icon positioning */
+.form-group select ~ .error-icon {
+  right: 35px; /* Account for dropdown arrow */
+}
+
+      .form-group option {
+        background: var(--dark-bg);
+        border-radius: 10px;
+        outline: none;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-gold-solid);
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .social-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .social-input {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.5rem;
+        border-radius: 8px;
+      }
+
+      .social-input i {
+        color: var(--primary-gold-solid);
+        font-size: 1.2rem;
+      }
+
+      .social-input input {
+        background: transparent;
+        border: none;
+        padding: 0.5rem;
+      }
+
+      .social-input input:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      /* Green Dropdown Styles */
+      .form-group select {
+        appearance: none;            /* remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .form-group select option {
+        background: #c7cebb;;
+        color:black;
+        padding: 10px;
+      }
+
+
+/* Change option highlight color inside the dropdown */
+.form-group select option:checked,
+.form-group select option:hover,
+.form-group select option:focus
+ {
+  background-color: #d4af37 !important; /* gold background */
+  color: #000 !important;               /* black text for contrast */
+}
+
+      /* Container */
+      .iti {
+        width: 100%;
+      }
+
+      /* The dropdown list */
+      .iti__country-list {
+        background: #c7cebb; /* dark background */
+        border-radius: 5px;
+        border: 1px solid #444;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        color: #d91212;
+        font-size: 14px;
+        max-height: 250px; /* scroll if too long */
+        max-width: 365px;
+        overflow-x: hidden;
+      }
+
+      .iti__country-list::-webkit-scrollbar{
+        display: none;
+      }
+
+      /* Each option */
+      .iti__country {
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      /* Hover effect */
+      .iti__country:hover {
+        background: #000000;
+        color: #ceb709;
+      }
+
+      /* Selected item */
+      .iti__country.iti__highlight {
+        background: #8f9383;
+        color: #304505;
+        font-weight: 800;
+      }
+
+      /* Flag icons inside dropdown */
+      .iti__flag-box {
+        margin-right: 8px;
+      }
+
+      /* Dial code alignment */
+      .iti__dial-code {
+        color: #000000; /* blue for dial code */
+        margin-left: 6px;
+        font-weight: bold;
+      }
+
+      /* Specific styles for the phone input container */
+.phone-input-container {
+    display: flex;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.phone-input-container select,
+.phone-input-container input {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.phone-input-container select {
+    flex: 100px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.phone-input-container input {
+    flex: 1;
+}
+
+.input-container .error-icon i{
+    display: inline;
+    position: relative;
+    top: 27px;
+    left: -5px;
+}
+
+.phone-input-container input.invalid {
+  border: 1px solid #f42525;
+  box-shadow: 0 0 0 2px rgba(212, 55, 55, 0.5);
+}
+
+.phone-input-container input.invalid ~ .error-icon {
+  visibility: visible;
+}
+
+      .file-upload {
+        position: relative;
+        border: 2px dashed rgba(212, 175, 55, 0.5);
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .file-upload:hover {
+        border-color: var(--primary-gold-solid);
+      }
+
+      .file-upload input .invalid{
+        position: relative;
+        border: 4px dashed #f42525;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .file-upload input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .file-upload-icon {
+        font-size: 2rem;
+        color: var(--primary-gold-solid);
+        margin-bottom: 1rem;
+      }
+
+      .file-upload-icon.invalid{
+        font-size: 2rem;
+        color: #f42525;
+        margin-bottom: 1rem;
+      }
+
+      .file-upload-text {
+        color: var(--text-gray);
+      }
+
+      .file-upload-text span {
+        color: var(--light-gold);
+        text-decoration: underline;
+      }
+
+      .word-count {
+        text-align: right;
+        font-size: 0.8rem;
+        color: var(--text-gray);
+        margin-top: 0.5rem;
+      }
+
+      .input-container .age::-webkit-inner-spin-button,
+.input-container.age::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+.input-container.age {
+  -moz-appearance: textfield;
+}
+
+      /* Toast container */
+.toast {
+  position: fixed;
+  top: -260px; /* hidden initially */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d1fae5; /* green-light */
+  color: #4c6f06;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  transition: top 0.4s ease-in-out;
+  z-index: 9999;
+}
+
+
+
+.toast.show {
+  top: 20px; /* slides into view */
+}
+
+/* Loading spinner */
+#loadingSpinner {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #517608;
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  animation: spin 0.8s linear infinite;
+  z-index: 10000;
+  
+}
+
+/* Overlay styling */
+#overlay {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6); /* dark semi-transparent */
+  z-index: 999; /* above page content */
+}
+
+/* Loader should appear above overlay */
+#loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* above overlay */
+}
+
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+      .submit-btn {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+      }
+
+      /* greyed out button */
+.btn-locked {
+  background: #777 !important;
+  color: #ccc !important;
+  cursor: not-allowed !important;
+  opacity: 0.8;
+  box-shadow: none !important;
+}
+
+/* overlay that blocks clicks */
+.btn-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  z-index: 10;
+  display: none;
+}
+
+.btn-overlay.visible {
+  display: block;
+}
+
+
+      /* Preview Card */
+      .preview-card {
+        position: sticky;
+        top: 2rem;
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        height: fit-content;
+      }
+
+      .preview-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .preview-content {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        overflow: hidden;
+        max-height: 700px;
+      }
+
+      .preview-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: #2a3515;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-gray);
+      }
+
+      .preview-details {
+        padding: 1.5rem;
+      }
+
+      .preview-name {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .preview-category {
+        color: var(--light-gold);
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .preview-description {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .preview-contact {
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .contact-item i {
+        color: var(--primary-gold-solid);
+        width: 16px;
+      }
+
+      .preview-social {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light);
+        transition: var(--transition);
+      }
+
+      .social-icon:hover {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+      }
+
+      /* Benefits Section */
+      .benefits-section {
+        padding: 6rem 0;
+        background: linear-gradient(
+          to bottom,
+          var(--dark-bg),
+          var(--primary-dark)
+        );
+      }
+
+      .benefits-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .benefit-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        transition: var(--transition);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+      }
+
+      .benefit-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--glow);
+        border-color: var(--primary-gold-solid);
+      }
+
+      .benefit-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .benefit-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .benefit-description {
+        color: var(--text-gray);
+      }
+
+      /* Footer */
+      .footer {
+        position: relative;
+        background: var(--primary-dark);
+        padding: 5rem 0 2rem;
+        overflow: hidden;
+      }
+
+      .footer-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(212, 175, 55, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(212, 175, 55, 0.1) 0%,
+            transparent 20%
+          ),
+          linear-gradient(
+            45deg,
+            transparent 49%,
+            rgba(212, 175, 55, 0.05) 50%,
+            transparent 51%
+          );
+        background-size: cover, cover, 10px 10px;
+        z-index: 0;
+      }
+
+      .footer-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+        margin-bottom: 4rem;
+      }
+
+      .footer-col h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 0.95rem;
+        opacity: 0.9;
+        transition: var(--transition);
+      }
+
+      .footer-links li i {
+        color: #d4af37;
+        font-size: 15px;
+        vertical-align: middle;
+      }
+
+      .footer-link {
+        color: var(--text-gray);
+        transition: var(--transition);
+        position: relative;
+        padding-left: 0;
+        transition: var(--transition);
+      }
+
+      .footer-link::before {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--primary-gold);
+        transition: var(--transition);
+      }
+
+      .footer-link:hover {
+        color: var(--light-gold);
+        padding-left: 10px;
+      }
+
+      .footer-link:hover::before {
+        width: 100%;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        transition: var(--transition);
+      }
+
+      .social-link:hover {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-gray);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1024px) {
+        .info-container {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .form-container {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-nav,
+        .auth-container {
+          display: none;
+        }
+        .main-nav {
+          display: none;
+          flex-direction: column;
+          gap: 1rem;
+          background: #111; /* dark background */
+          padding: 1rem;
+          border-radius: 0.5rem;
+          position: absolute;
+          top: 70px;
+          right: 20px;
+          z-index: 1000;
+        }
+
+        /* When active, show nav */
+        .main-nav.active {
+          display: flex;
+        }
+        /* Hide menu by default on small screens */
+        .main-nav {
+          display: none;
+          flex-direction: column;
+          background: var(--primary-dark); /* or dark if you prefer */
+          position: absolute;
+          top: 80px; /* below header */
+          right: 20px;
+          width: 200px;
+          padding: 1rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+          z-index: 999;
+        }
+
+        /* Show when active */
+        .main-nav.active {
+          display: flex;
+        }
+
+        /* Optional: style toggle button when active */
+        .mobile-menu-toggle.active {
+          color: rgb(127, 3, 3); /* highlight when open */
+        }
+
+        .nav-link {
+          border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+          width: 100%;
+        }
+
+        .scroller-btn {
+          margin-top: 450px;
+          top: 550px;
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+        .mobile-menu-toggle i {
+          display: block;
+          color: #ffcc00;
+        }
+        .nominee-hero-title {
+          font-size: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .social-inputs {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .nominee-hero-title {
+          font-size: 2rem;
+        }
+
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Prevent horizontal overflow */
+      html,
+      body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      /* Mobile menu overlay */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <img
+              src="Assets/img/Asset7.png"
+              alt="TallyTrack Africa"
+              class="logo-img"
+              onclick="window.location.href='index.html'"
+            />
+            <span class="logo-text" style="display: none">TALLYTRACK</span>
+          </div>
+
+          <nav class="main-nav">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="category.html" class="nav-link">Categories</a>
+            <a href="About_Us.html" class="nav-link">About</a>
+            <a href="Contact_US.html" class="nav-link">Contact Us</a>
+            <a href="nominee.html#home" class="nav-link active">Be A Nominee</a>
+          </nav>
+
+          <div class="auth-container" style="display: none">
+            <a href="#" class="btn btn-outline">Login</a>
+            <a href="#" class="btn btn-primary">Register</a>
+          </div>
+
+          <button class="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nominee Hero Section -->
+    <section class="nominee-hero" id="home">
+      <div class="nominee-hero-image"></div>
+      <div class="nominee-hero-overlay"></div>
+
+      <div class="container">
+        <div class="nominee-hero-content">
+          <h1 class="nominee-hero-title">Become A <span>Nominee</span></h1>
+          <p class="nominee-hero-description">
+            Join Africa's most prestigious awards platform. Showcase your
+            talent, get recognized, and inspire others with your journey.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+      <div class="container">
+        <div class="info-container">
+          <div class="info-content">
+            <span class="section-subtitle">Nomination Process</span>
+            <h2 class="section-title">How To Become A Nominee</h2>
+            <p class="section-description">
+              Being nominated for a TallyTrack Africa Award is a prestigious
+              honor that recognizes excellence and achievement across various
+              fields. Our rigorous selection process ensures that only the most
+              deserving individuals are featured on our platform.
+            </p>
+
+            <div class="process-steps">
+              <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Submit Your Application</h4>
+                  <p>
+                    Fill out the nomination form with your details,
+                    achievements, and supporting information.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Review Process</h4>
+                  <p>
+                    Our committee will review your application within 24-72
+                    hours to verify eligibility.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Approval Notification</h4>
+                  <p>
+                    If approved, you'll receive a confirmation email with
+                    further instructions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Profile Activation</h4>
+                  <p>
+                    Your nominee profile will be activated, and you'll be
+                    eligible for voting in your category.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-image">
+            <img
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Award nominee"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="application">
+      <div class="container">
+        <div class="form-header">
+          <h2 class="form-title">Nominee Application Form</h2>
+          <p class="form-subtitle">
+            Fill in your details to be considered for nomination. All fields are
+            required unless marked optional.
+          </p>
+        </div>
+
+        <div class="form-container">
+          <form class="nominee-form" id="nomineeForm" action="../server/verify.php" method="POST">
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <div class="input-container">
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Enter Your First Name"
+                    required
+                  />
+                  <span class="error-icon">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please enter your first name</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <div class="input-container">
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Enter Your Last Name"
+                    required
+                  />
+                  <span class="error-icon">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please enter your last name</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-container">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                  <span class="error-icon">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please enter your email address</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="countryCode">Phone Number</label>
+                  <div class="input-container phone-input-container">
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Phone number"
+                      required
+                      inputmode="tel"
+                      maxlength="20"
+                    />
+                    
+                  </div>
+                  <div class="hint-text">Please enter a valid phone number</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label>Social Media Profiles (At least one required)</label>
+              <div class="social-inputs">
+                <div class="social-input ">
+                  <i class="fab fa-facebook-f"></i>
+                  <input
+                    type="url"
+                    id="facebook"
+                    name="facebook"
+                    placeholder="Facebook profile URL"
+                  />
+                </div>
+                <div class="social-input">
+                  <i class="fab fa-instagram"></i>
+                  <input
+                    type="url"
+                    id="instagram"
+                    name="instagram"
+                    placeholder="Instagram profile URL"
+                  />
+                </div>
+                <div class="social-input">
+                  <i class="fab fa-tiktok"></i>
+                  <input
+                    type="url"
+                    id="tiktok"
+                    name="tiktok"
+                    placeholder="TikTok profile URL"
+                  />
+                </div>
+                <div class="social-input">
+                  <i class="fas fa-globe"></i>
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    placeholder="Website (optional)"
+                  />
+                  <span class="error-icon">
+                      <i class="ti ti-exclamation-circle error-icon"></i>
+                    </span>
+                </div>
+                <div class="hint-text">Please At Least One Area</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="photo">Upload Your Photo</label>
+              <div class="file-upload" id="photoUpload">
+                <input
+                  type="file"
+                  id="photo"
+                  name="photo"
+                  accept="image/*"
+                  required
+                />
+                <div class="file-upload-icon">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <p class="file-upload-text">
+                  Click to upload or <span>drag and drop</span>
+                </p>
+                <p class="file-upload-text">JPG, PNG (Max. 15MB)</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                            </select>
+                            
+                  <div class="hint-text">Please select your country</div>
+                        </div>
+            
+
+              <div class="form-group">
+            <label for="county" id="countyLabel">County</label>
+                <select id="county" name="county" required>
+                  <option value="">Select County</option>
+                </select>
+                
+                <div class="hint-text">Please select your county</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="town">Town/City</label>
+                <select id="town" name="town" required>
+                  <option value="">Select Town/City</option>
+                </select>
+                
+                <div class="hint-text">Please select your town</div>
+              </div>
+
+              <div class="form-group">
+                <label>Nominee Age</label>
+                <div class="input-container">
+                <input type="number" class="age"  name="age" min="18" max="40" required />
+                <span class="error-icon" >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="0.666667"
+                    />
+                    <path
+                      d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="0.666667"
+                    />
+                    <path
+                      d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <div class="hint-text">Please input your age [18-40 years]</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                
+                <div class="hint-text">Please select your gender</div>
+              </div>
+
+              <div class="form-group">
+                <label for="category">Nomination Category</label>
+                <select id="category" name="category" required>
+                  <option value="">Select Category</option>
+                  <option value="Philanthropist of the Year">
+                    Philanthropist of the Year
+                  </option>
+                  <option value="Brand Ambassador of the Year">
+                    Brand Ambassador of the Year
+                  </option>
+                  <option value="Blogger of the Year">Blogger of the Year</option>
+                  <option value="ontent Creator of the Year">
+                    Content Creator of the Year
+                  </option>
+                  <option value="Entrepreneur of the Year">Entrepreneur of the Year</option>
+                  <option value="Youth Leader of the Year">Youth Leader of the Year</option>
+                  <option value="CEO of the Year">CEO of the Year</option>
+                  <option value="Innovator of the Year">Innovator of the Year</option>
+                  <option value="Comedian of the Year">Comedian of the Year</option>
+                  <option value="Community Champion of the Year">
+                    Community Champion of the Year
+                  </option>
+                  <option value="Influencer of the Year">Influencer of the Year</option>
+                  <option value="DJ of the Year">DJ of the Year</option>
+                  <option value="Podcast of the Year">Podcast of the Year</option>
+                  <option value="Facebook Page of the Year">Facebook Page of the Year</option>
+                  <option value="TikTok Page of the Year">TikTok Page of the Year</option>
+                  <option value="Instagram Page of the Year">Instagram Page of the Year</option>
+                  <option value="YouTube Channel of the Year">YouTube Channel of the Year</option>
+                  <option value="Sports Personality of the Year">
+                    Sports Personality of the Year
+                  </option>
+                  <option value="Music Artist of the Year">Music Artist of the Year</option>
+                  <option value="Actor/Actress of the Year">
+                    Actor/Actress of the Year
+                  </option>
+                  <option value="Model of the Year">Model of the Year</option>
+                  <option value="Fashion Icon of the Year">Fashion Icon of the Year</option>
+                  <option value="Beauty Influencer of the Year">
+                    Beauty Influencer of the Year
+                  </option>
+                  <option value="Health and Wellness Advocate of the Year">
+                    Health and Wellness Advocate of the Year
+                  </option>
+                  <option value="Education Champion of the Year">Education Champion of the Year</option>
+                </select>
+                
+                <div class="hint-text">Please select your desired Nomination category</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description/Bio (Max 300 words) </label>
+              <div class="input-container">
+              <textarea
+                id="description"
+                name="description"
+                rows="5"
+                minlength="30"
+                maxlength="350"
+                required
+              ></textarea>
+              <div class="word-count">
+                <span id="wordCount">0</span>/300 words
+              </div>
+              <span class="error-icon">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="0.666667"
+                    />
+                    <path
+                      d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="0.666667"
+                    />
+                    <path
+                      d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <div class="hint-text" style="margin-top: -25px;">Please fill the text area</div>
+                </div>
+            </div>
+           
+            
+             <!-- Terms and Agreement -->
+<div class="form-group terms-group">
+  <input type="checkbox" id="termsCheckbox" />
+  <div>
+  <label for="termsCheckbox">
+    I agree to the 
+    <a href="terms.html" target="_blank">Terms and Agreement</a> and understand that my information will be used according to Tallytrack Africa
+  <a href="privacy.html" target="_blank">Privacy Policy</a>
+  </label>
+  </div>
+  <p>
+  <div class="terms-error" id="termsError">
+    You must accept the Terms and Agreement before submitting.
+  </div>
+</p>
+</div>
+            <button type="submit" value="Submit" class="submit-btn">Submit Application</button>
+          </form>
+
+          <div class="preview-card">
+            <h3 class="preview-title">Nominee Preview</h3>
+            <div class="preview-content">
+              <div class="preview-image" id="previewImage">
+                <i class="fas fa-user fa-3x"></i>
+              </div>
+              <div class="preview-details">
+                <h3 class="preview-name">
+                  <span id="previewName">Your Name</span>
+                  <span id="previewGenderIcon"></span>
+                </h3>
+                <p class="preview-category" id="previewCategory">Category</p>
+                <p class="preview-description" id="previewDescription">
+                  Your description will appear here once you start typing...
+                </p>
+
+                <div class="preview-contact">
+                  <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span id="previewEmail">email@example.com</span>
+                  </div>
+                  <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span id="previewPhone">Phone number</span>
+                  </div>
+                  <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="previewLocation">Location</span>
+                  </div>
+                </div>
+
+                <div class="preview-social">
+                  <a
+                    href="#"
+                    class="social-icon"
+                    id="previewFacebook"
+                    style="display: none"
+                  >
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon"
+                    id="previewInstagram"
+                    style="display: none"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon"
+                    id="previewTiktok"
+                    style="display: none"
+                  >
+                    <i class="fab fa-tiktok"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="social-icon"
+                    id="previewWebsite"
+                    style="display: none"
+                  >
+                    <i class="fas fa-globe"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+      <div class="container">
+        <div class="benefits-header">
+          <span class="section-subtitle">Why Join Us</span>
+          <h2 class="section-title">Benefits of Being a Nominee</h2>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3 class="benefit-title">Recognition</h3>
+            <p class="benefit-description">
+              Gain recognition for your work and achievements from a pan-African
+              audience.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="benefit-title">Networking</h3>
+            <p class="benefit-description">
+              Connect with other top talents, industry leaders, and potential
+              collaborators.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="benefit-title">Career Growth</h3>
+            <p class="benefit-description">
+              Boost your career or business with the credibility that comes with
+              nomination.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-award"></i>
+            </div>
+            <h3 class="benefit-title">Award Opportunities</h3>
+            <p class="benefit-description">
+              Get a chance to win prestigious awards in your category and gain
+              industry acclaim.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-pattern"></div>
+
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-grid">
+            <div class="footer-col">
+              <h4>TallyTrack Africa</h4>
+              <p style="color: var(--text-gray); margin-bottom: 1.5rem">
+                Recognizing and celebrating excellence across Africa through a
+                transparent and democratic voting platform.
+              </p>
+              <div class="social-links">
+                <a href="#" class="social-link"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
+              </div>
+            </div>
+
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul class="footer-links">
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="index.html" class="footer-link">Home</a>
+                </li>
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="dashboard.html" class="footer-link">Dashboard</a>
+                </li>
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="index.html#categories" class="footer-link"
+                    >Categories</a
+                  >
+                </li>
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="About_Us.html" class="footer-link">About Us</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>Resources</h4>
+              <ul class="footer-links">
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="Contact_US.html" class="footer-link">Help Center</a>
+                </li>
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="Contact_US.html#faqs" class="footer-link">FAQ</a>
+                </li>
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="#" class="footer-link">Terms of Service</a>
+                </li>
+                <li>
+                  <i class="fas fa-chevron-right"></i
+                  ><a href="#" class="footer-link">Privacy Policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>Contact Us</h4>
+              <ul class="footer-links">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i
+                  ><span class="footer-link">Nairobi, Kenya</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i
+                  ><a href="mailto:info@tallytrack.com" class="footer-link"
+                    >info@tallytrackafrica.co.ke</a
+                  >
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i
+                  ><a href="tel:+254712345678" class="footer-link"
+                    >+254 712 345 678</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>&copy; 2023 TallyTrack Africa. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+<div id="loadingSpinner"></div>
+<div id="overlay"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("EtsG0gJGwsf2sv9WZ");
+  })();
+</script>
+
+
+    <script>
+      // Header scroll effect
+      window.addEventListener('scroll', function () {
+        const header = document.getElementById('header')
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled')
+        } else {
+          header.classList.remove('scrolled')
+        }
+      })
+
+      // Form interactivity and preview
+      document.addEventListener('DOMContentLoaded', function () {
+        // Form elements
+        const form = document.getElementById('nomineeForm')
+        const firstName = document.getElementById('firstName')
+        const lastName = document.getElementById('lastName')
+        const email = document.getElementById('email')
+        const phone = document.getElementById('phone')
+        const facebook = document.getElementById('facebook')
+        const instagram = document.getElementById('instagram')
+        const tiktok = document.getElementById('tiktok')
+        const website = document.getElementById('website')
+        const photo = document.getElementById('photo')
+        const country = document.getElementById('country')
+        const county = document.getElementById('county')
+        const town = document.getElementById('town')
+        const gender = document.getElementById('gender')
+        const category = document.getElementById('category')
+        const description = document.getElementById('description')
+        const wordCount = document.getElementById('wordCount')
+
+        // Preview elements
+        const previewName = document.getElementById('previewName')
+        const previewGenderIcon = document.getElementById('previewGenderIcon')
+        const previewEmail = document.getElementById('previewEmail')
+        const previewPhone = document.getElementById('previewPhone')
+        const previewLocation = document.getElementById('previewLocation')
+        const previewCategory = document.getElementById('previewCategory')
+        const previewDescription = document.getElementById('previewDescription')
+        const previewImage = document.getElementById('previewImage')
+        const previewFacebook = document.getElementById('previewFacebook')
+        const previewInstagram = document.getElementById('previewInstagram')
+        const previewTiktok = document.getElementById('previewTiktok')
+        const previewWebsite = document.getElementById('previewWebsite')
+
+        // Update preview on input
+        firstName.addEventListener('input', updatePreview)
+        lastName.addEventListener('input', updatePreview)
+        email.addEventListener('input', updatePreview)
+        phone.addEventListener('input', updatePreview)
+        facebook.addEventListener('input', updateSocialPreview)
+        instagram.addEventListener('input', updateSocialPreview)
+        tiktok.addEventListener('input', updateSocialPreview)
+        website.addEventListener('input', updateSocialPreview)
+        country.addEventListener('change', updateLocationPreview)
+        county.addEventListener('change', updateLocationPreview)
+        town.addEventListener('change', updateLocationPreview)
+        gender.addEventListener('change', updateGenderPreview)
+        category.addEventListener('change', updateCategoryPreview)
+        description.addEventListener('input', updateDescriptionPreview)
+        
+
+
+// --- load countries ---
+// --- DOM elements ---
+const countrySelect = document.getElementById("country");
+const countySelect = document.getElementById("county");
+const townSelect = document.getElementById("town");
+
+// --- GeoNames username ---
+const geoUser = "rec9big"; // replace with your GeoNames username
+
+// --- Load Countries (GeoNames) ---
+async function loadCountries() {
+  try {
+    const res = await fetch(`https://secure.geonames.org/countryInfoJSON?username=rec9big`);
+    const data = await res.json();
+
+    if (!data.geonames) {
+      console.error("GeoNames API error:", data);
+      return;
+    }
+
+    while (countrySelect.options.length > 1) countrySelect.remove(1);
+
+    data.geonames.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = JSON.stringify({ code: c.countryCode, id: c.geonameId });
+      opt.text = c.countryName;
+      countrySelect.appendChild(opt);
+    });
+  } catch (err) {
+    console.error("Error loading countries:", err);
+  }
+}
+loadCountries();
+
+// --- Load Counties/States when Country changes ---
+countrySelect.addEventListener("change", async () => {
+  const countryData = JSON.parse(countrySelect.value);
+  const countryCode = countryData.code;
+  const countryId = countryData.id;
+
+  countySelect.innerHTML = '<option value="">Select County</option>';
+  townSelect.innerHTML = '<option value="">Select Town / Constituency</option>';
+  countySelect.disabled = true;
+  townSelect.disabled = true;
+
+  if (!countryCode) return;
+
+  if (countryCode === "KE") {
+  try {
+    const res = await fetch("https://kenyaareadata.vercel.app/api/areas?apiKey=keyPub1569gsvndc123kg9sjhg");
+    const data = await res.json();
+
+    // Root keys are counties
+    Object.keys(data).forEach(county => {
+      const opt = document.createElement("option");
+      opt.value = county;
+      opt.textContent = county;
+      countySelect.appendChild(opt);
+    });
+    countySelect.disabled = false;
+
+  } catch (err) {
+    console.error("Error fetching Kenya counties:", err);
+  }
+}
+
+ else {
+    // --- Other Countries (GeoNames for States/Counties) ---
+    try {
+      const res = await fetch(`https://secure.geonames.org/childrenJSON?geonameId=${countryId}&username=${geoUser}`);
+      const data = await res.json();
+
+      if (data.geonames?.length) {
+        data.geonames.forEach(r => {
+          const opt = document.createElement("option");
+          opt.value = r.geonameId;
+          opt.textContent = r.name;
+          countySelect.appendChild(opt);
+        });
+        countySelect.disabled = false;
+      }
+    } catch (err) {
+      console.error("Error fetching counties:", err);
+    }
+  }
+});
+
+// --- Load Towns/Constituencies when County changes ---
+countySelect.addEventListener("change", async () => {
+  const countryData = JSON.parse(countrySelect.value);
+  const countryCode = countryData.code;
+  const county = countySelect.value;
+
+  townSelect.innerHTML = '<option value="">Select Town / Constituency</option>';
+  townSelect.disabled = true;
+
+  if (!county) return;
+
+  if (countryCode === "KE") {
+  try {
+    const res = await fetch(`https://kenyaareadata.vercel.app/api/areas?apiKey=keyPub1569gsvndc123kg9sjhg&county=${encodeURIComponent(county)}`);
+    const data = await res.json();
+
+    if (data && data[county]) {
+      Object.keys(data[county]).forEach(constName => {
+        const opt = document.createElement("option");
+        opt.value = constName;
+        opt.textContent = constName;
+        townSelect.appendChild(opt);
+      });
+      townSelect.disabled = false;
+    } else {
+      console.error("No constituencies found for:", county, data);
+    }
+
+  } catch (err) {
+    console.error("Error fetching constituencies:", err);
+  }
+}
+
+ else {
+    // --- Other Countries → Towns (GeoNames) ---
+    try {
+      const res = await fetch(`https://secure.geonames.org/childrenJSON?geonameId=${county}&username=${geoUser}`);
+      const data = await res.json();
+
+      if (data.geonames?.length) {
+        data.geonames.forEach(city => {
+          const opt = document.createElement("option");
+          opt.value = city.name;
+          opt.textContent = city.name;
+          townSelect.appendChild(opt);
+        });
+        townSelect.disabled = false;
+      }
+    } catch (err) {
+      console.error("Error fetching towns:", err);
+    }
+  }
+});
+
+
+        /* ===========================
+   Phone Input (IntlTelInput)
+=========================== */
+
+         // --- intl-tel-input ---
+const phoneInput = document.getElementById('phone');
+let iti; // keep iti accessible
+
+
+if (phoneInput && window.intlTelInput) {
+  iti = window.intlTelInput(phoneInput, {
+    initialCountry: 'auto',
+    geoIpLookup: cb => {
+      fetch('https://ipwho.is/')
+        .then(r => r.json())
+        .then(d => {
+          cb((d && d.country_code ? d.country_code : 'US').toLowerCase());
+        })
+        .catch(() => cb('us'));
+    },
+    separateDialCode: true,
+    utilsScript:
+      'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+  });
+
+  phoneInput.addEventListener('blur', () => {
+    const container = phoneInput.closest('.form-group');
+    if (phoneInput.value.trim() && !iti.isValidNumber()) {
+      container.classList.add('error');
+      phoneInput.classList.add('invalid');
+    } else {
+      container.classList.remove('error');
+      phoneInput.classList.remove('invalid');
+    }
+  });
+
+  // Remove red border + error icon as soon as user corrects number
+  phoneInput.addEventListener('input', () => {
+    const container = phoneInput.closest('.form-group');
+    if (iti.isValidNumber()) {
+      container.classList.remove('error');
+      phoneInput.classList.remove('invalid');
+    }
+  });
+  // Detect country when number changes
+  phoneInput.addEventListener("blur", () => {
+    const countryData = iti.getSelectedCountryData();
+    if (countryData) {
+      countryField.value = countryData.name;
+    }
+
+    // Use ipapi to get state & city
+    fetch("https://ipapi.co/json")
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          countryField.value = data.country_name || countryField.value;
+          stateField.value = data.region || "N/A";
+          cityField.value = data.city || "N/A";
+        }
+      })
+      .catch(err => console.error("Geo lookup failed:", err));
+  });
+}
+
+
+
+        // Update word count
+        description.addEventListener('input', function () {
+          const text = description.value
+          const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length
+          wordCount.textContent = words
+
+          if (words > 300) {
+            wordCount.style.color = '#e53e3e'
+          } else {
+            wordCount.style.color = 'var(--text-gray)'
+          }
+        })
+
+        // Handle photo upload preview
+        photo.addEventListener('change', function (e) {
+          const file = e.target.files[0]
+          if (file) {
+            const reader = new FileReader()
+            reader.onload = function (e) {
+              previewImage.innerHTML = ''
+              const img = document.createElement('img')
+              img.src = e.target.result
+              img.alt = 'Preview Image'
+              img.style.width = '100%'
+              img.style.height = '100%'
+              img.style.objectFit = 'cover'
+              previewImage.appendChild(img)
+            }
+            reader.readAsDataURL(file)
+          }
+        })
+
+        // Update functions
+        function updatePreview() {
+          previewName.textContent = `${firstName.value} ${lastName.value}`
+          previewEmail.textContent = email.value
+          previewPhone.textContent = phone.value
+        }
+
+        function updateSocialPreview() {
+          previewFacebook.style.display = facebook.value ? 'flex' : 'none'
+          previewInstagram.style.display = instagram.value ? 'flex' : 'none'
+          previewTiktok.style.display = tiktok.value ? 'flex' : 'none'
+          previewWebsite.style.display = website.value ? 'flex' : 'none'
+
+          if (facebook.value) {
+            previewFacebook.href = facebook.value
+          }
+          if (instagram.value) {
+            previewInstagram.href = instagram.value
+          }
+          if (tiktok.value) {
+            previewTiktok.href = tiktok.value
+          }
+          if (website.value) {
+            previewWebsite.href = website.value
+          }
+        }
+
+        function updateLocationPreview() {
+  const countryName = country.options[country.selectedIndex]?.text || '';
+  const countyName  = county.options[county.selectedIndex]?.text || '';
+  const townName    = town.options[town.selectedIndex]?.text || '';
+
+  let locationStr = '';
+  if (countryName) locationStr += countryName;
+  if (countyName) locationStr += locationStr ? `, ${countyName}` : countyName;
+  if (townName) locationStr += locationStr ? `, ${townName}` : townName;
+
+  previewLocation.textContent = locationStr;
+}
+
+
+        function updateGenderPreview() {
+          previewGenderIcon.innerHTML = ''
+          if (gender.value === 'male') {
+            previewGenderIcon.innerHTML =
+              '<i class="fas fa-mars" style="color: #3b82f6;"></i>'
+          } else if (gender.value === 'female') {
+            previewGenderIcon.innerHTML =
+              '<i class="fas fa-venus" style="color: #ec4899;"></i>'
+          } else if (gender.value === 'other') {
+            previewGenderIcon.innerHTML =
+              '<i class="fas fa-transgender-alt" style="color: #8b5cf6;"></i>'
+          }
+        }
+
+        function updateCategoryPreview() {
+          previewCategory.textContent =
+            category.options[category.selectedIndex].text
+        }
+
+        function updateDescriptionPreview() {
+          previewDescription.textContent =
+            description.value ||
+            'Your description will appear here once you start typing...'
+        }
+
+        
+
+        // Animate elements on scroll
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        }
+
+        const observer = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated')
+              observer.unobserve(entry.target)
+            }
+          })
+        }, observerOptions)
+
+        const infoContent = document.querySelector('.info-content')
+        const infoImage = document.querySelector('.info-image')
+
+        if (infoContent) observer.observe(infoContent)
+        if (infoImage) observer.observe(infoImage)
+      })
+
+
+      // Select all relevant inputs
+const fields = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea , .file-upload input , .file-upload-icon');
+
+fields.forEach(field => {
+  field.addEventListener('blur', () => {  // When user leaves the field
+    if (!field.checkValidity()) {
+      field.classList.add('invalid');  // Add invalid class
+    } else {
+      field.classList.remove('invalid'); // Remove if fixed
+    }
+  });
+
+  // Optional: remove red border while typing
+  field.addEventListener('input', () => {
+    if (field.checkValidity()) {
+      field.classList.remove('invalid');
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('nomineeForm');
+    if (!form) return;
+
+    // ensure enctype for files
+    try { form.setAttribute('enctype', 'multipart/form-data'); } catch (e) {}
+
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalBtnText = submitBtn ? submitBtn.textContent : 'Submit';
+    const pageSpinner = document.getElementById('loadingSpinner');
+    const toastEl = document.getElementById('toast');
+
+    // small helpers
+    function showToast(message, success = true) {
+      // reuse your existing toast element visual style
+      const toast = toastEl || document.createElement('div');
+
+      if (success) {
+        toast.innerHTML = `
+          <span style="margin-right:12px; display:flex; align-items:center; justify-content:center;
+            width:40px; height:40px; border-radius:50%; background:#10b981; color:#fff;">
+            <i class="ti ti-circle-check" style="font-size:24px; line-height:1; display:block;"></i>
+          </span>
+          ${message}
+        `;
+        toast.style.background = "#d1fae5";
+        toast.style.color = "#004434";
+        toast.style.border = "none";
+      } else {
+        toast.innerHTML = `
+          <span style="margin-right:12px; display:flex; align-items:center; justify-content:center;
+            width:40px; height:40px; border-radius:50%; background:#facc15; color:#000;">
+            <i class="ti ti-alert-triangle" style="font-size:30px; line-height:1; display:block;"></i>
+          </span>
+          ${message}
+        `;
+        toast.style.background = "#dc2626";
+        toast.style.color = "#fff";
+        toast.style.border = "2px solid #000";
+      }
+
+      toast.classList.add('show');
+      // ensure it's in the DOM
+      if (!toastEl) document.body.appendChild(toast);
+
+      // auto hide
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 6000);
+    }
+
+    function showLoading() {
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+  }
+  if (pageSpinner) pageSpinner.style.display = 'block';
+
+  // Show overlay
+  const overlay = document.getElementById('overlay');
+  if (overlay) overlay.style.display = 'block';
+}
+
+function hideLoading() {
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
+  }
+  if (pageSpinner) pageSpinner.style.display = 'none';
+
+  // Hide overlay
+  const overlay = document.getElementById('overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+    // validation helper
+    function validateBeforeSubmit() {
+      // require at least one social link
+      const facebook = document.getElementById('facebook')?.value?.trim();
+      const instagram = document.getElementById('instagram')?.value?.trim();
+      const tiktok = document.getElementById('tiktok')?.value?.trim();
+      if (!facebook && !instagram && !tiktok) {
+        showToast('Please provide at least one social profile (Facebook, Instagram or TikTok).', false);
+        return false;
+      }
+
+      // description word count
+      const description = document.getElementById('description');
+      if (description) {
+        const words = description.value.trim() === '' ? 0 : description.value.trim().split(/\s+/).length;
+        if (words > 300) {
+          showToast('Description must be 300 words or less.', false);
+          return false;
+        }
+      }
+
+      // file presence + size check
+      const photo = document.getElementById('photo');
+      if (!photo || !photo.files || photo.files.length === 0) {
+        showToast('Please upload a photo.', false);
+        return false;
+      } else {
+        const file = photo.files[0];
+        const maxBytes = 15 * 1024 * 1024; // 15MB
+        if (file.size > maxBytes) {
+          showToast('Photo exceeds 15MB limit. Please choose a smaller file.', false);
+          return false;
+        }
+        // optional: enforce image types
+        if (!/^image\/(png|jpe?g|webp|gif)$/.test(file.type)) {
+          // allow common image types; adjust if needed
+          // accept other image types if you want
+          showToast('Please upload a JPG, PNG, WEBP or GIF image.', false);
+          return false;
+        }
+      }
+
+      // email validity (simple)
+      const email = document.getElementById('email');
+      if (email) {
+        const val = email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          showToast('Please provide a valid email address.', false);
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    // --- single robust submit handler ---
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // run validation
+      if (!validateBeforeSubmit()) return;
+
+      showLoading();
+
+      try {
+       // Build FormData from the form
+    
+    // Create a NEW FormData object without h-captcha
+    const cleanformData = new FormData(form)
+        // Required: your Web3Forms access key
+       cleanformData.delete('photo');
+       cleanformData.append('access_key', '1612f587-666d-4c7d-9e3d-7dc85329557d');
+        
+
+        // IMPORTANT: send to your admin email via Web3Forms
+        // change this address to whatever "send to me" email you want
+       cleanformData.append('recipient', 'info@tallytrackafrica.co.ke');
+        // optional: cc/bcc
+       cleanformData.append('cc', 'support@tallytrackafrica.co.ke');
+       cleanformData.append('bcc', 'admin@tallytrackafrica.co.ke');
+
+        // extra metadata
+       cleanformData.append('subject', 'New Nominee Application - TallyTrack Africa');
+       cleanformData.append('from_name', 'TallyTrack Africa Nominee Form');
+
+        // autoreply to nominee
+       cleanformData.append('autoreply', 'true');
+       cleanformData.append('autoreply_subject', 'Thanks we received your application!');
+
+        // If you use intlTelInput and want to add normalized phone: (optional)
+        try {
+          if (window.iti && typeof window.iti.getNumber === 'function') {
+           cleanformData.append('phone_full', window.iti.getNumber());
+          }
+        } catch (err) {
+          // ignore if not set
+        }
+
+        // 1) Send to Web3Forms
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body:cleanformData
+        });
+
+        const web3Result = await res.json();
+
+        if (!web3Result || !web3Result.success) {
+      console.error('Web3Forms response:', web3Result);
+      showToast('Failed to send application. Please try again.', false);
+      hideLoading();
+      return;
+    }
+    
+
+        // 2) Send verification email to nominee via EmailJS (sequential)
+        // Be sure your EmailJS template fields match these params
+        // === BEFORE SENDING EMAILJS: collect and validate ===
+const nomineeEmail = document.getElementById('email')?.value?.trim() || '';
+const nomineeName = `${(document.getElementById('firstName')?.value || '').trim()} ${(document.getElementById('lastName')?.value || '').trim()}`.trim();
+const phoneVal = (document.getElementById('phone')?.value || '').trim();
+const nationVal = (document.getElementById('country')?.value || '').trim();
+// Grab the select element
+const countryEl = document.getElementById('country');
+const countryVal = countryEl?.options[countryEl.selectedIndex]?.text || '';
+const townVal = (document.getElementById('town')?.value || '').trim();
+const categoryVal = (document.getElementById('category')?.value || '').trim();
+const descriptionVal = (document.getElementById('description')?.value || '').trim() || "N/A";
+
+// simple email validation
+if (!nomineeEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nomineeEmail)) {
+  console.error('EmailJS: nomineeEmail is missing or invalid:', nomineeEmail);
+  showToast('Your email is invalid/missing,verification email not sent.', false);
+} else {
+  // send *multiple* possible variable names so the template gets a match
+  const templateParams = {
+  firstName: document.getElementById('firstName')?.value?.trim(),
+  lastName: document.getElementById('lastName')?.value?.trim(),
+  email: document.getElementById('email')?.value?.trim(),
+  phone: document.getElementById('phone')?.value?.trim(),
+  country: countryVal,
+  county: document.getElementById('county')?.value,
+  town: document.getElementById('town')?.value,
+  category: document.getElementById('category')?.value,
+  description: document.getElementById('description')?.value?.trim() || "N/A"
+  };
+
+  // DEBUG: inspect what you're about to send (Network tab will show the same payload)
+  console.log('EmailJS: sending templateParams =>', templateParams);
+
+  try {
+    await emailjs.send('service_i06w66t', 'template_2q03ojs', templateParams);
+    console.log('EmailJS: send success');
+    showToast('Application sent, check your email.', true);
+  } catch (emErr) {
+    console.error('EmailJS error:', emErr, emErr?.status, emErr?.text);
+    showToast('Application sent, but verification email failed to send.', false);
+  }
+}
+
+
+        // final: reset form + preview (only after success)
+        form.reset();
+        // if you have preview update functions in your page, call them to clear preview:
+        try {
+          if (typeof updatePreview === 'function') updatePreview();
+          if (typeof updateSocialPreview === 'function') updateSocialPreview();
+          if (typeof updateLocationPreview === 'function') updateLocationPreview();
+          if (typeof updateDescriptionPreview === 'function') updateDescriptionPreview();
+          // clear preview image container (if exists)
+          const previewImage = document.getElementById('previewImage');
+          if (previewImage) previewImage.innerHTML = '<i class="fas fa-user fa-3x"></i>';
+        } catch (xx) { /* ignore */ }
+
+      } catch (err) {
+        console.error('Unexpected error while submitting nominee form:', err);
+        showToast('Unexpected error occurred. Please try again later.', false);
+      } finally {
+        hideLoading();
+      }
+    }); // end form submit listener
+
+  });
+   
+  const terms = document.getElementById('termsCheckbox');
+  const submitBtn = document.getElementById('submitBtn');
+  const error = document.getElementById('termsError');
+
+  // Toggle button state when checkbox changes
+  terms.addEventListener('change', function() {
+    if (this.checked) {
+      submitBtn.disabled = false;
+      error.style.display = 'none';
+    } else {
+      submitBtn.disabled = true;
+    }
+  });
+
+  // Prevent form submission + loader if unchecked
+  document.getElementById('nomineeForm').addEventListener('submit', function(e) {
+    if (!terms.checked) {
+      e.preventDefault();
+      error.style.display = 'block';
+    }
+  });
+
+
+
+
+      // Mobile menu functionality
+      document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle')
+        const mainNav = document.querySelector('.main-nav')
+        const mobileOverlay = document.createElement('div')
+
+        // Create mobile menu overlay
+        mobileOverlay.className = 'mobile-menu-overlay'
+        document.body.appendChild(mobileOverlay)
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+          mainNav.classList.toggle('active')
+          mobileOverlay.classList.toggle('active')
+          document.body.style.overflow = mainNav.classList.contains('active')
+            ? 'hidden'
+            : ''
+
+          // Change icon based on menu state
+          const icon = mobileMenuToggle.querySelector('i')
+          if (mainNav.classList.contains('active')) {
+            icon.classList.remove('fa-bars')
+            icon.classList.add('fa-times')
+          } else {
+            icon.classList.remove('fa-times')
+            icon.classList.add('fa-bars')
+          }
+        }
+
+        // Toggle menu when clicking the button
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu)
+
+        // Close menu when clicking overlay
+        mobileOverlay.addEventListener('click', toggleMobileMenu)
+
+        // Close menu when clicking nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', toggleMobileMenu)
+        })
+
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+            toggleMobileMenu()
+          }
+        })
+
+        // Make mobile menu toggle visible
+
+        mobileMenuToggle.style.alignItems = 'center'
+        mobileMenuToggle.style.justifyContent = 'center'
+        mobileMenuToggle.style.width = '44px'
+        mobileMenuToggle.style.height = '44px'
+        mobileMenuToggle.style.fontSize = '1.5rem'
+        mobileMenuToggle.style.color = 'var(--primary-gold)'
+        mobileMenuToggle.style.zIndex = '1002'
+      })
+    </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('nomineeForm');
+  const terms = document.getElementById('termsCheckbox') || document.querySelector('.terms-group input[type="checkbox"]');
+  const submitBtn = document.getElementById('submitBtn') || document.querySelector('.submit-btn');
+  const termsError = document.getElementById('termsError') || document.querySelector('.terms-error');
+  const loadingSpinner = document.getElementById('loadingSpinner'); // optional
+  const pageOverlay = document.getElementById('overlay'); // optional
+
+  if (!form || !terms || !submitBtn) {
+    console.warn('Required elements (form/terms/submit) not found. Script aborted.');
+    return;
+  }
+
+  // Remove any old overlays that were accidentally appended to the form (to avoid covering it)
+  document.querySelectorAll('.btn-overlay').forEach(o => {
+    if (o.parentElement === form) o.remove();
+  });
+
+  // Ensure the button itself is a positioned container for the overlay
+  const btnWrapper = submitBtn;
+  if (getComputedStyle(btnWrapper).position === 'static') {
+    btnWrapper.style.position = 'relative';
+  }
+
+  // Create (or reuse) an overlay that sits ON the button and captures clicks while locked
+  let btnOverlay = submitBtn.querySelector('.btn-overlay');
+  if (!btnOverlay) {
+    btnOverlay = document.createElement('div');
+    btnOverlay.className = 'btn-overlay';
+    // Keep overlay focusable for keyboard activation
+    btnOverlay.tabIndex = 0;
+    submitBtn.appendChild(btnOverlay);
+  }
+
+  // Inject the Tabler check icon container just after the checkbox if it's not present
+  if (!terms.nextElementSibling || !terms.nextElementSibling.classList.contains('terms-check-icon')) {
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'terms-check-icon';
+    iconSpan.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i>';
+    terms.parentNode.insertBefore(iconSpan, terms.nextSibling);
+  }
+
+  function showTermsError() {
+    if (termsError) termsError.style.display = 'block';
+    const tg = document.querySelector('.terms-group');
+    if (tg) {
+      tg.classList.remove('error');
+      void tg.offsetWidth; // reflow to restart animation
+      tg.classList.add('error');
+    }
+  }
+
+  function hideTermsError() {
+    if (termsError) termsError.style.display = 'none';
+    const tg = document.querySelector('.terms-group');
+    if (tg) tg.classList.remove('error');
+  }
+
+  // Lock/unlock the button visually using overlay + CSS class (do NOT use submitBtn.disabled)
+  function lockButton() {
+    submitBtn.classList.add('btn-locked');
+    submitBtn.setAttribute('aria-disabled', 'true');
+    btnOverlay.classList.add('visible'); // overlay captures clicks on the button only
+  }
+
+  function unlockButton() {
+    submitBtn.classList.remove('btn-locked');
+    submitBtn.removeAttribute('aria-disabled');
+    btnOverlay.classList.remove('visible');
+    hideTermsError();
+  }
+
+  // Initial state: locked if not checked
+  if (!terms.checked) lockButton();
+  else unlockButton();
+
+  // Toggle when checkbox changes
+  terms.addEventListener('change', function () {
+    if (this.checked) unlockButton();
+    else lockButton();
+  });
+
+  // Clicking overlay shows inline error and focuses checkbox (overlay only sits on the button)
+  btnOverlay.addEventListener('click', function (e) {
+    e.preventDefault();
+    showTermsError();
+    terms.focus();
+  });
+
+  btnOverlay.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this.click();
+    }
+  });
+
+  // Submission: only proceed if checkbox is checked
+  let submitting = false;
+  form.addEventListener('submit', function (e) {
+    if (!terms.checked) {
+      e.preventDefault();
+      showTermsError();
+      terms.focus();
+      return;
+    }
+    if (submitting) {
+      e.preventDefault(); // prevent double submit
+      return;
+    }
+    submitting = true;
+
+    // show loader/overlay only after legit submit
+    if (loadingSpinner) loadingSpinner.style.display = 'block';
+    if (pageOverlay) pageOverlay.style.display = 'block';
+
+    // visually lock to prevent double clicks (do NOT set disabled attribute)
+    submitBtn.classList.add('btn-locked');
+    submitBtn.setAttribute('aria-disabled', 'true');
+  });
+});
+</script>
+
+
+
+  </body>
+</html>

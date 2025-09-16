@@ -1,0 +1,200 @@
+/* src/App.css */
+/* Import the main CSS variables and reset */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Font Face */
+@font-face {
+  font-family: 'Adam-Medium';
+  src: url('./Assets/fonts/Adam-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Variables */
+:root {
+  --primary-dark: #1D260B;
+  --primary-gold: linear-gradient(135deg, #D4AF37 0%, #F1E5B9 100%);
+  --primary-gold-solid: #D4AF37;
+  --light-gold: #F1E5B9;
+  --white: #FFFFFF;
+  --black: #000000;
+  --dark-bg: #0A0E05;
+  --card-bg: rgba(29, 38, 11, 0.8);
+  --text-light: #E2E8F0;
+  --text-gray: #A0AEC0;
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Adam-Medium', sans-serif;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.logo img {
+  scale: 2.0;
+  padding: 5px 0px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition);
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background: var(--primary-gold);
+  color: var(--primary-dark);
+  border: none;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--light-gold);
+  border: 2px solid var(--primary-gold-solid);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-gold);
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.btn-outline:hover {
+  color: var(--primary-dark);
+}
+
+.btn-outline:hover::before {
+  left: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  70% {
+      box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes glow {
+  0% {
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+  }
+  50% {
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+  }
+  100% {
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-title {
+      font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-nav, .auth-container {
+      display: none;
+  }
+  
+  .hero-title {
+      font-size: 2.5rem;
+  }
+  
+  .section-title {
+      font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 0 1rem;
+  }
+  
+  .hero-title {
+      font-size: 2rem;
+  }
+}

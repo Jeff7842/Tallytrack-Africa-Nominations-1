@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Agreement | TallyTrack Africa Under 40 Years National Prestigious Awards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <style>
+        /* Font Face */
+        @font-face {
+            font-family: 'Adam-Medium';
+            src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Variables */
+        :root {
+            --primary-dark: #1d260b;
+            --primary-gold: linear-gradient(135deg, #d4af37 0%, #f1e5b9 100%);
+            --primary-gold-solid: #d4af37;
+            --light-gold: #f1e5b9;
+            --white: #ffffff;
+            --black: #000000;
+            --dark-bg: #0a0e05;
+            --card-bg: rgba(29, 38, 11, 0.8);
+            --text-light: #e2e8f0;
+            --text-gray: #a0aec0;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+            --sidebar-width: 280px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Remove blue outline when buttons/links are tapped or focused */
+        button:focus,
+        a:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        button,
+        a,
+        input,
+        textarea,
+        select {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: inherit;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary-color-dark);
+            outline-offset: 2px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Adam-Medium', sans-serif;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header Styles */
+        .header {
+            position:relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2.5rem 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(10, 14, 5, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            visibility: hidden;
+        }
+
+        .header.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-family: 'Adam-Medium', sans-serif;
+            font-size: 1.8rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2.5rem;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            justify-items: center;
+            align-items: center;
+            text-align: center;
+            margin-right: 50px;
+            font-family: 'Adam-Medium';
+            font-size: 21px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--light-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .auth-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mobile-menu-toggle {
+            position: relative;
+            display: block;
+            z-index: 10001;
+            top: -10px;
+            display: none;
+            background: none;
+            border: none;
+            font-size: larger;
+        }
+
+        .mobile-menu-toggle i {
+            display: none;
+        }
+
+        /* Terms Page Layout */
+        .terms-page {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .terms-sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0px;
+            left: 0;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            background: var(--card-bg);
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 2rem 1.5rem;
+            z-index: 10000;
+            height: 100%;
+        }
+
+        .terms-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem 3rem 4rem;
+
+        }
+
+        /* ========== Sidebar Scrollbar ========== */
+      .terms-sidebar {
+        direction: rtl; /* Flip direction so scrollbar appears on the left */
+      }
+      .terms-sidebar * {
+        direction: ltr; /* Keep text direction normal */
+      }
+
+      /* Webkit Browsers (Chrome, Edge, Safari) */
+      .terms-sidebar::-webkit-scrollbar {
+        width: 2px; /* Thin scrollbar */
+      }
+      .terms-sidebar::-webkit-scrollbar-track {
+        background: transparent; /* No background */
+      }
+      .terms-sidebar::-webkit-scrollbar-thumb {
+        background: #d4af37; /* Gold color */
+        border-radius: 10px;
+      }
+      .terms-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #f1e5b9; /* Light gold on hover */
+      }
+
+      /* Firefox */
+      .terms-sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: #d4af37 transparent;
+      }
+
+      /* WebKit */
+      .terms-sidebar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .terms-sidebar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .terms-sidebar::-webkit-scrollbar-thumb {
+        background: #666; /* choose your content color */
+        border-radius: 10px;
+      }
+      .terms-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #999;
+      }
+
+        .hero-logo{
+            
+          margin-top: -150px;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer; 
+            margin-bottom: -20px;
+        }
+
+        .logo-hero{
+            position: relative;
+            height: 250px;
+            width: auto;
+            top: -40px;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .sidebar-nav-link {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .sidebar-nav-link:hover,
+        .sidebar-nav-link.active {
+            color: var(--light-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .terms-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .terms-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .last-updated {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .terms-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-gold);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .section-content {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .section-content ul, 
+        .section-content ol {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--primary-gold-solid);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .internal-link {
+            color: var(--primary-gold-solid);
+            text-decoration: Underline;
+            transition: var(--transition);
+        }
+
+        .internal-link:hover {
+            color: var(--light-gold);
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            background: var(--primary-dark);
+            padding: 5rem 0 2rem;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at 20% 80%,
+                rgba(212, 175, 55, 0.1) 0%,
+                transparent 20%
+            ),
+            radial-gradient(
+                circle at 80% 20%,
+                rgba(212, 175, 55, 0.1) 0%,
+                transparent 20%
+            ),
+            linear-gradient(
+                45deg,
+                transparent 49%,
+                rgba(212, 175, 55, 0.05) 50%,
+                transparent 51%
+            );
+            background-size: cover, cover, 10px 10px;
+            z-index: 0;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .footer-links li i {
+            color: #d4af37;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+
+        .footer-link {
+            color: var(--text-gray);
+            transition: var(--transition);
+            position: relative;
+            padding-left: 0;
+            transition: var(--transition);
+        }
+
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--light-gold);
+            padding-left: 10px;
+        }
+
+        .footer-link:hover::before {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .terms-sidebar {
+                width: 220px;
+            }
+            
+            .terms-content {
+                margin-left: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav,
+            .auth-container {
+                display: none;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background: #111;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                z-index: 1000;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                background: var(--primary-dark);
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                width: 200px;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle.active {
+                color: rgb(127, 3, 3);
+            }
+
+            .nav-link {
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+                width: 100%;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .mobile-menu-toggle i {
+                display: block;
+                color: #ffcc00;
+            }
+            
+            /* Terms page responsive */
+            .terms-page {
+                flex-direction: column;
+                padding-top: 100px;
+            }
+            
+            .terms-sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .terms-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .terms-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img
+                        src="Assets/img/Asset7.png"
+                        alt="TallyTrack Africa Under 40 Years National Prestigious Awards"
+                        class="logo-img"
+                        onclick="window.location.href='index.html'"
+                    />
+                    <span class="logo-text" style="display: none">TALLYTRACK</span>
+                </div>
+
+                <nav class="main-nav">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="category.html" class="nav-link">Categories</a>
+                    <a href="About_Us.html" class="nav-link">About</a>
+                    <a href="Contact_US.html" class="nav-link">Contact Us</a>
+                    <a href="nominee.html#home" class="nav-link">Be A Nominee</a>
+                </nav>
+
+                <div class="auth-container" style="display: none">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Register</a>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Terms Page Content -->
+    <div class="terms-page">
+        <!-- Sidebar Navigation -->
+        <aside class="terms-sidebar">
+            <h3 class="sidebar-title">Terms & Agreement</h3>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item"><a href="#introduction" class="sidebar-nav-link active">1. Introduction</a></li>
+                <li class="sidebar-nav-item"><a href="#definitions" class="sidebar-nav-link">2. Definitions</a></li>
+                <li class="sidebar-nav-item"><a href="#eligibility" class="sidebar-nav-link">3. Eligibility</a></li>
+                <li class="sidebar-nav-item"><a href="#nomination-process" class="sidebar-nav-link">4. Nomination Process</a></li>
+                <li class="sidebar-nav-item"><a href="#voting-process" class="sidebar-nav-link">5. Voting Process</a></li>
+                <li class="sidebar-nav-item"><a href="#user-conduct" class="sidebar-nav-link">6. User Conduct</a></li>
+                <li class="sidebar-nav-item"><a href="#intellectual-property" class="sidebar-nav-link">7. Intellectual Property</a></li>
+                <li class="sidebar-nav-item"><a href="#privacy" class="sidebar-nav-link">8. Privacy & Data Protection</a></li>
+                <li class="sidebar-nav-item"><a href="#limitation-liability" class="sidebar-nav-link">9. Limitation of Liability</a></li>
+                <li class="sidebar-nav-item"><a href="#termination" class="sidebar-nav-link">10. Termination</a></li>
+                <li class="sidebar-nav-item"><a href="#governing-law" class="sidebar-nav-link">11. Governing Law</a></li>
+                <li class="sidebar-nav-item"><a href="#changes-terms" class="sidebar-nav-link">12. Changes to Terms</a></li>
+                <li class="sidebar-nav-item"><a href="#contact" class="sidebar-nav-link">13. Contact Information</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="terms-content">
+            <div class="terms-hero">
+                <div class="hero-logo">
+                    <img
+                        src="Assets/img/Symbol.png"
+                        alt="TallyTrack Africa Under 40 Years National Prestigious Awards"
+                        class="logo-hero"
+                        onclick="window.location.href='index.html'"
+                    />
+                </div>
+                <h1 class="terms-title">Terms and Agreement</h1>
+                <p class="last-updated">Last Updated: September 15, 2025</p>
+            </div>
+
+            <section id="introduction" class="terms-section">
+                <h2 class="section-title">1. Introduction</h2>
+                <div class="section-content">
+                    <p>Welcome to TallyTrack Africa Under 40 Years National Prestigious Awards ("we," "our," or "us"). These Terms and Conditions ("Terms") govern your use of our website, services, and participation in the TallyTrack Africa Under 40 Years National Prestigious Awards Awards program. By accessing our website, submitting a nomination, casting votes, or otherwise using our services, you agree to be bound by these Terms.</p>
+                    <p>Please read these Terms carefully before using our services. If you do not agree to these Terms, you may not access or use our services.</p>
+                    <div class="highlight">
+                        <p><strong>Note:</strong> These Terms constitute a legally binding agreement between you and TallyTrack Africa Under 40 Years National Prestigious Awards. We recommend that you print a copy of these Terms for your records.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="definitions" class="terms-section">
+                <h2 class="section-title">2. Definitions</h2>
+                <div class="section-content">
+                    <p>In these Terms, the following definitions apply:</p>
+                    <ul>
+                        <li><strong>"Platform"</strong> refers to the TallyTrack Africa Under 40 Years National Prestigious Awards website, mobile applications, and all related services.</li>
+                        <li><strong>"User"</strong> means any individual who accesses or uses our Platform.</li>
+                        <li><strong>"Nominee"</strong> means an individual who has been nominated for a TallyTrack Africa Under 40 Years National Prestigious Awards Award.</li>
+                        <li><strong>"Voter"</strong> means a User who casts votes for Nominees.</li>
+                        <li><strong>"Content"</strong> includes all information, text, graphics, photos, logos, and other materials uploaded to or appearing on our Platform.</li>
+                        <li><strong>"Services"</strong> refers to all services provided by TallyTrack Africa Under 40 Years National Prestigious Awards, including but not limited to the nomination process, voting system, and award management.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="eligibility" class="terms-section">
+                <h2 class="section-title">3. Eligibility</h2>
+                <div class="section-content">
+                    <p>To use our Services, you must meet the following eligibility requirements:</p>
+                    <ol>
+                        <li>You must be at least 18 years of age or have obtained parental/guardian consent.</li>
+                        <li>You must provide accurate and complete information during registration or nomination.</li>
+                        <li>You must comply with all applicable laws and regulations in your jurisdiction.</li>
+                        <li>Nominees must be between 18-40 years of age at the time of nomination.</li>
+                        <li>Employees of TallyTrack Africa Under 40 Years National Prestigious Awards and their immediate family members are not eligible for nomination.</li>
+                    </ol>
+                    <p>We reserve the right to verify eligibility and refuse service to anyone at our sole discretion.</p>
+                </div>
+            </section>
+
+            <section id="nomination-process" class="terms-section">
+                <h2 class="section-title">4. Nomination Process</h2>
+                <div class="section-content">
+                    <p>The nomination process for TallyTrack Africa Under 40 Years National Prestigious Awards Awards is governed by the following terms:</p>
+                    <ol>
+                        <li>Nominations may be submitted by individuals or organizations meeting our eligibility criteria.</li>
+                        <li>All nominations must be submitted through our official Platform using the designated nomination form.</li>
+                        <li>Nominees must consent to their nomination and provide required documentation upon request.</li>
+                        <li>All information provided during nomination must be accurate, truthful, and not misleading.</li>
+                        <li>We reserve the right to verify all information provided and disqualify any nomination that does not meet our standards.</li>
+                        <li>Submission of a nomination does not guarantee selection as a finalist or winner.</li>
+                        <li>All decisions regarding nominations and awards are final and not subject to appeal.</li>
+                    </ol>
+                    <p>By submitting a nomination, you grant TallyTrack Africa Under 40 Years National Prestigious Awards the right to use nominee information for promotional purposes as outlined in our <a href="privacy.html" class="internal-link">Privacy Policy</a>.</p>
+                </div>
+            </section>
+
+            <section id="voting-process" class="terms-section">
+                <h2 class="section-title">5. Voting Process</h2>
+                <div class="section-content">
+                    <p>The voting process for TallyTrack Africa Under 40 Years National Prestigious Awards Awards is subject to the following conditions:</p>
+                    <ol>
+                        <li>Voting is open to registered Users who meet our eligibility requirements.</li>
+                        <li>Each User may cast one vote per category per day, unless otherwise specified.</li>
+                        <li>We employ measures to detect and prevent fraudulent voting activities.</li>
+                        <li>Any attempt to manipulate the voting process through automated systems, multiple accounts, or other fraudulent means will result in disqualification.</li>
+                        <li>We reserve the right to adjust vote counts, disqualify votes, or take other appropriate actions to ensure the integrity of the voting process.</li>
+                        <li>Voting periods and rules for each award category will be clearly communicated on our Platform.</li>
+                    </ol>
+                    <div class="highlight">
+                        <p><strong>Important:</strong> The final determination of award winners is at the sole discretion of TallyTrack Africa Under 40 Years National Prestigious Awards and may consider factors beyond vote counts, including judge evaluations and compliance with these Terms.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="user-conduct" class="terms-section">
+                <h2 class="section-title">6. User Conduct</h2>
+                <div class="section-content">
+                    <p>When using our Platform, you agree to the following standards of conduct:</p>
+                    <ol>
+                        <li>You will not engage in any activity that violates any applicable law or regulation.</li>
+                        <li>You will not submit false, inaccurate, or misleading information.</li>
+                        <li>You will not impersonate any person or entity or misrepresent your affiliation with any person or entity.</li>
+                        <li>You will not upload, post, or transmit any content that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or otherwise objectionable.</li>
+                        <li>You will not interfere with or disrupt the integrity or performance of our Platform.</li>
+                        <li>You will not attempt to gain unauthorized access to our systems or engage in any activity that interferes with the proper working of our Platform.</li>
+                        <li>You will not engage in any activity that compromises the security or integrity of the voting process.</li>
+                    </ol>
+                    <p>Violation of these conduct standards may result in termination of your account and legal action where appropriate.</p>
+                </div>
+            </section>
+
+            <section id="intellectual-property" class="terms-section">
+                <h2 class="section-title">7. Intellectual Property</h2>
+                <div class="section-content">
+                    <p>All intellectual property rights in our Platform and Services are owned by or licensed to TallyTrack Africa Under 40 Years National Prestigious Awards:</p>
+                    <ol>
+                        <li>The TallyTrack Africa Under 40 Years National Prestigious Awards name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of TallyTrack Africa Under 40 Years National Prestigious Awards or its affiliates.</li>
+                        <li>All content on our Platform, including text, graphics, logos, images, and software, is the property of TallyTrack Africa Under 40 Years National Prestigious Awards or its content suppliers and protected by copyright and other intellectual property laws.</li>
+                        <li>By submitting content to our Platform (including nomination information), you grant TallyTrack Africa Under 40 Years National Prestigious Awards a worldwide, royalty-free, perpetual license to use, reproduce, modify, adapt, publish, translate, and distribute such content for promotional and operational purposes.</li>
+                        <li>Nominees retain ownership of their submitted materials but grant TallyTrack Africa Under 40 Years National Prestigious Awards the right to use such materials in connection with the awards program.</li>
+                    </ol>
+                    <p>Unauthorized use of any intellectual property belonging to TallyTrack Africa Under 40 Years National Prestigious Awards is strictly prohibited.</p>
+                </div>
+            </section>
+
+            <section id="privacy" class="terms-section">
+                <h2 class="section-title">8. Privacy & Data Protection</h2>
+                <div class="section-content">
+                    <p>Your privacy is important to us. Our collection, use, and protection of your personal information is governed by our <a href="privacy.html" class="internal-link">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+                    <p>Key aspects of our data practices include:</p>
+                    <ol>
+                        <li>We collect personal information necessary to provide our Services, including names, contact information, and biographical details.</li>
+                        <li>We implement security measures to protect your personal information from unauthorized access.</li>
+                        <li>We may use your information to communicate with you about the awards program, promotional offers, and important updates.</li>
+                        <li>We may share information with trusted third-party service providers who assist us in operating our Platform and conducting our business.</li>
+                        <li>By using our Services, you consent to the transfer, storage, and processing of your information as described in our Privacy Policy.</li>
+                    </ol>
+                    <p>Please review our <a href="privacy.html" class="internal-link">Privacy Policy</a> carefully to Understand our practices regarding your personal data.</p>
+                </div>
+            </section>
+
+            <section id="limitation-liability" class="terms-section">
+                <h2 class="section-title">9. Limitation of Liability</h2>
+                <div class="section-content">
+                    <p>To the fullest extent permitted by law, TallyTrack Africa Under 40 Years National Prestigious Awards shall not be liable for:</p>
+                    <ol>
+                        <li>Any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, use, goodwill, or other intangible losses.</li>
+                        <li>Any errors or omissions in any content or for any loss or damage incurred as a result of the use of any content posted, transmitted, or otherwise made available through the Platform.</li>
+                        <li>Any unauthorized access to or use of our servers and/or any personal information stored therein.</li>
+                        <li>Any interruption or cessation of transmission to or from our Platform.</li>
+                        <li>Any bugs, viruses, Trojan horses, or the like that may be transmitted to or through our Platform by any third party.</li>
+                    </ol>
+                    <p>Our total cumulative liability to you for all claims arising from or relating to these Terms or your use of our Services shall not exceed the amount you have paid to us in the twelve (12) months preceding the event giving rise to the claim.</p>
+                    <div class="highlight">
+                        <p><strong>Disclaimer:</strong> Our Platform and Services are provided on an "as is" and "as available" basis without any warranties of any kind, either express or implied.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="termination" class="terms-section">
+                <h2 class="section-title">10. Termination</h2>
+                <div class="section-content">
+                    <p>These Terms remain in effect while you use our Services. We may terminate or suspend your access to our Services:</p>
+                    <ol>
+                        <li>Immediately if you breach any provision of these Terms.</li>
+                        <li>For any reason with thirty (30) days' notice.</li>
+                        <li>Immediately if required to do so by law or legal process.</li>
+                    </ol>
+                    <p>Upon termination:</p>
+                    <ol>
+                        <li>Your right to use our Services will immediately cease.</li>
+                        <li>All provisions of these Terms which by their nature should survive termination shall survive, including ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</li>
+                    </ol>
+                    <p>We reserve the right to discontinue any aspect of our Services at any time, including the awards program itself.</p>
+                </div>
+            </section>
+
+            <section id="governing-law" class="terms-section">
+                <h2 class="section-title">11. Governing Law</h2>
+                <div class="section-content">
+                    <p>These Terms shall be governed by and construed in accordance with the laws of the Republic of Kenya, without regard to its conflict of law provisions.</p>
+                    <p>Any legal action or proceeding relating to your access to or use of our Platform or Services shall be instituted in the courts of the Republic of Kenya. You agree to submit to the jurisdiction of the courts located in Nairobi, Kenya, and waive any objections to the exercise of jurisdiction over you by such courts.</p>
+                    <p>The United Nations Convention on Contracts for the International Sale of Goods does not apply to these Terms.</p>
+                </div>
+            </section>
+
+            <section id="changes-terms" class="terms-section">
+                <h2 class="section-title">12. Changes to Terms</h2>
+                <div class="section-content">
+                    <p>We reserve the right to modify these Terms at any time. When we make changes, we will post the updated Terms on our Platform and update the "Last Updated" date at the beginning of these Terms.</p>
+                    <p>Your continued use of our Services after any changes to these Terms constitutes your acceptance of the revised Terms. If you do not agree to the changes, you must stop using our Services.</p>
+                    <p>We encourage you to review these Terms periodically to stay informed about our policies.</p>
+                    <div class="highlight">
+                        <p><strong>Material Changes:</strong> If we make material changes to these Terms, we will notify you by email (if you have provided an email address) or by posting a prominent notice on our Platform before the changes become effective.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="terms-section">
+                <h2 class="section-title">13. Contact Information</h2>
+                <div class="section-content">
+                    <p>If you have any questions about these Terms, please contact us at:</p>
+                    <p><strong>TallyTrack Africa Under 40 Years National Prestigious Awards</strong><br>
+                    Email: info@tallytrackafrica.co.ke<br>
+                    Phone: +254 115 289 871<br>
+                    Address: Nairobi, Kenya</p>
+                    <p>We will make every effort to respond to your inquiries in a timely manner.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        const mobileMenuOverlay = document.createElement('div');
+        mobileMenuOverlay.className = 'mobile-menu-overlay';
+        document.body.appendChild(mobileMenuOverlay);
+
+        mobileMenuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        mobileMenuOverlay.addEventListener('click', function() {
+            mainNav.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        });
+
+        // Sidebar navigation highlighting
+        const sections = document.querySelectorAll('.terms-section');
+        const navLinks = document.querySelectorAll('.sidebar-nav-link');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scrolling for sidebar navigation
+        document.querySelectorAll('.sidebar-nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update active class
+                navLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

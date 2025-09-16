@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TallyTrack Africa | Celebrating Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <link rel="stylesheet" href="Assets/css/main.css"/>
+    <style>
+        /* Additional styles for this page can go here */
+        @font-face {
+            font-family:'Adam-Medium';
+            src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Sponsors Section */
+    .sponsors-section {
+        position: relative;
+        padding: 4rem 0;
+        background:linear-gradient(to bottom, var(--primary-dark), var(--primary-dark));
+        overflow: hidden;
+    }
+
+    .sponsors-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .sponsors-header.animated {
+        opacity: 1;
+        transform: translateY(0);
+        transition: var(--transition);
+    }
+
+    .sponsors-track {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 1rem 0;
+    }
+
+    .sponsors-slide {
+        display: flex;
+        width: calc(250px * 10); /* Double the items for seamless loop */
+        animation: slide 30s linear infinite;
+    }
+
+    .sponsor-card {
+        flex: 0 0 220px;
+        height: 120px;
+        margin: 0 15px;
+        /*background: rgba(29, 38, 11, 0.7);*/
+        background:var(--primary-gold);
+        -webkit-background-filter:blure(10px) ;
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .sponsor-card:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: var(--glow);
+        border-color: var(--primary-gold-solid);
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .sponsor-logo {
+        max-width: 160px;
+        max-height: 70px;
+        filter: grayscale(0.3);
+        opacity: 0.8;
+        transition: var(--transition);
+    }
+
+    .sponsor-card:hover .sponsor-logo {
+        filter: grayscale(0);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-250px * 5)); /* Move by half the items */
+        }
+    }
+
+    /* Pause animation on hover */
+    .sponsors-track:hover .sponsors-slide {
+        animation-play-state: paused;
+    }
+
+    
+
+         /* Voting Section */
+        .voting-section {
+            position: relative;
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+        }
+
+        .voting-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .voting-content.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .voting-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+        }
+
+        </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="Assets/img/Asset7.png" alt="TallyTrack Africa" class="logo-img" onclick="window.location.href='index.html'">
+                    <span class="logo-text" style="display:none;">TALLYTRACK</span>
+                </div>
+                
+                <nav class="main-nav">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="#categories" class="nav-link">Categories</a>
+                    <a href="About_Us.html" class="nav-link">About</a>
+                    <a href="Contact_US.html" class="nav-link">Contact Us</a>
+                </nav>
+                
+                <div class="auth-container" style="display:none;">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Register</a>
+                </div>
+                
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('Assets/img/Slide1920x1080.webp');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('Assets/img/Slide21920x1080.webp');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide" style="background-image: url('Assets/img/Slide31920x1080.webp');">
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Celebrating <span>Excellence</span> Across Africa</h1>
+                <p class="hero-description">Career capital, reputation boost, a national spotlight that is more than a trophy building personal brands, visibility, and credibility for Kenya’s next generation of leaders.</p>
+                <div class="hero-buttons">
+                    <a href="dashboard.html" class="btn btn-primary">View Nominees</a>
+                    <a href="Learn.html" class="btn btn-outline">How To Vote</a>
+                    <a href="Nominee.html" class="btn btn-primary">Be A Nominee</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-pattern"></div>
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-subtitle">TallyTrack Awards</span>
+                    <h2 class="section-title">Ready to choose your favorite nominee?</h2>
+                    <p class="section-description">
+                        TallyTrack Africa Awards celebrates excellence and outstanding achievements across various industries. 
+                        Our platform allows you to participate in recognizing the best talents and contributors in their respective fields.
+                    </p>
+                    <p class="section-description">
+                        With transparent voting processes and real-time results, we ensure that every vote counts and the most deserving nominees receive the recognition they deserve.
+                    </p>
+                    <a href="dashboard.html" class="btn btn-primary">Vote Now</a>
+                </div>
+                
+                <div class="about-image">
+                    <!--<img src="Assets/img/Trophy.webp" alt="Trophy award">--->
+                    <img src="Assets/img/Trophy-01.webp" alt="Trophy award" style="border: none; box-shadow: none;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- About Company Section -->
+    <section class="about-company-section" id="about">
+        <div class="container">
+            <div class="about-company-container">
+                <div class="about-company-image">
+                    <img src="Assets/img/TallyTrack_Africa_Logo_1.webp" alt="TallyTrack Africa Logo">
+                </div>
+                
+                <div class="about-company-content">
+                    <span class="section-subtitle">Our Story</span>
+                    <h2 class="about-company-title">Who Are We?</h2>
+                    <p class="about-company-description">
+                        The TallyTrack under 40 Years National Prestigious Awards is Kenya’s most credible and inspiring platform dedicated to celebrating the next generation of leaders. 
+                        We recognize and honor young achievers under the age of 40 who are driving impact across 
+                        business, governance, innovation, philanthropy, sports, arts, technology, and community service.
+                    </p>
+                    <p class="about-company-description">
+                        At TallyTrack, we believe that Kenya’s future is already here in the hands of young leaders. 
+                        Our mission is to shine a national spotlight on them, so they can inspire millions, build stronger communities, and shape a brighter tomorrow.
+                    </p>
+                    <a href="About_Us.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+ <!--Sponsers Section-->
+    <section class="sponsors-section">
+    <div class="sponsors-container">
+        <div class="sponsors-header">
+            <span class="section-subtitle">Our Partners</span>
+            <h2 class="section-title">Supported By Industry Leaders</h2>
+        </div>
+        
+        <div class="sponsors-track">
+            <div class="sponsors-slide">
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/Absa.png" alt="Sponsor 1" class="sponsor-logo">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/Coca-Cola-Logo-1934.png" alt="Sponsor 2" class="sponsor-logo">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/bonfire.png" alt="Sponsor 3" class="sponsor-logo">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/SAF-MAIN-LOGO.png" alt="Sponsor 4" class="sponsor-logo" style="scale:2.8;">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/Equity_Group_Logo.png" alt="Sponsor 5" class="sponsor-logo">
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/Absa.png" alt="Sponsor 1" class="sponsor-logo">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/Coca-Cola-Logo-1934.png" alt="Sponsor 2" class="sponsor-logo">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/bonfire.png" alt="Sponsor 3" class="sponsor-logo">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/SAF-MAIN-LOGO.png" alt="Sponsor 4" class="sponsor-logo" style="scale:2.8;">
+                </div>
+                <div class="sponsor-card">
+                    <img src="Assets/img/Nominee_Pictures/sponsers/Equity_Group_Logo.png" alt="Sponsor 5" class="sponsor-logo">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Nominees Section -->
+    <section class="nominees-section" id="nominees">
+        <div class="container">
+            <div class="nominees-header text-center">
+                <span class="section-subtitle">Our Nominees</span>
+                <h2 class="section-title">Outstanding Achievers</h2>
+                <p class="section-description">Browse through our exceptional nominees and cast your vote for your favorites</p>
+            </div>
+            
+            <div class="nominees-container">
+                <div class="nominees-scroller" id="nominees-scroller">
+                    <!-- Nominee cards will be added here by JavaScript -->
+                </div>
+                
+                <div class="scroller-controls">
+                    <button class="scroller-btn" id="scroll-left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroller-btn" id="scroll-right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="view-all-btn">
+                <a href="dashboard.html" class="btn btn-outline">View All Nominees</a>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Categories Section -->
+    <!-- Award Categories Section -->
+<section class="categories-section" id="categories">
+  <div class="container">
+    <div class="categories-header text-center">
+      <span class="section-subtitle">Award Categories</span>
+      <h2 class="section-title">Recognizing Excellence</h2>
+      <p class="section-description">
+        Explore the various categories and see the outstanding nominees in each field
+      </p>
+    </div>
+
+    <div class="categories-grid scroll-container">
+      <!-- Philanthropist -->
+      <div class="category-card" data-category="philanthropist">
+        <div class="category-icon"><i class="fas fa-heart"></i></div>
+        <h3 class="category-title">Philanthropist of the Year</h3>
+        <p class="category-count">12 Nominees</p>
+      </div>
+
+      <!-- Brand Ambassador -->
+      <div class="category-card" data-category="ambassador">
+        <div class="category-icon"><i class="fas fa-flag"></i></div>
+        <h3 class="category-title">Brand Ambassador of the Year</h3>
+        <p class="category-count">10 Nominees</p>
+      </div>
+
+      <!-- Blogger -->
+      <div class="category-card" data-category="blogger">
+        <div class="category-icon"><i class="fas fa-pen-nib"></i></div>
+        <h3 class="category-title">Blogger of the Year</h3>
+        <p class="category-count">8 Nominees</p>
+      </div>
+
+      <!-- Content Creator -->
+      <div class="category-card" data-category="content-creator">
+        <div class="category-icon"><i class="fas fa-microphone"></i></div>
+        <h3 class="category-title">Content Creator of the Year</h3>
+        <p class="category-count">24 Nominees</p>
+      </div>
+
+      <!-- Entrepreneur -->
+      <div class="category-card" data-category="entrepreneur">
+        <div class="category-icon"><i class="fas fa-briefcase"></i></div>
+        <h3 class="category-title">Entrepreneur of the Year</h3>
+        <p class="category-count">16 Nominees</p>
+      </div>
+
+      <!-- Youth Leader -->
+      <div class="category-card" data-category="youth-leader">
+        <div class="category-icon"><i class="fas fa-user-check"></i></div>
+        <h3 class="category-title">Youth Leader of the Year</h3>
+        <p class="category-count">9 Nominees</p>
+      </div>
+
+      <!-- Innovator -->
+      <div class="category-card" data-category="innovator">
+        <div class="category-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3 class="category-title">Innovator of the Year</h3>
+        <p class="category-count">14 Nominees</p>
+      </div>
+
+      <!-- Comedian -->
+      <div class="category-card" data-category="comedian">
+        <div class="category-icon"><i class="fas fa-theater-masks"></i></div>
+        <h3 class="category-title">Comedian of the Year</h3>
+        <p class="category-count">11 Nominees</p>
+      </div>
+
+      <!-- Community Champion -->
+      <div class="category-card" data-category="community-champion">
+        <div class="category-icon"><i class="fas fa-users"></i></div>
+        <h3 class="category-title">Community Champion of the Year</h3>
+        <p class="category-count">15 Nominees</p>
+      </div>
+
+      <!-- Influencer -->
+      <div class="category-card" data-category="influencer">
+        <div class="category-icon"><i class="fas fa-bullhorn"></i></div>
+        <h3 class="category-title">Influencer of the Year</h3>
+        <p class="category-count">13 Nominees</p>
+      </div>
+
+      <!-- DJ -->
+      <div class="category-card" data-category="dj">
+        <div class="category-icon"><i class="fas fa-music"></i></div>
+        <h3 class="category-title">DJ of the Year</h3>
+        <p class="category-count">18 Nominees</p>
+      </div>
+
+      <!-- Podcast -->
+      <div class="category-card" data-category="podcast">
+        <div class="category-icon"><i class="fas fa-podcast"></i></div>
+        <h3 class="category-title">Podcast of the Year</h3>
+        <p class="category-count">7 Nominees</p>
+      </div>
+
+      <!-- Facebook -->
+      <div class="category-card" data-category="facebook">
+        <div class="category-icon"><i class="fab fa-facebook"></i></div>
+        <h3 class="category-title">Facebook Page of the Year</h3>
+        <p class="category-count">10 Nominees</p>
+      </div>
+
+      <!-- TikTok -->
+      <div class="category-card" data-category="tiktok">
+        <div class="category-icon"><i class="fab fa-tiktok"></i></div>
+        <h3 class="category-title">TikTok Page of the Year</h3>
+        <p class="category-count">20 Nominees</p>
+      </div>
+      <div class="category-card" data-category="tiktok">
+        <div class="category-icon"><i class="ti ti-buildings"></i></div>
+        <h3 class="category-title">CEO of the Year</h3>
+        <p class="category-count">30 Nominees</p>
+      </div>
+    </div>
+    <div class="view-all-btn">
+                <a href="category.html" class="btn btn-outline">View All Categories</a>
+            </div>
+  </div>
+</section>
+
+
+    <!-- Voting Section -->
+    <section class="voting-section" id="voting">
+        <div class="container">
+            <div class="voting-content text-center">
+                <span class="section-subtitle">Voting Process</span>
+                <h2 class="section-title">How To Cast Your Vote</h2>
+                <p class="section-description">
+                    Participating in the TallyTrack Africa Awards is simple and straightforward. Follow these steps to ensure your voice is heard.
+                </p>
+                
+                <div class="voting-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="votes-count">0</div>
+                        <div class="stat-label">Votes Cast</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-value" id="nominees-count">0</div>
+                        <div class="stat-label">Nominees</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-value" id="days-left">14</div>
+                        <div class="stat-label">Days Left</div>
+                    </div>
+                </div>
+                
+                <a href="Learn.html" class="btn btn-primary">Start Learning</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-pattern"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4 style="width:60%;"><img src="Assets/img/Asset2.webp" alt=""></h4>
+                        <p>Celebrating excellence and outstanding achievements across Africa through transparent public voting.</p>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="#home" class="footer-link">Home</a></li>
+                            <li><a href="dashboard.html" class="footer-link">Dashboard</a></li>
+                            <li><a href="Nominee.html" class="footer-link">Be A Nominee</a></li>
+                            <li><a href="Learn.html" class="footer-link">Voting Process</a></li>
+                            <li><a href="About_Us.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Categories</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link">Content Creation</a></li>
+                            <li><a href="#" class="footer-link">Music & Entertainment</a></li>
+                            <li><a href="#" class="footer-link">Business</a></li>
+                            <li><a href="#" class="footer-link">Philanthropy</a></li>
+                            <li><a href="#" class="footer-link">Innovation</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-envelope"></i> info@tallytrackafrica.co.ke</li>
+                            <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 TallyTrack Africa. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="Assets/js/main-2.js"></script>
+    <script src="Assets/js/dashboard-2.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
+     <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  // Defensive check for import.meta.env
+  const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
+  const supabaseUrl = env.VITE_SUPABASE_URL || 'https://cijjwarijqkaihehjskw.supabase.co';
+  const supabaseKey = env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpamp3YXJpanFrYWloZWhqc2t3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0MzAxODQsImV4cCI6MjA3MjAwNjE4NH0.h0VWs07u1mPGCBKc7wcOAG_ejH8LK8CdyFFHVyoILp8';
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  // Make supabase available globally for your dashboard.js
+  window.supabase = supabase;
+</script>
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | TallyTrack Africa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <link rel="stylesheet" href="Assets/css/main.css"/>
+    <style>
+        /* Additional styles for this page can go here */
+        @font-face {
+            font-family:'Adam-Medium';
+            src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body{
+            overflow-x: hidden;
+        }
+        * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove blue outline when buttons/links are tapped or focused */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+        /* About Hero Section */
+        .about-hero {
+            height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--dark-bg);
+        }
+        
+        .about-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+        
+        .about-hero-image.active {
+            opacity: 0.7;
+            transform: translateY(0);
+        }
+        
+        .about-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 14, 5, 0.8), rgba(10, 14, 5, 0.95));
+        }
+        
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--dark-bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .trust-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .trust-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        .trust-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--primary-gold-solid);
+        }
+        
+        .trust-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .trust-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-gold);
+        }
+        
+        /* Empowerment Section */
+        .empowerment-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .empowerment-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .opportunity-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .opportunity-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: left;
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .opportunity-card h3{
+            color:var(--primary-gold-solid);
+        }
+        
+        .opportunity-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        .opportunity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+            border-color: var(--primary-gold-solid);
+        }
+        
+        .opportunity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Values Section */
+        .values-section {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+            position: relative;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .value-item {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        
+        .value-item.animated {
+            opacity: 1;
+            transform: translateX(0);
+            transition: var(--transition);
+        }
+        
+        .value-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+        
+        .value-item:nth-child(even).animated {
+            transform: translateX(0);
+        }
+        
+        .value-icon {
+            font-size: 2rem;
+            color: var(--primary-gold-solid);
+            flex-shrink: 0;
+        }
+        
+        .value-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--light-gold);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+            display: flex;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: 0.5s ease-in-out;
+            opacity: 100;
+            transform: translateY(30px);
+        }
+
+        .stat-item.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--primary-gold-solid);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--dark-bg) 100%);
+        }
+
+        .CTA-btn{
+         display: flex; 
+         gap: 1.5rem; 
+         justify-content: center; 
+         margin-top: 2rem;
+        }
+
+        /* Decorative Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            background: var(--primary-gold-solid);
+        }
+
+        .shape-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-square {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            right: 15%;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 87px solid var(--primary-gold-solid);
+            bottom: 20%;
+            left: 20%;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+ @media (max-width: 768px) {
+    /* Header adjustments for mobile */
+    .header {
+       margin-bottom:240px;
+       
+    }
+    .logo .logo-img{
+    scale: 1.5;
+    margin-top:-15px;
+    }
+    
+    .main-nav {
+  display: none;
+  flex-direction: column;
+  background:var(--primary-dark); /* or dark if you prefer */
+  position: absolute;
+  top: 75px; /* below header */
+  right: 20px;
+  width: 200px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 999;
+    }
+    
+    .main-nav.active {
+  display: flex;
+}
+    
+    .nav-link {
+        
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        width: 100%;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .mobile-menu-toggle i{
+        display: block;
+       color: #ffcc00; 
+    }
+
+    .CTA-btn{
+        
+        width: 130%;
+        margin-left:-55px;
+        margin-top:10px;
+        display: grid; 
+         gap: 1.5rem; 
+         justify-content: center; 
+         margin-top: 2rem;
+    }
+
+    .trust-grid.scroll-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
+  }
+
+  .trust-grid.scroll-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for clean UI */
+  }
+
+  .trust-card {
+    min-width: 20px;
+    flex: 0 0 330px;
+  }
+
+  .opportunity-cards.scroll-container {
+    display: flex;
+    height: fit-content;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
+  }
+
+  .opportunity-cards.scroll-container::-webkit-scrollbar {
+   display: none; /* Hide scrollbar for clean UI */
+  }
+
+  .opportunity-card {
+    min-width: 20px;
+    flex: 0 0 320px;
+    text-align: center;
+  }
+  .values-grid {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+
+        }
+
+
+    /* Prevent horizontal overflow */
+
+}
+        
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    visibility:collapse;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="Assets/img/Asset7.png" alt="TallyTrack Africa" class="logo-img" onclick="window.location.href='index.html'">
+                    <span class="logo-text" style="display:none;">TALLYTRACK</span>
+                </div>
+                
+                <nav class="main-nav" style="">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="category.html" class="nav-link">Categories</a>
+                    <a href="About_Us.html" class="nav-link active">About</a>
+                    <a href="Contact_US.html" class="nav-link">Contact Us</a>
+                </nav>
+                
+                <div class="auth-container" style="display:none;">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Register</a>
+                </div>
+                
+                <button class="mobile-menu-toggle"  >
+                    <i class="fas fa-bars" ></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-image" id="about-hero-image"></div>
+        <div class="about-hero-overlay"></div>
+        
+        <div class="container">
+            <div class="about-hero-content">
+                <h1 class="hero-title">Get to Know <span>TallyTrack Africa</span></h1>
+                <p class="hero-description">Discover the vision behind Africa's most trusted platform for recognizing and rewarding excellence among the next generation of leaders and innovators.</p>
+                <div class="hero-buttons">
+                    <a href="#trust" class="btn btn-primary">Why Trust Us</a>
+                    <a href="#empowerment" class="btn btn-outline">Our Mission</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section" id="trust">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-subtitle">Why Choose Us</span>
+                <h2 class="section-title">Your Vote Matters & We Protect It</h2>
+                <p class="section-description">We've built a platform with integrity at its core, ensuring every vote counts and every voice is heard.</p>
+            </div>
+            
+            <div class="trust-grid scroll-container">
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="trust-title">Secure Voting</h3>
+                    <p>Advanced encryption and verification systems protect every vote from manipulation, ensuring fair and transparent results.</p>
+                </div>
+                
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="trust-title">Real-time Tracking</h3>
+                    <p>Watch votes accumulate in real-time with our transparent tracking system that leaves no room for doubt.</p>
+                </div>
+                
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="trust-title">Independent Auditing</h3>
+                    <p>Third-party verification of all voting processes guarantees the integrity of our results and builds confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Empowerment Section -->
+    <section class="empowerment-section" id="empowerment">
+        <div class="container">
+            <div class="empowerment-content">
+                <span class="section-subtitle">Our Purpose</span>
+                <h2 class="section-title">Empowering Africa's Next Generation</h2>
+                <p class="section-description">
+                    TallyTrack Africa was built on the belief that young Africans deserve recognition for their outstanding contributions 
+                    and a platform that connects them with life-changing opportunities. We're not just about awards—we're about creating pathways to success.
+                </p>
+                
+                <div class="opportunity-cards scroll-container">
+                    <div class="opportunity-card">
+                        <div class="opportunity-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Recognition That Matters</h3>
+                        <p>We spotlight exceptional talent across diverse fields, giving visibility to those who are shaping Africa's future through innovation, creativity, and leadership.</p>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="opportunity-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Connecting Talent with Opportunity</h3>
+                        <p>Our platform serves as a bridge between exceptional individuals and organizations seeking fresh talent, investment opportunities, and partnerships.</p>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="opportunity-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <h3>Pan-African Network</h3>
+                        <p>Join a continent-wide community of innovators, creators, and leaders who are driving change and creating impact in their communities.</p>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="opportunity-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Accelerating Growth</h3>
+                        <p>Winners and notable nominees gain access to mentorship programs, funding opportunities, and platforms that amplify their work to wider audiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-subtitle">Our Foundation</span>
+                <h2 class="section-title">Core Values That Guide Us</h2>
+                <p class="section-description">These principles shape every aspect of our platform and our relationship with the community we serve.</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="value-content">
+                        <h3>Transparency</h3>
+                        <p>We believe in open processes and clear communication, ensuring that every participant understands how the system works.</p>
+                    </div>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="value-content">
+                        <h3>Fairness</h3>
+                        <p>Every nominee is evaluated on their merits, and every vote carries equal weight in our system.</p>
+                    </div>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="value-content">
+                        <h3>Innovation</h3>
+                        <p>We continuously evolve our platform to incorporate the latest technology while maintaining accessibility.</p>
+                    </div>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="value-content">
+                        <h3>Community</h3>
+                        <p>We prioritize building a supportive ecosystem where African talent can thrive and collaborate.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-subtitle">By The Numbers</span>
+                <h2 class="section-title">Our Impact</h2>
+                <p class="section-description">The results of our work in empowering young Africans across the continent</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">15,000+</div>
+                    <div class="stat-label">Active Nominees</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-vote-yea"></i>
+                    </div>
+                    <div class="stat-value">2.5M+</div>
+                    <div class="stat-label">Votes Cast</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-value">240+</div>
+                    <div class="stat-label">Awards Given</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">African Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Ready to Make Your Voice Count?</h2>
+                <p class="section-description">
+                    Join thousands of Africans who are already participating in recognizing and elevating exceptional talent across the continent.
+                </p>
+                <div class="CTA-btn" style="">
+                    <a href="dashboard.html" class="btn btn-primary">View Nominees</a>
+                    <a href="Learn.html" class="btn btn-outline">Learn How to Vote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-pattern"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4 style="width:60%;"><img src="Assets/img/Asset2.png" alt=""></h4>
+                        <p>Celebrating excellence and outstanding achievements across Africa through transparent public voting.</p>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                           <li><a href="#home" class="footer-link">Home</a></li>
+                            <li><a href="dashboard.html" class="footer-link">Dashboard</a></li>
+                            <li><a href="Nominee.html" class="footer-link">Be A Nominee</a></li>
+                            <li><a href="Learn.html" class="footer-link">Voting Process</a></li>
+                            <li><a href="About_Us.html" class="footer-link">About Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Categories</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link">Content Creation</a></li>
+                            <li><a href="#" class="footer-link">Music & Entertainment</a></li>
+                            <li><a href="#" class="footer-link">Business</a></li>
+                            <li><a href="#" class="footer-link">Philanthropy</a></li>
+                            <li><a href="#" class="footer-link">Innovation</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Contact Us</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-envelope"></i> info@tallytrackafrica.co.ke</li>
+                            <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 TallyTrack Africa. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize hero image animation
+            setTimeout(() => {
+                document.getElementById('about-hero-image').classList.add('active');
+            }, 300);
+            
+            // Initialize scroll animations
+            initScrollAnimations();
+        });
+
+        // Scroll Animations (reused from main.js)
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.trust-card, .opportunity-card, .value-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const mobileOverlay = document.createElement('div');
+    
+    // Create mobile menu overlay
+    mobileOverlay.className = 'mobile-menu-overlay';
+    document.body.appendChild(mobileOverlay);
+    
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        mainNav.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+        
+        // Change icon based on menu state
+        const icon = mobileMenuToggle.querySelector('i');
+        if (mainNav.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
+    
+    // Toggle menu when clicking the button
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    
+    // Close menu when clicking overlay
+    mobileOverlay.addEventListener('click', toggleMobileMenu);
+    
+    // Close menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', toggleMobileMenu);
+    });
+    
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+            toggleMobileMenu();
+        }
+    });
+    
+    // Make mobile menu toggle visible
+    mobileMenuToggle.style.alignItems = 'center';
+    mobileMenuToggle.style.justifyContent = 'center';
+    mobileMenuToggle.style.width = '44px';
+    mobileMenuToggle.style.height = '44px';
+    mobileMenuToggle.style.fontSize = '1.5rem';
+    mobileMenuToggle.style.color = 'var(--primary-gold)';
+    mobileMenuToggle.style.zIndex = '1002';
+});
+    </script>
+</body>
+</html>

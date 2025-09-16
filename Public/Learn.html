@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TallyTrack Africa | How To Vote</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <style>
+        /* Font Face */
+        @font-face {
+            font-family: 'Adam-Medium';
+            src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Variables */
+        :root {
+            --primary-dark: #1d260b;
+            --primary-gold: linear-gradient(135deg, #d4af37 0%, #f1e5b9 100%);
+            --primary-gold-solid: #d4af37;
+            --light-gold: #f1e5b9;
+            --white: #ffffff;
+            --black: #000000;
+            --dark-bg: #0a0e05;
+            --card-bg: rgba(29, 38, 11, 0.8);
+            --text-light: #e2e8f0;
+            --text-gray: #a0aec0;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove blue outline when buttons/links are tapped or focused */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--primary-color-dark); /* or any color you like */
+  outline-offset: 2px;
+}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Adam-Medium', sans-serif;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--light-gold);
+            border: 2px solid var(--primary-gold-solid);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-outline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn-outline:hover {
+            color: var(--primary-dark);
+        }
+
+        .btn-outline:hover::before {
+            left: 0;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem 0;
+            transition: var(--transition);
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .header.scrolled {
+            background: rgba(10, 14, 5, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .header.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-family: 'Adam-Medium', sans-serif;
+            font-size: 1.8rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2.5rem;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            justify-items: center;
+            align-items: center;
+            text-align: center;
+            margin-right: 50px;
+            font-family: 'Adam-Medium';
+            font-size: 21px;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--light-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .auth-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+
+        }
+
+         .mobile-menu-toggle i{
+            display: none;
+         }
+
+        /* Hero Section */
+        .learn-hero {
+            padding-top: 12rem;
+            padding-bottom: 5rem;
+            background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--dark-bg) 100%);
+            text-align: center;
+        }
+
+        .learn-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .learn-hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Steps Section */
+        .steps-section {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .step:nth-child(even) .step-content {
+            order: 2;
+        }
+
+        .step-number {
+            font-size: 6rem;
+            font-weight: bold;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-gold);
+        }
+
+        .step-description {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .step-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--glow);
+            position: relative;
+        }
+
+        .step-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .step-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .step-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Payment Modal Example */
+        .modal-example {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--light-gold);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .nominee-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nominee-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .nominee-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nominee-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .nominee-details p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-gold-solid);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .cost-summary {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .cost-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .modal-footer {
+            text-align: right;
+        }
+
+        /* Confirmation Example */
+        .confirmation-example {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+        }
+
+        .confirmation-icon {
+            font-size: 4rem;
+            color: #4ade80;
+            margin-bottom: 1.5rem;
+        }
+
+        .confirmation-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-gold);
+        }
+
+        .confirmation-message {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            background: var(--primary-dark);
+            padding: 5rem 0 2rem;
+            overflow: hidden;
+        }
+
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                        linear-gradient(45deg, transparent 49%, rgba(212, 175, 55, 0.05) 50%, transparent 51%);
+            background-size: cover, cover, 10px 10px;
+            z-index: 0;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .footer-links li i {
+            color: #d4af37;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+
+        .footer-link {
+            color: var(--text-gray);
+            transition: var(--transition);
+            position: relative;
+            padding-left: 0;
+            transition: var(--transition);
+        }
+
+        .footer-link::before {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--light-gold);
+            padding-left: 10px;
+        }
+
+        .footer-link:hover::before {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .step {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .step:nth-child(even) .step-content {
+                order: 0;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav, .auth-container {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .learn-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .step-number {
+                font-size: 4rem;
+            }
+            
+            .step-title {
+                font-size: 1.8rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .learn-hero {
+                padding-top: 10rem;
+            }
+            
+            .learn-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .step-number {
+                font-size: 3rem;
+            }
+            
+            .step-title {
+                font-size: 1.5rem;
+            }
+        }
+         @media (max-width: 768px) {
+    /* Header adjustments for mobile */
+    .header-content {
+        padding: 1rem 0;
+    }
+    
+    .main-nav {
+  display: none;
+  flex-direction: column;
+  background:var(--primary-dark); /* or dark if you prefer */
+  position: absolute;
+  top: 75px; /* below header */
+  right: 20px;
+  width: 200px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 999;
+  border-radius: 10px;
+    }
+    
+    .main-nav.active {
+  display: flex;
+}
+    
+    .nav-link {
+        padding:0px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        width: 100%;
+    }
+    
+    .mobile-menu-toggle {
+        display: inline-block;
+        position: relative;
+        display: block;
+        z-index: 1001;
+        top: -20px;
+
+    }
+
+    .mobile-menu-toggle i{
+    display: inline-block;
+       color: #ffcc00; 
+    }
+    /* Prevent horizontal overflow */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="Assets/img/Asset7.png" alt="TallyTrack Africa" class="logo-img" onclick="window.location.href='index.html'">
+                    <span class="logo-text" style="display: none">TALLYTRACK</span>
+                </div>
+
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="category.html" class="nav-link">Categories</a>
+                    <a href="about_page.html" class="nav-link">About</a>
+                    <a href="Contact_US.html" class="nav-link">Contact Us</a>
+                </nav>
+
+                <div class="auth-container" style="display: none">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Register</a>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="learn-hero">
+        <div class="container">
+            <h1>How To Vote</h1>
+            <p>Follow these simple steps to cast your vote for your favorite nominees. Your participation helps recognize and celebrate excellence across Africa.</p>
+            <a href="dashboard.html" class="btn btn-primary">Start Voting Now</a>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps-section">
+        <div class="container">
+            <div class="step-container">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">01</div>
+                        <h2 class="step-title">Access the Dashboard</h2>
+                        <p class="step-description">
+                            From the homepage, click on the "Dashboard" link in the navigation menu at the top of the screen. This will take you to the voting dashboard where you can view all categories and nominees.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1634942536743-5b34d915b9c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dashboard navigation">
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">02</div>
+                        <h2 class="step-title">Select a Category</h2>
+                        <p class="step-description">
+                            Browse through the categories listed on the sidebar. Click on your desired category to view all nominees in that category. You can also use the "All Categories" option to see nominees across all categories.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1589254065878-42cae63c0dac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Category selection">
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">03</div>
+                        <h2 class="step-title">Choose a Nominee</h2>
+                        <p class="step-description">
+                            Browse through the nominees in your selected category. Each nominee card displays their name, photo, and current vote count. When you find your preferred nominee, click the "Vote Now" button on their card.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nominee selection">
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">04</div>
+                        <h2 class="step-title">Complete Voting Details</h2>
+                        <p class="step-description">
+                            A voting modal will appear with the nominee's information pre-filled. Enter your M-Pesa phone number and select the number of votes you wish to purchase. The total cost will be calculated automatically.
+                        </p>
+                        
+                        <div class="modal-example">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Cast Your Vote</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="nominee-info">
+                                    <div class="nominee-avatar">
+                                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Nominee">
+                                    </div>
+                                    <div class="nominee-details">
+                                        <h4>Ama Mensah</h4>
+                                        <p>Content Creator of the Year</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">M-Pesa Phone Number</label>
+                                    <input type="tel" id="phone" placeholder="e.g., 07XX XXX XXX">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="votes">Number of Votes</label>
+                                    <input type="number" id="votes" min="1" value="1">
+                                </div>
+                                
+                                <div class="cost-summary">
+                                    <div class="cost-item">
+                                        <span>Price per vote:</span>
+                                        <span>KES 50</span>
+                                    </div>
+                                    <div class="cost-item">
+                                        <span>Number of votes:</span>
+                                        <span>1</span>
+                                    </div>
+                                    <div class="cost-total">
+                                        <span>Total:</span>
+                                        <span>KES 50</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary">Proceed to Pay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">05</div>
+                        <h2 class="step-title">M-Pesa Payment</h2>
+                        <p class="step-description">
+                            After clicking "Proceed to Pay", you will receive an STK push notification on your phone. Open your M-Pesa menu and enter your PIN to authorize the payment. The system will automatically verify your payment.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1563013546-7e567a0cbbded?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="M-Pesa payment">
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">06</div>
+                        <h2 class="step-title">Payment Confirmation</h2>
+                        <p class="step-description">
+                            Once your payment is successfully processed, you will see a confirmation message. If the payment fails, you'll be prompted to try again. All transactions are secure and processed through Safaricom's M-Pesa API.
+                        </p>
+                        
+                        <div class="confirmation-example">
+                            <div class="confirmation-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 class="confirmation-title">Payment Successful!</h3>
+                            <p class="confirmation-message">Thank you! Your payment was received and your vote for Ama Mensah has been recorded.</p>
+                            <button class="btn btn-primary">Continue Voting</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-number">07</div>
+                        <h2 class="step-title">Votes Updated</h2>
+                        <p class="step-description">
+                            The nominee's vote count will be updated automatically in real-time. You can see the updated totals on the nominee's card. All votes are recorded transparently in our system to ensure a fair voting process.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Votes updated">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 5rem;">
+                <h2 style="margin-bottom: 1.5rem;">Ready to cast your vote?</h2>
+                <a href="dashboard.html" class="btn btn-primary">Go to Voting Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-pattern"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>TallyTrack Africa</h4>
+                        <p>Celebrating excellence and outstanding achievements across Africa through transparent public voting.</p>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html" class="footer-link">Home</a></li>
+                            <li><a href="dashboard.html" class="footer-link">Dashboard</a></li>
+                            <li><a href="Nominee.html" class="footer-link">Be A Nominee</a></li>
+                            <li><a href="About_Us.html" class="footer-link">About</a></li>
+                            <li><a href="Contact_US.html" class="footer-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Categories</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link">Philanthropist</a></li>
+                            <li><a href="#" class="footer-link">Content Creator</a></li>
+                            <li><a href="#" class="footer-link">Entrepreneur</a></li>
+                            <li><a href="#" class="footer-link">Innovator</a></li>
+                            <li><a href="#" class="footer-link">Community Champion</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-envelope"></i>info@tallytrackafrica.co.ke</li>
+                            <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 TallyTrack Africa. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animation for step elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            steps.forEach(step => {
+                step.style.opacity = 0;
+                step.style.transform = 'translateY(20px)';
+                step.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(step);
+            });
+        });
+
+        // Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const mobileOverlay = document.createElement('div');
+    
+    // Create mobile menu overlay
+    mobileOverlay.className = 'mobile-menu-overlay';
+    document.body.appendChild(mobileOverlay);
+    
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        mainNav.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+        
+        // Change icon based on menu state
+        const icon = mobileMenuToggle.querySelector('i');
+        if (mainNav.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
+    
+    // Toggle menu when clicking the button
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    
+    // Close menu when clicking overlay
+    mobileOverlay.addEventListener('click', toggleMobileMenu);
+    
+    // Close menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', toggleMobileMenu);
+    });
+    
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+            toggleMobileMenu();
+        }
+    });
+    
+    // Make mobile menu toggle visible;
+    mobileMenuToggle.style.alignItems = 'center';
+    mobileMenuToggle.style.justifyContent = 'center';
+    mobileMenuToggle.style.width = '44px';
+    mobileMenuToggle.style.height = '44px';
+    mobileMenuToggle.style.fontSize = '1.5rem';
+    mobileMenuToggle.style.color = 'var(--primary-gold)';
+    mobileMenuToggle.style.zIndex = '1002';
+});
+    </script>
+</body>
+</html>

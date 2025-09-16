@@ -1,0 +1,3624 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TallyTrack Africa | Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdBUborAAAAACBmx1y8Nox6S98ohwkRArK78D0N"></script>
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <style>
+      /* Font Face */
+      @font-face {
+        font-family: "Adam-Medium";
+        src: url("Assets/fonts/Adam-Medium.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* Variables */
+      :root {
+        --primary-dark: #1d260b;
+        --primary-gold: linear-gradient(135deg, #d4af37 0%, #f1e5b9 100%);
+        --primary-gold-solid: #d4af37;
+        --light-gold: #f1e5b9;
+        --white: #ffffff;
+        --error:#d4282b;
+        --success:#1a911e;
+        --black: #000000;
+        --dark-bg: #0a0e05;
+        --card-bg: rgba(29, 38, 11, 0.8);
+        --text-light: #e2e8f0;
+        --text-gray: #a0aec0;
+        --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+      }
+
+      /* Reset & Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        line-height: 1.6;
+        overflow: hidden;
+        overflow: scroll;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        overflow: hidden;
+      }
+
+      * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove blue outline when buttons/links are tapped or focused */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+:focus-visible {
+  outline: 2px solid var(--primary-color-dark); /* or any color you like */
+  outline-offset: 2px;
+}
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Adam-Medium", sans-serif;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section {
+        padding: 5rem 0;
+        position: relative;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: var(--transition);
+        text-align: center;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        border: none;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--light-gold);
+        border: 2px solid var(--primary-gold-solid);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .btn-outline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-gold);
+        transition: var(--transition);
+        z-index: -1;
+      }
+
+      .btn-outline:hover {
+        color: var(--primary-dark);
+      }
+
+      .btn-outline:hover::before {
+        left: 0;
+      }
+
+      .BeBtn{
+        margin-left: 10px;
+      }
+
+      /* Header Styles */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 2.5rem 0;
+        transition: var(--transition);
+        background: transparent;
+        z-index: 10;
+      }
+
+      .header.scrolled {
+        background: rgba(10, 14, 5, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .logo-img {
+        height: 50px;
+        width: auto;
+      }
+
+      .header.scrolled .logo-img {
+        height: 40px;
+      }
+
+      .logo-text {
+        font-family: "Adam-Medium", sans-serif;
+        font-size: 1.8rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .main-nav {
+        display: flex;
+        gap: 2.5rem;
+        margin-right: 10px;
+      }
+
+      .mobile-mani-nav{
+        position: relative;
+        display: flex;
+        gap: 0.rem;
+        margin-right: -50px;
+        top: 5px;
+        display: none;
+      }
+
+      .nav-link {
+        position: relative;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        transition: var(--transition);
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        margin-right: 50px;
+        font-family: "Adam-Medium";
+        font-size: 21px;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gold);
+        transition: var(--transition);
+      }
+
+      .nav-link:hover {
+        color: var(--light-gold);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .mobile-nav-link{
+         position: relative;
+        font-weight: 400;
+        padding: 0rem 0;
+        transition: var(--transition);
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+        margin-right: 50px;
+        font-family: "Adam-Medium";
+        font-size: 25px;
+        margin-left: -10px;
+        color: #d4af37;
+        display: none;
+      }
+
+      .auth-container {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .mobile-menu-toggle {
+        display:none;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* ========== Sidebar Scrollbar ========== */
+      .category-sidebar {
+        direction: rtl; /* Flip direction so scrollbar appears on the left */
+      }
+      .category-sidebar * {
+        direction: ltr; /* Keep text direction normal */
+      }
+
+      /* Webkit Browsers (Chrome, Edge, Safari) */
+      .category-sidebar::-webkit-scrollbar {
+        width: 2px; /* Thin scrollbar */
+      }
+      .category-sidebar::-webkit-scrollbar-track {
+        background: transparent; /* No background */
+      }
+      .category-sidebar::-webkit-scrollbar-thumb {
+        background: #d4af37; /* Gold color */
+        border-radius: 10px;
+      }
+      .category-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #f1e5b9; /* Light gold on hover */
+      }
+
+      /* Firefox */
+      .category-sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: #d4af37 transparent;
+      }
+
+      /* WebKit */
+      .content-area::-webkit-scrollbar {
+        width: 6px;
+      }
+      .content-area::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .content-area::-webkit-scrollbar-thumb {
+        background: #666; /* choose your content color */
+        border-radius: 10px;
+      }
+      .content-area::-webkit-scrollbar-thumb:hover {
+        background: #999;
+      }
+
+      /* Firefox */
+      .content-area {
+        scrollbar-width: thin;
+        scrollbar-color: #d4af37 transparent;
+      }
+
+      /* Dashboard Styles */
+      .dashboard-section {
+        padding-top: 8rem;
+        min-height: 100vh;
+        margin-left: 0px;
+      }
+
+      .content-area {
+        margin-left:0px;
+        height: 100vh;
+        overflow-y: auto; /* this is the second scroller */
+        overflow-x: hidden; /* no horizontal/bottom scroller */
+        padding: 2rem 0rem 2rem; /* clear the fixed header */
+        margin-left: 0; /* kill the old margin offset */
+
+        transition: 0.5s ease-in-out;
+
+        min-height: 100%;
+      }
+
+      .category-sidebar.collapsed + .content-area {
+        margin-left: -30px;
+        transition: 0.8s ease-in-out;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .stat-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        transition: var(--transition);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        cursor: pointer;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glow);
+        border-color: var(--primary-gold-solid);
+      }
+
+      .stat-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .stat-label {
+        font-size: 1.1rem;
+        color: var(--text-gray);
+      }
+
+      /* Category Sidebar */
+      .main-container {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        height: 100vh;
+      }
+      .category-sidebar {
+        position: sticky;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 340px;
+        background: var(--primary-dark);
+        padding: 0rem 1.5rem 2rem;
+        overflow-y: auto; /* its own vertical scroll */
+        overflow-x: hidden; /* no bottom scroller */
+        z-index: 900;
+        border-right: 1px solid rgba(212, 175, 55, 0.2);
+        margin-bottom: 0px;
+        transition: 0.5s ease-in-out;
+        text-align: left;
+      }
+
+      .sidebar-objects {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #d4af37;
+        margin-bottom: 20px;
+        margin-top: -10px;
+        transition: 2.5s ease-in-out;
+      }
+
+      .sidebar-logo-img {
+        height: 90px;
+        width: auto;
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        cursor: pointer;
+      }
+
+      .sidebar-toggle {
+        background: none;
+        border: 1px solid #d4af37;
+        padding: 2px 6px;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .category-item svg,
+      .category-item i {
+        width: 22px;
+        height: 22px;
+        color: var(--light-gold);
+        margin-right: 5px;
+        vertical-align: middle;
+        display: inline-block;
+      }
+
+      /* when collapsed show only the icon */
+      .category-sidebar.collapsed .category-item .category-name span,
+      .category-sidebar.collapsed .category-item .category-desc {
+        display: none;
+      }
+
+      .category-sidebar.collapsed .category-item svg,
+      .category-item i {
+        margin-right: 0;
+        width: 25px;
+        height: 25px;
+        display: block;
+        text-align: center;
+        margin-left: -13px;
+        margin-right: 0px;
+        left: -10px;
+        overflow-y: auto; /* its own vertical scroll */
+        overflow-x: hidden;
+      }
+
+      .main-container.is-collapsed {
+        grid-template-columns: 70px minmax(0, 1fr);
+      }
+
+      .category-sidebar.collapsed {
+        width: 80px;
+        background-color: transparent;
+        overflow-y: auto; /* allow vertical scrolling */
+        overflow-x: hidden;
+        transition: 0.8s ease-in-out;
+      }
+      .category-sidebar.collapsed .category-item {
+        text-align: center;
+        transition: 0.8s ease-in-out;
+      }
+      .category-sidebar.collapsed .category-item i {
+        font-size: 1.4rem;
+        transition: 0.8s ease-in-out;
+      }
+      .category-sidebar.collapsed .category-item .category-name span,
+      .category-sidebar.collapsed .category-item .category-desc,
+      .category-sidebar.collapsed .sidebar-logo-img {
+        display: none;
+        transition: 1.8s ease-in-out;
+      }
+      .sidebar-toggle:hover {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        transform: translateY(-3px);
+      }
+
+      .category-sidebar.collapsed .sidebar-toggle {
+        margin-top: 20px;
+        scale: 0.8;
+      }
+
+      .category-list {
+        list-style: none;
+      }
+
+      .category-item {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        transition: var(--transition);
+        cursor: pointer;
+      }
+
+      .category-item:hover {
+        background: rgba(251, 192, 0, 0.255);
+      }
+
+      .category-item.active {
+        background: rgba(255, 196, 0, 0.1);
+      }
+
+      .category-name {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--light-gold);
+      }
+
+      .category-desc {
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+
+      .count-badge {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        border-radius: 12px;
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-left: 8px;
+        display: inline-block;
+      }
+
+      /* Voting Sections */
+      .voting-section {
+        margin-bottom: 4rem;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .nominees-scroller {
+        display: flex;
+        gap: 2rem;
+        overflow-x: auto;
+        padding: 1rem 0;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        -webkit-scrollbar-width: none;
+        scrollbar-width: none;
+      }
+
+      .nominees-scroller::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* ===========================
+   Loader shared animation
+   =========================== */
+@keyframes loader-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%);  }
+}
+
+/* Generic overlay used by loader elements */
+.loader-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.06) 40%,
+    rgba(255,255,255,0.16) 50%,
+    rgba(255,255,255,0.06) 60%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: loader-shimmer 1.4s linear infinite;
+  pointer-events: none;
+}
+
+
+/* ===========================
+   Nominee card loader (matches .nominee-card)
+   =========================== */
+.loader-card {
+  flex: 0 0 300px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  background: #25301c; /* matches your card tone */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* photo area */
+.loader-card .photo {
+  width: 100%;
+  height: 60%;
+  background: #2e3c27;
+  position: relative;
+  overflow: hidden;
+}
+.loader-card .photo.loader-shimmer { position: relative; }
+
+/* bottom content plate (mimic gradient + padding) */
+.loader-card .meta {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.25rem 1.25rem;
+  background: linear-gradient(to top, var(--primary-dark) 30%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+/* lines that mimic name / category / votes */
+.loader-card .line {
+  height: 14px;
+  border-radius: 7px;
+  background: #374c31;
+  position: relative;
+  overflow: hidden;
+}
+.loader-card .line.name {
+  width: 70%;
+  height: 18px;
+}
+.loader-card .line.category { width: 42%; }
+.loader-card .line.votes { width: 55%; }
+.loader-card .line.bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #3b5034;
+}
+
+/* vote button placeholder */
+.loader-card .action {
+  margin-top: 8px;
+  width: 100%;
+  height: 38px;
+  border-radius: 25px;
+  background: #555a3a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* apply shimmer overlay where needed */
+.loader-card .photo.loader-shimmer::after,
+.loader-card .line::after,
+.loader-card .action::after {
+  /* use same animation defined above */
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.06) 40%,
+    rgba(255,255,255,0.16) 50%,
+    rgba(255,255,255,0.06) 60%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: loader-shimmer 1.4s linear infinite;
+}
+
+/* ===========================
+   Stats-card loader (mimics .stat-card)
+   =========================== */
+/* Skeleton shimmer animation */
+@keyframes loader-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%);  }
+}
+
+/* Number skeleton */
+.stat-loader-number {
+  display: inline-block;
+  width: 80px;
+  height: 32px;
+  border-radius: 6px;
+  background: #3a4b35;
+  position: relative;
+  overflow: hidden;
+  left:-50px;
+}
+.stat-loader-number::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255, 244, 199, 0.07) 40%,
+    rgba(249, 222, 176, 0.18) 50%,
+    rgba(255,255,255,0.07) 60%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: loader-shimmer 1.4s linear infinite;
+}
+
+/* Icon skeleton */
+.stat-loader-icon {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  background: #3a4b35;
+  position: relative;
+  overflow: hidden;
+  top: -80px;
+  left: 35px;
+}
+.stat-loader-icon::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.07) 40%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0.07) 60%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: loader-shimmer 1.4s linear infinite;
+}
+
+/* When real data loads */
+.stat-value.loaded,
+.stat-icon.loaded {
+  background: none;
+}
+.stat-value.loaded::after,
+.stat-icon.loaded::after {
+  display: none;
+}
+
+
+
+/* ===========================
+   Sidebar category-count badge loader
+   (mimics .count-badge)
+   =========================== */
+.count-badge-loader {
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  border-radius: 12px;
+  background: #3b4a33;
+  vertical-align: middle;
+  position: relative;
+  margin-left: 8px;
+}
+.count-badge-loader::after {
+  content: "";
+  position: absolute; top:0; left:-100%; width:100%; height:100%;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.06) 60%, rgba(255,255,255,0) 100%);
+  animation: loader-shimmer 1.2s linear infinite;
+}
+
+/* ===========================
+   Responsive loader sizing
+   =========================== */
+
+/* Desktop (default) - keep as above */
+
+/* Large tablets / small desktop */
+@media (max-width: 1200px) {
+  .loader-card { flex: 0 0 280px; height: 380px; }
+  .stat-loader { min-height: 110px; }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .loader-card { flex: 0 0 260px; height: 360px; }
+  .stat-loader { min-height: 100px; }
+  .count-badge-loader { width: 34px; height: 18px; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .loader-card { flex: 0 0 220px; height: 340px; }
+  .loader-card .photo { height: 58%; }
+  .stat-loader { min-height: 50px; display: flex; gap: 10px; }
+  .count-badge-loader { width: 30px; height: 16px; }
+  .stat-loader-number{display:inline-flex; left:-45px;}
+} 
+
+/* Flip phone / very small screens */
+@media (max-width: 360px) {
+  .loader-card { flex: 0 0 200px; height: 320px; }
+  .loader-card .photo { height: 56%; }
+  .stat-loader { min-height: 40px; }
+  .stat-loader-number{display:inline-flex; left:0px; scale: 0.7;}
+  .stat-loader-icon{display:none;}
+  .count-badge-loader { width: 26px; height: 14px; }
+}
+
+
+
+
+      .nominee-card {
+        flex: 0 0 300px;
+        height: 400px;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        transition: var(--transition);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .nominee-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .nominee-photo {
+  position: relative;
+  width: 100%;
+  height: 400px; /* adjust to card height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.05);
+}
+
+.nominee-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.nominee-photo .placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2a3515;
+  width: 100%;
+  height: 100%;
+  font-size: 25rem;
+}
+
+
+      .nominee-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        background: linear-gradient(
+          to top,
+          var(--primary-dark) 30%,
+          transparent
+        );
+        transform: translateY(0);
+        opacity: 1;
+        transition: var(--transition);
+      }
+
+      .nominee-name {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .description-name {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .description-category {
+        font-size: 0.9rem;
+        color: var(--light-gold);
+        margin-bottom: 1rem;
+      }
+
+      .nominee-category {
+        font-size: 0.9rem;
+        color: var(--light-gold);
+        margin-bottom: 1rem;
+      }
+
+      .nominee-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+      }
+
+      .nominee-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .nominee-description {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.95),
+          rgba(0, 0, 0, 0.5)
+        );
+        color: rgb(213, 235, 167);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 80px 20px;
+        text-align: center;
+        transition: bottom 0.4s ease-in-out;
+        z-index: 10;
+        display: none;
+      }
+
+      .nominee-description p {
+        font-size: 21px;
+        line-height: 1.2;
+        font-family: "adam-medium";
+      }
+
+      .nominee-card:hover .nominee-description {
+        bottom: 0;
+      }
+
+      .nominee-card:hover .nominee-name .nominee-category {
+        transform: translateY(-50px);
+        transition: transform 0.4s ease-in-out;
+      }
+
+      .vote-count i {
+        margin-right: 5px;
+        color: var(--primary-gold-solid);
+      }
+
+      .vote-count {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .vote-bar {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+      }
+
+      .vote-fill {
+        height: 100%;
+        background: var(--primary-gold);
+        border-radius: 3px;
+      }
+
+      .vote-btn {
+        width: 100%;
+        padding: 0.7rem;
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 1000;
+      }
+
+      .vote-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      }
+
+      /* All Votes Grid */
+      .all-votes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .view-more {
+        display: grid;
+        gap: 2rem;
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      /* Category Page */
+      .category-page {
+        margin-left: 20px;
+        padding: 7rem 2rem 2rem;
+        width: 100%;
+        transition: 0.5s ease-in-out;
+      }
+
+      .category-sidebar.collapsed .category-page {
+        margin-left: 70px;
+        transition: 0.8s ease-in-out;
+      }
+
+      .category-header {
+        margin-bottom: 2rem;
+      }
+
+      .category-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .category-description {
+        font-size: 1.1rem;
+        color: var(--text-gray);
+        margin-bottom: 2rem;
+        max-width: 800px;
+      }
+
+      .filter-controls {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-select {
+        appearance: none;            /* remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+        background: var(--card-bg);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--text-light);
+        padding: 0.7rem 1.2rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        min-width: 180px;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='gold' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Add custom arrow as a pseudo-element */
+.filter-select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='gold' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.3s ease;
+  pointer-events: none; /* let clicks go through */
+}
+
+/* Rotate arrow on focus */
+.filter-select:focus::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+      .filter-select option{
+        position: relative;
+        background: #c7cebb;;
+        color:black;
+        padding: 10px;
+        border-radius:20px;
+      }
+
+      .filter-select:focus,
+.filter-select option:focus,
+.filter-select option:hover {
+  outline: none;
+  background:var(--card-bg) !important; /*#b5c2a6 your custom hover color */
+  color: rgba(212, 175, 55, 0.9);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+      .search-bar {
+        position: relative;
+        flex-grow: 1;
+        max-width: 400px;
+      }
+
+      .search-input {
+        width: 100%;
+        background: var(--card-bg);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--text-light);
+        padding: 0.7rem 1.2rem 0.7rem 3rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(212, 175, 55, 0.7);
+      }
+
+      /* Modal Container */
+      .modal-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 14, 5, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        opacity: 1;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .modal-container.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background: var(--card-bg);
+        border-radius: 20px;
+        width: 94%;
+        max-width: 500px;
+        overflow-y: auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), var(--glow);
+        transform: scale(0.9);
+        max-height: 90vh;
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0.4s ease;
+      }
+
+      .share-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #d4af37;
+        cursor: pointer;
+        margin-bottom: 20px;
+        margin-left: auto; /* push to right if in flex container */
+        transition: color 0.2s ease, transform 0.2s ease;
+        top: 140px;
+        margin-right: 60px;
+      }
+
+      .share-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #d4af37;
+        cursor: pointer;
+        margin-bottom: -50px;
+        margin-left: auto; /* push to right if in flex container */
+        transition: color 0.2s ease, transform 0.2s ease;
+        transform: translateY(-180%) translateX(340%);
+      }
+
+      .share-link svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+      }
+
+      .share-link:hover {
+        color: #f3e2ab;
+      }
+      #copy-alert-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10000;
+  max-height: 490px;   /* stack limit */
+  overflow: hidden;
+  transition: all 0.8s ease;
+}
+      .copy-alert {
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: #406e08;
+  border: 1px solid var(--primary-gold-solid);
+  color: var(--light-gold);
+  box-shadow: var(--glow) opacity 70%;
+  opacity: 0;
+  transform: translateX(70px);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  pointer-events: none;
+}
+
+.copy-alert.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.5s ease;
+}
+
+.copy-alert.error {
+  background: rgba(239, 68, 68, 0.9);
+  border-color: #f8d271;
+}
+
+.copy-alert i {
+  font-size: 22px;
+  color: var(--primary-gold-solid);
+  flex-shrink: 0;
+}
+
+.copy-alert.error i {
+  color: #d5ba07;
+}
+
+#copy-alert-text {
+  margin: 0;
+  font-family: "Adam-Medium", sans-serif;
+  font-size: 16px;
+}
+
+      #voting-modal .modal-content::-webkit-scrollbar {
+        width: 2px;
+      }
+      #voting-modal .modal-content::-webkit-scrollbar-thumb {
+        background: #d4af37;
+        border-radius: 10px;
+      }
+      #voting-modal .modal-content {
+        scrollbar-width: thin;
+        scrollbar-color: #d4af37 transparent;
+      }
+
+      .modal-container.active .modal-content {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      /* Nominee Header Section */
+      #voting-modal .nominee-header {
+        position: relative;
+        height: 380px;
+        overflow: hidden;
+      }
+
+      #voting-modal .nominee-image {
+        width: 100%;
+        height: 130%;
+        object-fit: cover;
+        position: absolute;
+        margin-top: 00px;
+      }
+
+      #voting-modal .nominee-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        background: linear-gradient(
+          to top,
+          var(--primary-dark) 50%,
+          transparent
+        );
+      }
+
+      #voting-modal .nominee-name {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--white);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        font-family: "adam-medium";
+      }
+
+      #voting-modal .nominee-category {
+        font-size: 1rem;
+        color: var(--light-gold);
+        margin-bottom: 0.5rem;
+      }
+
+      #voting-modal .nominee-id {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--primary-gold-solid);
+        font-weight: 500;
+        font-family: "adam-medium";
+      }
+
+      /* Modal Body */
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Form Elements */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--light-gold);
+      }
+
+      /* Vote input box styling */
+      #vote-count {
+        width: 70px;
+        height: 40px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-light);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.4); /* soft gold border */
+        border-radius: 10px;
+        transition: var(--transition);
+      }
+
+      /* Glow + highlight when active */
+      #vote-count:focus {
+        outline: none;
+        border-color: var(--primary-gold-solid);
+        box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      #vote-count::-webkit-outer-spin-button,
+      #vote-count::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Remove arrows (Firefox) */
+      #vote-count {
+        -moz-appearance: textfield;
+      }
+
+      .input-with-icon {
+        position: relative;
+      }
+
+      .input-with-icon i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 1rem;
+        color: var(--primary-gold-solid);
+      }
+
+      .input-with-icon input {
+        padding-left: 3rem;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--text-light);
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-gold-solid);
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+      }
+
+      /* Vote Counter */
+      .vote-counter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+      }
+
+      .counter-label {
+        font-weight: 500;
+        color: var(--light-gold);
+      }
+
+      .counter-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .counter-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        border: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .counter-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      }
+
+      .counter-value {
+        width: 60px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-light);
+      }
+
+      /* Cost Summary */
+      .cost-summary {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .cost-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+      }
+
+      .cost-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .cost-label {
+        color: var(--text-gray);
+      }
+
+      .cost-value {
+        font-weight: 500;
+      }
+
+      .cost-total {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(212, 175, 55, 0.3);
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: var(--light-gold);
+      }
+
+      /* Buttons */
+      #voting-modal .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: var(--transition);
+        text-align: center;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        border: none;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #voting-modal .btn-primary {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      }
+
+      #voting-modal .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+      }
+
+      #voting-modal .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+      }
+
+      #voting-modal .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Loading Animation */
+      .btn-loading .btn-text {
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      .btn-loading::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        border: 3px solid transparent;
+        border-top-color: var(--primary-dark);
+        border-radius: 50%;
+        animation: button-loading-spinner 1s ease infinite;
+      }
+
+      @keyframes button-loading-spinner {
+        from {
+          transform: rotate(0turn);
+        }
+        to {
+          transform: rotate(1turn);
+        }
+      }
+
+      /* Result Modal */
+      .result-modal {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .result-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+      
+      }
+
+      .success .result-icon {
+        color: var(--success);
+      }
+
+      .error .result-icon {
+        color: var(--error);
+      }
+
+      .result-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .success .result-title {
+        color: var(--success);
+      }
+
+      .error .result-title {
+        color: var(--primary-gold-solid);
+      }
+
+      .result-message {
+        color: var(--text-gray);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      /* Close Button */
+      .close-modal {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(124, 105, 42, 0.325);
+        color: var(--primary-gold-solid);
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 10;
+      }
+
+      .close-modal:hover {
+        background: rgba(217, 194, 41, 0.2);
+        transform: rotate(90deg);
+        color: #42573e;
+      }
+
+      .fa-shield-alt {
+        color: var(--primary-gold-solid);
+        margin-right: 2px;
+      }
+
+      .recaptcha-indicator {
+        margin-top: 20px;
+        font-size: 0.85rem;
+        color: #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .recaptcha-indicator i {
+        margin-right: 6px;
+        color: #4285f4; /* Google blue */
+      }
+
+      /* Error Toast */
+      #toast-container {
+  position: fixed;
+  top: 40px;
+  left: 52%;
+  width: auto;
+  height: auto;
+  transform: translateX(-60%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 10px;
+  z-index: 200000;
+  pointer-events: none;
+  max-height: 300px;   /* limit stack height */
+    /* older toasts get removed */
+}
+
+.vote-toast {
+  background: #d83333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+  font-family: 'adam';
+  width: fit-content;
+}
+
+.vote-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vote-toast i {
+  font-size: 1.6rem;
+  color: #ffd000;
+}
+
+
+/* Input error border */
+/* Shake animation */
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+#phone.invalid {
+  border: 2px solid #c80e0e !important;
+  box-shadow: 0 0 0 2px rgba(234, 54, 54, 0.3);
+  border-radius: 8px;
+  animation: error-shake 0.2s ease;
+}
+
+      /* Footer */
+      .footer {
+        display: none;
+        position: relative;
+        background: var(--primary-dark);
+        padding: 5rem 0 2rem;
+        overflow: hidden;
+        z-index: 1000;
+        margin-top: 1550px;
+        margin-right: -90px;
+      }
+
+      .footer-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(212, 175, 55, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(212, 175, 55, 0.1) 0%,
+            transparent 20%
+          ),
+          linear-gradient(
+            45deg,
+            transparent 49%,
+            rgba(212, 175, 55, 0.05) 50%,
+            transparent 51%
+          );
+        background-size: cover, cover, 10px 10px;
+        z-index: 0;
+      }
+
+      .footer-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+        margin-bottom: 4rem;
+      }
+
+      .footer-col h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        background: var(--primary-gold);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 0.95rem;
+        opacity: 0.9;
+        transition: var(--transition);
+      }
+
+      .footer-links li i {
+        color: #d4af37;
+        font-size: 15px;
+        vertical-align: middle;
+      }
+
+      .footer-link {
+        color: var(--text-gray);
+        transition: var(--transition);
+        position: relative;
+        padding-left: 0;
+        transition: var(--transition);
+      }
+
+      .footer-link::before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--primary-gold);
+        transition: var(--transition);
+      }
+
+      .footer-link:hover {
+        color: var(--light-gold);
+        padding-left: 10px;
+      }
+
+      .footer-link:hover::before {
+        width: 100%;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        transition: var(--transition);
+      }
+
+      .social-link:hover {
+        background: var(--primary-gold);
+        color: var(--primary-dark);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-gray);
+      }
+
+      .category-sidebar {
+transform: translateX(0);
+transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.mobile-menu-toggle i {
+transition: transform 0.3s ease, color 0.3s ease;
+}
+.mobile-menu-toggle.active i {
+transform: rotate(180deg);
+color: var(--primary-gold-solid);
+}
+
+
+/* ===== Mobile Hidden State ===== */
+@media (max-width: 768px) {
+.category-sidebar {
+position: fixed;
+left: 0;
+top: 0;
+height: 100%;
+width: 80%; /* Use percentage for better adaptation */
+max-width: 320px;
+background: var(--primary-dark);
+transform: translateX(-100%);
+z-index: 9999;
+box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+}
+.category-sidebar.active {
+transform: translateX(0);
+}
+body.sidebar-open::after {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 9998;
+}
+
+.mobile-mani-nav{
+        visibility: visible;
+      }
+.mobile-nav-link{
+display: inline;
+}
+}
+
+
+/* ===== Desktop Sidebar Collapse ===== */
+.category-sidebar.collapsed {
+width: 70px;
+}
+.category-sidebar.collapsed .category-item span,
+.category-sidebar.collapsed .category-desc,
+.category-sidebar.collapsed .sidebar-logo-img {
+display: none;
+}
+
+
+/* ===== Mobile Menu Toggle ===== */
+
+
+
+/* ===== Device-Specific Styling ===== */
+/* iPhone devices */
+@media only screen and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) {
+.category-sidebar { max-width: 260px; font-size: 0.9rem; }
+.mobile-menu-toggle { font-size: 1.6rem; }
+.mobile-mani-nav{
+        visibility: visible;
+      }
+      .mobile-nav-link{
+display: inline;
+}
+}
+
+
+/* Samsung phones (common viewport width) */
+@media only screen and (max-device-width: 420px) {
+.category-sidebar { width: 90%; max-width: 300px; }
+.category-item { padding: 0.8rem; font-size: 0.95rem; }
+.mobile-mani-nav{
+        visibility: visible;
+      }
+      .mobile-nav-link{
+display: inline;
+}
+}
+
+
+/* Tablets (portrait & landscape) */
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
+.category-sidebar { width: 250px; }
+.category-item { font-size: 1rem; }
+.content-area { padding: 1rem; }
+.mobile-mani-nav{ display: none; }
+.mobile-menu-toggle{display: none;}
+.sidebar-toggle{display: none;}
+.category-sidebar{
+  width: 90%;
+}
+
+.dashboard-section{
+  margin-left:20px;
+}
+.BeBtn{
+  margin-left: 10px;
+}
+.stats-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+ width:100%;
+ gap:1rem;
+}
+.main-nav{
+  gap:0.1rem;
+  margin-right:-30px;
+}
+.nav-link{
+font-size:20px;
+}
+.content-area{
+  padding: 0 0 0 0;
+  margin-left: -80px;
+}
+ }
+
+/* Flip phones & very small screens */
+@media only screen and (max-width: 320px) {
+.category-sidebar { width: 100%; font-size: 0.8rem; }
+.category-item { padding: 0.6rem; }
+.mobile-menu-toggle { font-size: 1.4rem; }
+.mobile-mani-nav{
+        visibility: visible;
+      }
+}
+
+      /* Responsive Styles */
+      @media (max-width: 1200px) {
+        .all-votes-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .mobile-mani-nav{
+          display:block;
+        visibility: visible;
+      }
+      
+      }
+
+      @media (max-width: 992px) {
+        .mobile-mani-nav{
+        visibility: visible;
+         display:block;
+      }
+        .category-sidebar {
+          width: 220px;
+        }
+
+        .category-page {
+          margin-left: 220px;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-nav,
+        .auth-container {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        .mobile-mani-nav{
+        visibility: visible;
+         display:block;
+      }
+
+        .category-sidebar {
+          transform: translateX(-100%);
+          transition: var(--transition);
+        }
+
+        .category-sidebar.active {
+          transform: translateX(0);
+        }
+
+        .category-page {
+          margin-left: 0;
+        }
+
+        .all-votes-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .filter-controls {
+          flex-direction: column;
+        }
+
+        .filter-select,
+        .search-bar {
+          width: 100%;
+          max-width: none;
+        }
+
+        .modal-content{
+          scale: 0.85;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .mobile-mani-nav{
+           display:block;
+        visibility: visible;
+      }
+
+        .nominee-card {
+          flex: 0 0 280px;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .mobile-mani-nav{
+           display:block;
+        visibility: visible;
+      }
+
+        .all-votes-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 992px) {
+        .header-content {
+          padding: 0 1rem;
+        }
+
+        .main-nav {
+          gap: 1.5rem;
+        }
+
+        .mobile-mani-nav{
+           display:block;
+        visibility: visible;
+      }
+
+        .nominee-card {
+          flex: 0 0 250px;
+          height: 380px;
+        }
+      }
+
+      /* Tablet Styles */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .main-nav {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        .mobile-mani-nav{
+           display:block;
+        visibility: visible;
+      }
+
+        .auth-container {
+          display: none;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .all-votes-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nominee-card {
+          flex: 0 0 220px;
+          height: 350px;
+        }
+
+        .category-sidebar {
+          width: 280px;
+        }
+
+        .main-container {
+          grid-template-columns: 280px 1fr;
+        }
+
+        .category-sidebar.collapsed {
+          width: 70px;
+        }
+
+        .main-container.is-collapsed {
+          grid-template-columns: 70px 1fr;
+        }
+
+        .content-area {
+          padding: 2rem 0.5rem;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .filter-controls {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .search-bar {
+          max-width: 100%;
+        }
+        .mobile-menu-toggle {
+display: flex;
+align-items: center;
+justify-content: center;
+background: none;
+border: none;
+color: var(--white);
+font-size: 1.8rem;
+cursor: pointer;
+z-index: 10000;
+}
+.sidebar-toggle:hover,
+.mobile-menu-toggle:hover {
+transform: scale(1.1);
+color: var(--primary-gold-solid);
+}
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 576px) {
+        .header {
+          padding: 1rem 0;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+        }
+
+        .logo-img {
+          height: 30px;
+        }
+
+        .dashboard-section {
+          padding-top: 5rem;
+        }
+
+        .category-sidebar {
+          width: 100%;
+          position: fixed;
+          z-index: 1000;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+        }
+
+        .category-sidebar.active {
+          transform: translateX(0);
+        }
+
+        .main-container {
+          grid-template-columns: 1fr;
+        }
+
+        .main-container.is-collapsed .category-sidebar {
+          transform: translateX(0%);
+        }
+
+        .content-area {
+          margin-left: 0;
+          padding: 1rem;
+        }
+
+        .category-sidebar.collapsed + .content-area {
+          margin-left: 0;
+        }
+
+        .sidebar-toggle {
+          visibility:hidden;
+        }
+
+        .mobile-sidebar-toggle {
+          display: block;
+          position: fixed;
+          bottom: 1rem;
+          right: 1rem;
+          z-index: 900;
+          background: var(--primary-gold);
+          color: var(--primary-dark);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-mani-nav{
+           display:block;
+        visibility: visible;
+      }
+
+        .nominee-card {
+          flex: 0 0 200px;
+          height: 300px;
+        }
+
+        .nominees-scroller{
+          gap: 0.8rem;
+          scale:1.1;
+        }
+
+        .all-votes-grid .nominee-card {
+          height: 420px;
+        }
+
+        .BeBtn{
+          margin-top:15px;
+          margin-left:0px;
+        }
+
+        .stat-card {
+          padding: 1rem;
+        }
+
+        .stat-value {
+          font-size: 1.5rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 0.5rem;
+        }
+      }
+
+      /* Very small mobile devices */
+      @media (max-width: 380px) {
+        .logo-text {
+          font-size: 1.2rem;
+        }
+
+        .nominee-card {
+          flex: 0 0 180px;
+          height: 280px;
+        }
+
+        .stat-icon {
+          font-size: 1.5rem;
+        }
+
+        .stat-value {
+          font-size: 1.3rem;
+        }
+
+        .btn {
+          padding: 0.7rem 1.5rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Mobile-specific enhancements */
+      @media (hover: none) {
+        .nominee-card:hover {
+          transform: none;
+        }
+
+        .nominee-card .nominee-description {
+          display: none;
+          bottom: 0;
+          opacity: 0.9;
+        }
+
+        .vote-btn:active {
+          transform: scale(0.97);
+        }
+
+        .nav-link:active {
+          color: var(--light-gold);
+        }
+
+        .nav-link:active::after {
+          width: 100%;
+        }
+      }
+
+      /* Tablet-specific adjustments */
+      @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .all-votes-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .nominee-card {
+          flex: 0 0 240px;
+          height: 440px;
+        }
+
+        .content-area {
+          padding: 2rem 1rem;
+        }
+
+        
+
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+        .nominee-card {
+          flex: 0 0 220px;
+          height: 320px;
+        }
+        
+      }
+      
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <img
+              src="Assets/img/Asset7.png"
+              alt="TallyTrack Africa"
+              class="logo-img"
+              onclick="window.location.href='index.html'"
+            />
+            <span class="logo-text" style="display: none">TALLYTRACK</span>
+          </div>
+
+          <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="#dashboard" class="nav-link active">Dashboard</a>
+            <a href="Learn.html" class="nav-link">How To Vote</a>
+            <a href="About_Us.html" class="nav-link">About</a>
+            <a href="Contact_US.html" class="nav-link">Contact Us</a>
+          </nav>
+
+          <div class="auth-container" style="display: none">
+            <a href="#" class="btn btn-outline">Login</a>
+            <a href="#" class="btn btn-primary">Register</a>
+          </div>
+
+          <nav class="mobile-mani-nav">
+            <a href="index.html" class="mobile-nav-link"><i class="ti ti-home"></i></a>
+            <a href="Learn.html" class="mobile-nav-link"><i class="ti ti-ballpen"></i></a>
+             <a href="Contact_US.html" class="mobile-nav-link"><i class="ti ti-device-mobile-message"></i></a>
+          </nav>
+          
+            <button class="mobile-menu-toggle active">
+              <i class="ti ti-menu"></i>
+          </button>
+          
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <!-- Category Sidebar -->
+      <aside class="category-sidebar" id="category-sidebar">
+        <div class="sidebar-objects">
+          <div class="sidebar-logo">
+            <img
+              src="Assets/img/Asset7.png"
+              alt="TallyTrack Africa"
+              class="sidebar-logo-img"
+              onclick="window.location.href='index.html'"
+            />
+            <span class="logo-text" style="display: none">TALLYTRACK</span>
+          </div>
+
+          <div class="sidebar-header">
+            <button class="sidebar-toggle" id="sidebar-toggle">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <ul class="category-list">
+          <li class="category-item active" data-category="dashboard">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-table-dashed"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+                />
+                <path d="M3 10h18" />
+                <path d="M10 3v18" />
+              </svg>
+              <span>Overview</span>
+            </div>
+            <div class="category-desc">Welcome to the voting page</div>
+          </li>
+          <li class="category-item" data-category="all">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-clear-all"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M8 6h12" />
+                <path d="M6 12h12" />
+                <path d="M4 18h12" />
+              </svg>
+              <span>All Categories</span>
+            </div>
+            <div class="category-desc">Browse all award categories</div>
+          </li>
+          <!--Philanthropist-->
+          <li class="category-item" data-category="philanthropist">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-heart-handshake"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
+                />
+                <path
+                  d="M12 6l-3.293 3.293a1 1 0 0 0 0 1.414l.543 .543c.69 .69 1.81 .69 2.5 0l1 -1a3.182 3.182 0 0 1 4.5 0l2.25 2.25"
+                />
+                <path d="M12.5 15.5l2 2" />
+                <path d="M15 13l2 2" />
+              </svg>
+              <span> Philanthropist of the Year</span>
+            </div>
+            <div class="category-desc">Recognizing exceptional generosity</div>
+          </li>
+          <!--Artist-->
+          <li class="category-item" data-category="artist">
+            <div class="category-name">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-playlist"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M17 17v-13h4" /><path d="M13 5h-10" /><path d="M3 9l10 0" /><path d="M9 13h-6" /></svg>
+              <span>Artist of the Year</span>
+            </div>
+            <div class="category-desc">Outstanding creativity and captivating performances.</div>
+          </li>
+          <!--Brand Ambassador-->
+          <li class="category-item" data-category="brand-ambassador">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-flag"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z"
+                />
+                <path d="M5 21v-7" />
+              </svg>
+              <span>Brand Ambassador of the Year</span>
+            </div>
+            <div class="category-desc">Excellence in brand representation</div>
+          </li>
+          <!--Blogger-->
+          <li class="category-item" data-category="blogger">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-article"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+                />
+                <path d="M7 8h10" />
+                <path d="M7 12h10" />
+                <path d="M7 16h10" />
+              </svg>
+              <span>Blogger of the Year</span>
+            </div>
+            <div class="category-desc">Outstanding content creation</div>
+          </li>
+          <!--Content Creator-->
+          <li class="category-item" data-category="content-creator">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-video"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"
+                />
+                <path
+                  d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"
+                />
+              </svg>
+              <span>Content Creator of the Year</span>
+            </div>
+            <div class="category-desc">Innovative digital content</div>
+          </li>
+          <!--Entrepreneur-->
+          <li class="category-item" data-category="entrepreneur">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-briefcase"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
+                />
+                <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
+                <path d="M12 12l0 .01" />
+                <path d="M3 13a20 20 0 0 0 18 0" />
+              </svg>
+              <span>Entrepreneur of the Year</span>
+            </div>
+            <div class="category-desc">Business innovation and growth</div>
+          </li>
+          <!--Youth Leader-->
+          <li class="category-item" data-category="youth-leader">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-user-check"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                <path d="M15 19l2 2l4 -4" />
+              </svg>
+              <span>Youth Leader of the Year</span>
+            </div>
+            <div class="category-desc">Inspiring young leadership</div>
+          </li>
+          <!--Innovator-->
+          <li class="category-item" data-category="innovator">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-bulb"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"
+                />
+                <path
+                  d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"
+                />
+                <path d="M9.7 17l4.6 0" />
+              </svg>
+              <span>Innovator of the Year</span>
+            </div>
+            <div class="category-desc">Groundbreaking ideas and solutions</div>
+          </li>
+          <!--Comedian-->
+          <li class="category-item" data-category="comedian">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-masks-theater"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M13.192 9h6.616a2 2 0 0 1 1.992 2.183l-.567 6.182a4 4 0 0 1 -3.983 3.635h-1.5a4 4 0 0 1 -3.983 -3.635l-.567 -6.182a2 2 0 0 1 1.992 -2.183z"
+                />
+                <path d="M15 13h.01" />
+                <path d="M18 13h.01" />
+                <path d="M15 16.5c1 .667 2 .667 3 0" />
+                <path
+                  d="M8.632 15.982a4.037 4.037 0 0 1 -.382 .018h-1.5a4 4 0 0 1 -3.983 -3.635l-.567 -6.182a2 2 0 0 1 1.992 -2.183h6.616a2 2 0 0 1 2 2"
+                />
+                <path d="M6 8h.01" />
+                <path d="M9 8h.01" />
+                <path d="M6 12c.764 -.51 1.528 -.63 2.291 -.36" />
+              </svg>
+              <span>Comedian of the Year</span>
+            </div>
+            <div class="category-desc">Exceptional comedy talent</div>
+          </li>
+          <!--Community Champion-->
+          <li class="category-item" data-category="community-champion">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-users-group"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>
+              <span>Community Champion of the Year</span>
+            </div>
+            <div class="category-desc">Dedication to community service</div>
+          </li>
+          <!--Influencer-->
+          <li class="category-item" data-category="influencer">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-speakerphone"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 8a3 3 0 0 1 0 6" />
+                <path d="M10 8v11a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1v-5" />
+                <path
+                  d="M12 8h0l4.524 -3.77a.9 .9 0 0 1 1.476 .692v12.156a.9 .9 0 0 1 -1.476 .692l-4.524 -3.77h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h8"
+                />
+              </svg>
+              <span>Influencer of the Year</span>
+            </div>
+            <div class="category-desc">Significant social media impact</div>
+          </li>
+          <!--MC-->
+          <li class="category-item" data-category="mc">
+            <div class="category-name">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-microphone-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 12.9a5 5 0 1 0 -3.902 -3.9" /><path d="M15 12.9l-3.902 -3.899l-7.513 8.584a2 2 0 1 0 2.827 2.83l8.588 -7.515z" /></svg>
+              <span>MC of the Year</span>
+            </div>
+            <div class="category-desc">Exceptional event hosting and audience engagement.</div>
+          </li>
+          <!--Deejay-->
+          <li class="category-item" data-category="dj">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-vinyl"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M16 3.937a9 9 0 1 0 5 8.063" />
+                <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                <path d="M20 4m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                <path d="M20 4l-3.5 10l-2.5 2" />
+              </svg>
+              <span>DJ of the Year</span>
+            </div>
+            <div class="category-desc">Outstanding musical performance</div>
+          </li>
+          <!--podcast-->
+          <li class="category-item" data-category="podcast">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-spotify"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                <path d="M8 11.973c2.5 -1.473 5.5 -.973 7.5 .527" />
+                <path d="M9 15c1.5 -1 4 -1 5 .5" />
+                <path d="M7 9c2 -1 6 -2 10 .5" />
+              </svg>
+              <span>Podcast of the Year</span>
+            </div>
+            <div class="category-desc">Engaging audio content</div>
+          </li>
+          <!--Facebook Page-->
+          <li class="category-item" data-category="facebook">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
+                />
+              </svg>
+              <span>Facebook Page of the Year</span>
+            </div>
+            <div class="category-desc">Excellence in social engagement</div>
+          </li>
+          <!--Tiktok-->
+          <li class="category-item" data-category="tiktok">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-tiktok"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M21 7.917v4.034a9.948 9.948 0 0 1 -5 -1.951v4.5a6.5 6.5 0 1 1 -8 -6.326v4.326a2.5 2.5 0 1 0 4 2v-11.5h4.083a6.005 6.005 0 0 0 4.917 4.917z"
+                />
+              </svg>
+              <span>Tiktok Page of the Year</span>
+            </div>
+            <div class="category-desc">Best in social challenges</div>
+          </li>
+          <!--CEO-->
+          <li class="category-item" data-category="ceo">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-buildings"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 21v-15c0 -1 1 -2 2 -2h5c1 0 2 1 2 2v15" />
+                <path d="M16 8h2c1 0 2 1 2 2v11" />
+                <path d="M3 21h18" />
+                <path d="M10 12v0" />
+                <path d="M10 16v0" />
+                <path d="M10 8v0" />
+                <path d="M7 12v0" />
+                <path d="M7 16v0" />
+                <path d="M7 8v0" />
+                <path d="M17 12v0" />
+                <path d="M17 16v0" />
+              </svg>
+              <span>CEO of the Year</span>
+            </div>
+            <div class="category-desc">
+              Honoring visionary leadership and impact.
+            </div>
+          </li>
+         <!--Media Personality-->
+          <li class="category-item" data-category="media">
+            <div class="category-name">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-tv-old"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M16 3l-4 4l-4 -4" /><path d="M15 7v13" /><path d="M18 15v.01" /><path d="M18 12v.01" /></svg>
+              <span>Media Personality of the Year</span>
+            </div>
+            <div class="category-desc">Influential voice shaping public conversation.</div>
+          </li>
+        </ul>
+      </aside>
+      <div class="content-area">
+        <!-- Dashboard Section -->
+        <section class="dashboard-section" id="dashboard">
+          <div class="container">
+            <div class="stats-grid">
+              <!-- Total Votes -->
+<div class="stat-card" onclick="navigateToCategory('all')">
+  <div class="stat-icon" aria-hidden="true">
+    <i class="fas fa-vote-yea"></i>
+  </div>
+
+  <div class="stat-value" id="total-votes" aria-live="polite" aria-busy="true">
+    <!-- loader placeholders (visible while fetching) -->
+    <span class="stat-loader-icon" aria-hidden="true"></span>
+    <span class="stat-loader-number" aria-hidden="true"></span>
+    <!-- real value (hidden until data arrives) -->
+    <span class="stat-value-text" style="display:none" aria-hidden="false">0</span>
+  </div>
+
+  <div class="stat-label">Total Votes</div>
+</div>
+
+<!-- Total Nominees -->
+<div class="stat-card" onclick="navigateToCategory('all')">
+  <div class="stat-icon" aria-hidden="true">
+    <i class="fas fa-users"></i>
+  </div>
+
+  <div class="stat-value" id="total-nominees" aria-live="polite" aria-busy="true">
+    <span class="stat-loader-icon" aria-hidden="true"></span>
+    <span class="stat-loader-number" aria-hidden="true"></span>
+    <span class="stat-value-text" style="display:none" aria-hidden="false">0</span>
+  </div>
+
+  <div class="stat-label">Total Nominees</div>
+</div>
+
+<!-- Award Categories -->
+<div class="stat-card" onclick="navigateToCategory('all')">
+  <div class="stat-icon" aria-hidden="true">
+    <i class="fas fa-trophy"></i>
+  </div>
+
+  <div class="stat-value" id="total-categories" aria-live="polite" aria-busy="true">
+    <span class="stat-loader-icon" aria-hidden="true"></span>
+    <span class="stat-loader-number" aria-hidden="true"></span>
+    <span class="stat-value-text" style="display:none" aria-hidden="false">0</span>
+  </div>
+
+  <div class="stat-label">Award Categories</div>
+</div>
+
+            </div>
+
+            <!-- Most Popular Votes -->
+            <div class="voting-section">
+              <div class="section-header">
+                <h2 class="section-title">Most Popular Votes</h2>
+              </div>
+
+              <div class="nominees-scroller">
+                <!-- Popular nominee cards will be populated by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Most Recent Votes -->
+            <div class="voting-section">
+              <div class="section-header">
+                <h2 class="section-title">Most Recent Votes</h2>
+              </div>
+
+              <div class="nominees-scroller">
+                <!-- Recent nominee cards will be populated by JavaScript -->
+              </div>
+            </div>
+
+            <!-- All Votes -->
+            <div class="voting-section">
+              <div class="section-header">
+                <h2 class="section-title">All Votes</h2>
+              </div>
+
+              <div class="all-votes-grid">
+                <!-- All nominee cards will be populated by JavaScript -->
+              </div>
+
+              <div class="view-more">
+                <div class="hero-buttons">
+                  <a
+                    href="javascript:void(0)"
+                    class="btn btn-outline"
+                    onclick="navigateToCategory('all:')"
+                    >View More Votes</a
+                  >
+                  <a
+                    href="Nominee.html"
+                    class="btn btn-outline BeBtn"
+                    >Be A Nominee</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Category Page (Hidden by default) -->
+        <section class="category-page" id="category-page" style="display: none">
+          <div class="category-header">
+            <h1 class="category-title" id="category-title">Category Title</h1>
+            <p class="category-description" id="category-description">
+              Category description will appear here.
+            </p>
+
+            <div class="filter-controls">
+              <select class="filter-select" id="gender-filter">
+                <option value="all">All Genders</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+
+              <select class="filter-select" id="sort-filter">
+                <option value="recent">Most Recent</option>
+                <option value="votes">Highest Votes</option>
+                <option value="trending">Trending</option>
+                <option value="all">All</option>
+              </select>
+
+              <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input
+                  type="text"
+                  class="search-input"
+                  placeholder="Search nominees..."
+                  id="nominee-search"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="all-votes-grid" id="category-nominees">
+            <!-- Category nominee cards will be populated by JavaScript -->
+          </div>
+        </section>
+      </div>
+      <!-- Custom Success Alert -->
+       <div id="copy-alert-container"></div>
+    <div id="copy-alert" class="copy-alert">
+      <i class="ti ti-circle-check"></i>
+  <p id="copy-alert-text">  Link copied successfully!</p>
+</div>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-pattern"></div>
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-grid">
+              <div class="footer-col">
+                <h4>TallyTrack Africa</h4>
+                <p>
+                  Celebrating excellence and outstanding achievements across
+                  Africa through transparent public voting.
+                </p>
+              </div>
+
+              <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                  <li><a href="index.html" class="footer-link">Home</a></li>
+                  <li>
+                    <a href="dashboard.html" class="footer-link">Dashboard</a>
+                  </li>
+                  <li>
+                    <a href="#categories" class="footer-link">Categories</a>
+                  </li>
+                  <li>
+                    <a href="about_page.html" class="footer-link">About</a>
+                  </li>
+                  <li>
+                    <a href="Contact_US.html" class="footer-link">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="footer-col">
+                <h4>Categories</h4>
+                <ul class="footer-links">
+                  <li><a href="#" class="footer-link">Philanthropist</a></li>
+                  <li><a href="#" class="footer-link">Content Creator</a></li>
+                  <li><a href="#" class="footer-link">Entrepreneur</a></li>
+                  <li><a href="#" class="footer-link">Innovator</a></li>
+                  <li>
+                    <a href="#" class="footer-link">Community Champion</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="footer-col">
+                <h4>Connect</h4>
+                <div class="social-links">
+                  <a href="#" class="social-link"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                  <a href="#" class="social-link"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  <a href="#" class="social-link"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                  <a href="#" class="social-link"
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                </div>
+                <ul class="footer-links">
+                  <li>
+                    <i class="fas fa-envelope"></i> info@tallytrackafrica.com
+                  </li>
+                  <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                  <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="footer-bottom">
+              <p>&copy; 2025 TallyTrack Africa. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!--// Voting Modal// -->
+    <!-- Voting Modal -->
+    <div class="modal-container" id="voting-modal">
+      <div class="modal-content">
+        <button class="close-modal" id="close-voting">
+          <i class="fas fa-times"></i>
+        </button>
+        <!-- Nominee Header -->
+        <div class="nominee-header">
+          <img src="Assets/img/Asset.png" alt="Nominee" class="nominee-image" />
+          <div class="nominee-overlay">
+            <h2 class="nominee-name">Nominee Name</h2>
+            <p class="nominee-category">Category</p>
+            <div class="nominee-id">
+              <i class="fas fa-id-card"></i>
+              <span>ID: </span>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <h3 class="modal-title">Cast Your Vote</h3>
+          <!-- Phone Input -->
+          <div class="form-group">
+            <label for="phone">M-Pesa Phone Number</label>
+            <div class="input-with-icon">
+              <i class="fas fa-phone"></i>
+              <input
+                type="tel"
+                id="phone"
+                class="form-control"
+                placeholder="07XX XXX XXX"
+              />
+            </div>
+          </div>
+          <!-- Vote Counter -->
+          <div class="vote-counter">
+            <span class="counter-label">Number of Votes:</span>
+            <div class="counter-controls">
+              <button class="counter-btn" id="decrement-votes">-</button>
+              <input
+                type="number"
+                id="vote-count"
+                class="counter-value"
+                value="1"
+                min="1"
+              />
+              <button class="counter-btn" id="increment-votes">+</button>
+            </div>
+          </div>
+          <!-- Cost Summary -->
+          <div class="cost-summary">
+            <div class="cost-item">
+              <span class="cost-label">Price per vote:</span>
+              <span class="cost-value">KES 10</span>
+            </div>
+            <div class="cost-item">
+              <span class="cost-label">Number of votes:</span>
+              <span class="cost-value" id="summary-votes">1</span>
+            </div>
+            <div class="cost-total">
+              <span class="cost-label">Total Amount:</span>
+              <span class="cost-value" id="total-amount">KES 10</span>
+            </div>
+          </div>
+
+          <!-- Proceed Button -->
+          <button class="btn btn-primary" id="proceed-payment">
+            <span class="btn-text">Proceed to Pay</span>
+          </button>
+          <!-- reCAPTCHA -->
+          <div id="recaptcha-indicator" class="recaptcha-indicator">
+            <i class="fas fa-shield-alt"></i> Protected by reCAPTCHA
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-container" id="success-modal">
+      <div class="modal-content">
+        <div class="result-modal success">
+          <div class="result-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3 class="result-title">Payment Successful!</h3>
+          <p class="result-message">
+            Thank you! Your payment was received and your vote for
+            <strong>Ama Mensah</strong> has been recorded.
+          </p>
+          <button class="btn btn-primary" id="success-button">
+            Return to Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal-container" id="error-modal">
+      <div class="modal-content">
+        <div class="result-modal error">
+          <div class="result-icon">
+            <i class="fas fa-times-circle"></i>
+          </div>
+          <h3 class="result-title">Payment Failed</h3>
+          <p class="result-message">
+            We couldn't process your payment. Please check your M-Pesa details
+            and try again.
+          </p>
+          <button class="btn btn-secondary" id="try-again">Try Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Toast -->
+     <div id="toast-container"></div>
+<div id="vote-error-toast" class="vote-toast">
+  <i class="ti ti-exclamation-circle"></i>
+  <span id="vote-error-message">Invalid phone number</span>
+</div>
+
+    <!-- Scripts -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"
+      integrity="sha512-rXnX2+8YV7K6k5e3t8f3L5b5H"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--<script type="module" src="Assets/js/dashboard.js"></script> -->
+    <script type="module" src="Assets/js/dashboard-2.js"></script>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+      // Defensive check for import.meta.env
+      const env =
+        typeof import.meta !== "undefined" && import.meta.env
+          ? import.meta.env
+          : {};
+      const supabaseUrl =
+        env.VITE_SUPABASE_URL || "https://cijjwarijqkaihehjskw.supabase.co";
+      const supabaseKey =
+        env.VITE_SUPABASE_ANON_KEY ||
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpamp3YXJpanFrYWloZWhqc2t3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0MzAxODQsImV4cCI6MjA3MjAwNjE4NH0.h0VWs07u1mPGCBKc7wcOAG_ejH8LK8CdyFFHVyoILp8";
+
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      // Make supabase available globally for your dashboard.js
+      window.supabase = supabase;
+    </script>
+    <script>
+      
+
+      // Sidebar Toggle
+      const sidebarToggle = document.getElementById("sidebar-toggle");
+      const categorySidebar = document.getElementById("category-sidebar");
+      const mainContainer = document.getElementById("main-container");
+
+      sidebarToggle.addEventListener("click", () => {
+        categorySidebar.classList.toggle("collapsed");
+        mainContainer.classList.toggle("is-collapsed");
+
+        // Change icon based on state
+        const icon = sidebarToggle.querySelector("i");
+        if (categorySidebar.classList.contains("collapsed")) {
+          icon.classList.remove("fa-chevron-left");
+          icon.classList.add("fa-chevron-right");
+        } else {
+          icon.classList.remove("fa-chevron-right");
+          icon.classList.add("fa-chevron-left");
+        }
+      });
+
+      // Mobile Sidebar Toggle
+      const mobileSidebarToggle = document.getElementById(
+        "mobile-sidebar-toggle"
+      );
+
+      mobileSidebarToggle.addEventListener("click", () => {
+        categorySidebar.classList.toggle("active");
+      });
+
+      // Voting Modal Functionality
+      const voteButtons = document.querySelectorAll(".vote-btn");
+      const votingModal = document.getElementById("voting-modal");
+      const closeVotingModal = document.getElementById("close-voting-modal");
+      const cancelVote = document.getElementById("cancel-vote");
+      const incrementVote = document.getElementById("increment-vote");
+      const decrementVote = document.getElementById("decrement-vote");
+      const voteCount = document.getElementById("vote-count");
+      const voteQuantity = document.getElementById("vote-quantity");
+      const totalCost = document.getElementById("total-cost");
+      const confirmVote = document.getElementById("confirm-vote");
+
+      voteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          votingModal.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      function closeModal() {
+        votingModal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      closeVotingModal.addEventListener("click", closeModal);
+      cancelVote.addEventListener("click", closeModal);
+      overlay.addEventListener("click", closeModal);
+
+      // Vote counter functionality
+      const costPerVote = 2.0;
+
+      function updateCost() {
+        const votes = parseInt(voteCount.value);
+        voteQuantity.textContent = votes;
+        totalCost.textContent = `₵ ${(votes * costPerVote).toFixed(2)}`;
+        confirmVote.querySelector(
+          ".btn-text"
+        ).textContent = `Confirm Vote - ₵ ${(votes * costPerVote).toFixed(2)}`;
+      }
+
+      incrementVote.addEventListener("click", () => {
+        if (parseInt(voteCount.value) < 10) {
+          voteCount.value = parseInt(voteCount.value) + 1;
+          updateCost();
+        }
+      });
+
+      decrementVote.addEventListener("click", () => {
+        if (parseInt(voteCount.value) > 1) {
+          voteCount.value = parseInt(voteCount.value) - 1;
+          updateCost();
+        }
+      });
+
+      voteCount.addEventListener("change", () => {
+        if (voteCount.value < 1) voteCount.value = 1;
+        if (voteCount.value > 10) voteCount.value = 10;
+        updateCost();
+      });
+
+      // Confirm vote with loading animation
+      confirmVote.addEventListener("click", () => {
+        confirmVote.classList.add("btn-loading");
+
+        // Simulate API call
+        setTimeout(() => {
+          confirmVote.classList.remove("btn-loading");
+          closeModal();
+          alert("Vote cast successfully!");
+        }, 1500);
+      });
+
+      // Header scroll effect
+      const header = document.getElementById("header");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Category filtering
+      const categoryFilter = document.getElementById("category-filter");
+      const categorySearch = document.getElementById("category-search");
+      const categoryItems = document.querySelectorAll(".category-item");
+      const statCards = document.querySelectorAll(".stat-card");
+
+      categoryFilter.addEventListener("change", filterCategories);
+      categorySearch.addEventListener("input", filterCategories);
+
+      function filterCategories() {
+        const filterValue = categoryFilter.value.toLowerCase();
+        const searchValue = categorySearch.value.toLowerCase();
+
+        statCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+
+          if (
+            (filterValue === "all" || category === filterValue) &&
+            card
+              .querySelector(".stat-label")
+              .textContent.toLowerCase()
+              .includes(searchValue)
+          ) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // Category item selection
+      categoryItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          // Remove active class from all items
+          categoryItems.forEach((i) => i.classList.remove("active"));
+
+          // Add active class to clicked item
+          item.classList.add("active");
+
+          // Filter categories based on selection
+          const category = item.getAttribute("data-category");
+          categoryFilter.value = category;
+          filterCategories();
+        });
+      });
+
+      // Initialize page
+      updateCost();
+    </script>
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.getElementById("category-sidebar");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+    const toggleIcon = mobileMenuToggle.querySelector("i");
+    const categoryItems = document.querySelectorAll(".category-item");
+
+    // Desktop sidebar collapse toggle
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+      document.querySelector(".main-container").classList.toggle("is-collapsed");
+    });
+
+    // Mobile sidebar open/close toggle + icon change
+    mobileMenuToggle.addEventListener("click", () => {
+      const isActive = sidebar.classList.toggle("active");
+      toggleIcon.className = isActive ? "ti ti-clear-all" : "ti ti-menu";
+    });
+
+    // Close sidebar on category click (for mobile)
+    categoryItems.forEach(item => {
+      item.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove("active");
+          toggleIcon.className = "ti ti-menu"; // Reset to hamburger
+        }
+      });
+    });
+
+    // Reset state on window resize
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove("active");
+        toggleIcon.className = "ti ti-menu";
+      }
+    });
+  });
+</script>
+
+  </body>
+</html>

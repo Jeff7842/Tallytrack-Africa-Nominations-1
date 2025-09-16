@@ -1,0 +1,187 @@
+/* src/components/CategorySidebar/CategorySidebar.css */
+/* ========== Sidebar Scrollbar ========== */
+.category-sidebar {
+    direction: rtl; /* Flip direction so scrollbar appears on the left */
+    position: sticky;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 340px;
+    background: var(--primary-dark);
+    padding: 0rem 1.5rem 2rem;
+    overflow-y: auto; /* its own vertical scroll */
+    overflow-x: hidden; /* no bottom scroller */
+    z-index: 900;
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
+    margin-bottom: 0px;
+    transition: 0.5s ease-in-out;
+    text-align: left;
+}
+.category-sidebar * {
+    direction: ltr; /* Keep text direction normal */
+}
+
+/* Webkit Browsers (Chrome, Edge, Safari) */
+.category-sidebar::-webkit-scrollbar {
+    width: 2px; /* Thin scrollbar */
+}
+.category-sidebar::-webkit-scrollbar-track {
+    background: transparent; /* No background */
+}
+.category-sidebar::-webkit-scrollbar-thumb {
+    background: #d4af37; /* Gold color */
+    border-radius: 10px;
+}
+.category-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #f1e5b9; /* Light gold on hover */
+}
+
+/* Firefox */
+.category-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 transparent;
+}
+
+.sidebar-objects {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #d4af37;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    transition: 2.5s ease-in-out;
+}
+
+.sidebar-logo-img {
+    height: 90px;
+    width: auto;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: 1px solid #d4af37;
+    padding: 2px 6px;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.category-item svg,
+.category-item i {
+    width: 22px;
+    height: 22px;
+    color: var(--light-gold);
+    margin-right: 5px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* when collapsed show only the icon */
+.category-sidebar.collapsed .category-item .category-name span,
+.category-sidebar.collapsed .category-item .category-desc {
+    display: none;
+}
+
+.category-sidebar.collapsed .category-item svg,
+.category-item i {
+    margin-right: 0;
+    width: 25px;
+    height: 25px;
+    display: block;
+    text-align: center;
+    margin-left: -13px;
+    margin-right: 0px;
+    left: -10px;
+    overflow-y: auto; /* its own vertical scroll */
+    overflow-x: hidden;
+}
+
+.category-sidebar.collapsed {
+    width: 80px;
+    background-color: transparent;
+    overflow-y: auto;    /* allow vertical scrolling */
+    overflow-x: hidden;
+    transition: 0.8s ease-in-out;
+}
+.category-sidebar.collapsed .category-item {
+    text-align: center;
+    transition: 0.8s ease-in-out;
+}
+.category-sidebar.collapsed .category-item i {
+    font-size: 1.4rem;
+    transition: 0.8s ease-in-out;
+}
+.category-sidebar.collapsed .category-item .category-name span,
+.category-sidebar.collapsed .category-item .category-desc,
+.category-sidebar.collapsed .sidebar-logo-img {
+    display: none;
+    transition: 1.8s ease-in-out;
+}
+.sidebar-toggle:hover {
+    background: var(--primary-gold);
+    color: var(--primary-dark);
+    transform: translateY(-3px);
+}
+
+.category-sidebar.collapsed .sidebar-toggle {
+    margin-top: 20px;
+    scale: 0.8;
+}
+
+.category-list {
+    list-style: none;
+}
+
+.category-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.category-item:hover {
+    background: rgba(251, 192, 0, 0.255);
+}
+
+.category-item.active {
+    background: rgba(255, 196, 0, 0.1);
+}
+
+.category-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--light-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-desc {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .category-sidebar {
+        width: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-sidebar {
+        transform: translateX(-100%);
+        transition: var(--transition);
+    }
+
+    .category-sidebar.active {
+        transform: translateX(0);
+    }
+}

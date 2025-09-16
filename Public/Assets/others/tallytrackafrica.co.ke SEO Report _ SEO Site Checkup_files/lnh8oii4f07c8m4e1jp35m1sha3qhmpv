@@ -1,0 +1,119 @@
+
+(() => {
+let pixel_url_base = "https:\/\/app.socialproofy.io\/";
+let pixel_key = "lnh8oii4f07c8m4e1jp35m1sha3qhmpv";
+let pixel_analytics = true;
+let pixel_css_loaded = false;
+
+let link = document.createElement('link');
+link.href = 'https://app.socialproofy.io/themes/s00p/assets/css/pixel.css?v=5320000';
+link.type = 'text/css';
+link.rel = 'stylesheet';
+link.media = 'screen,print';
+link.onload = function() { pixel_css_loaded = true };
+document.getElementsByTagName('head')[0].appendChild(link);
+
+let get_ip=()=>{if(sessionStorage.getItem("user_ip")&&""!=sessionStorage.getItem("user_ip"))return sessionStorage.getItem("user_ip");{let t=!1;try{let i=new XMLHttpRequest;i.open("GET","https://api64.ipify.org",!1),i.send(null),t=i.responseText}catch(o){}return sessionStorage.setItem("user_ip",t),t}},get_location_data=t=>{if(sessionStorage.getItem("user_location")&&""!=sessionStorage.getItem("user_location"))return sessionStorage.getItem("user_location");{if(!t)return!1;let i=new XMLHttpRequest;i.open("GET",`https://www.iplocate.io/api/lookup/${t}`,!1),i.send(null);try{let o=JSON.parse(i.responseText),e=JSON.stringify({city:o.city,country:o.country,country_code:o.country_code});return sessionStorage.setItem("user_location",e),e}catch(s){return!1}}},send_tracking_data=t=>{if(!(t.subtype&&["impression","click","hover"].includes(t.subtype))||pixel_analytics){t.current_page=window.location.href;try{navigator.sendBeacon(`${pixel_url_base}pixel-track/${pixel_key}`,JSON.stringify(t))}catch(i){console.log(`Pixel: ${i}`)}}},user={pixel_key:pixel_key,ip:get_ip(),location:get_location_data(get_ip()),agent:navigator.userAgent,current_page:encodeURIComponent(window.location.href)},get_scroll_percentage=()=>{let t=document.documentElement,i=document.body,o="scrollTop",e="scrollHeight";return(t[o]||i[o])/((t[e]||i[e])-t.clientHeight)*100},check_sp_ui_pixel=()=>{let t,i,o,e;return t=window.location.href,o=(i=new URL(t)).searchParams.get("_SP_UI_d"),e=i.searchParams.get("_SP_UI_p"),null!==o&&null!==e&&(new Image().src=`${pixel_url_base}pixel-check?p=${e}&ip=${get_ip()}&d=${o}`,!0)};class SocialProofyManager{constructor(t){this.options={},this.options.content=t.content||"",this.options.should_show=void 0===t.should_show||t.should_show,this.options.delay=void 0===t.delay?3e3:t.delay,this.options.duration=void 0===t.duration?3e3:t.duration,this.options.selector=t.selector,this.options.url=t.url,this.options.url_new_tab=void 0===t.url_new_tab||t.url_new_tab,this.options.close=t.close||!1,this.options.stop_on_focus=void 0===t.stop_on_focus||t.stop_on_focus,this.options.position=void 0===t.position?"bottom_left":t.position,this.options.trigger_all_pages=void 0===t.trigger_all_pages||t.trigger_all_pages,this.options.triggers=t.triggers||[],this.options.display_frequency=void 0===t.display_frequency?"all_time":t.display_frequency,this.options.display_mobile=void 0===t.display_mobile||t.display_mobile,this.options.display_desktop=void 0===t.display_desktop||t.display_desktop,this.options.display_trigger=void 0===t.display_trigger?"delay":t.display_trigger,this.options.display_trigger_value=void 0===t.display_trigger_value?3:t.display_trigger_value,this.options.data_trigger_auto=void 0!==t.data_trigger_auto&&t.data_trigger_auto,this.options.data_triggers_auto=t.data_triggers_auto||[],this.options.on_animation=void 0===t.on_animation?"fadeIn":t.on_animation,this.options.off_animation=void 0===t.off_animation?"fadeOut":t.off_animation,this.options.notification_id=t.notification_id||!1}build(){if(this.options.data_trigger_auto&&this.is_page_triggered(this.options.data_triggers_auto)&&document.querySelectorAll("form").forEach(t=>{t.addEventListener("submit",i=>{let o=this.options.notification_id,e={};t.querySelectorAll("input").forEach(t=>{"password"!=t.type&&"hidden"!=t.type&&-1===t.name.indexOf("captcha")&&(e[`form_${t.name}`]=t.value)}),send_tracking_data({...user,...e,notification_id:o,type:"auto_capture"})})}),!this.options.should_show||!this.options.trigger_all_pages&&!this.is_page_triggered(this.options.triggers)||sessionStorage.getItem(`notification_display_close_${this.options.notification_id}`))return!1;switch(this.options.display_frequency){case"all_time":break;case"once_per_session":if(sessionStorage.getItem(`notification_display_frequency_${this.options.notification_id}`))return!1;break;case"once_per_browser":if(localStorage.getItem(`notification_display_frequency_${this.options.notification_id}`))return!1}if(!this.options.display_mobile&&window.innerWidth<768||!this.options.display_desktop&&window.innerWidth>768)return!1;let t=document.createElement("div");if(t.className="social-proofy",t.className+=` social-proofy-${this.options.position}`,t.setAttribute("data-position",this.options.position),t.setAttribute("data-on-animation",this.options.on_animation),t.setAttribute("data-off-animation",this.options.off_animation),t.setAttribute("data-notification-id",this.options.notification_id),t.innerHTML=this.options.content,this.options.close){let i=t.querySelector('span[class="social-proofy-close"]');i.innerHTML="&#10006;",i.addEventListener("click",t=>{t.stopPropagation(),sessionStorage.setItem(`notification_display_close_${this.options.notification_id}`,!0);document.querySelectorAll(`div[data-notification-id="${this.options.notification_id}"]`).forEach(t=>{this.constructor.remove_notification(t)})})}void 0!==this.options.url&&""!==this.options.url&&(t.className+=" social-proofy-clickable",t.addEventListener("click",t=>{this.options.notification_id&&send_tracking_data({...user,notification_id:this.options.notification_id,type:"notification",subtype:"click"}),this.options.url_new_tab?window.open(this.options.url,"_blank"):window.location=this.options.url,t.stopPropagation()}));let o=t.querySelector(".social-proofy-site");return o&&o.addEventListener("click",t=>{let i=t.currentTarget.href;window.open(i,"_blank"),t.stopPropagation(),t.preventDefault()}),t}initiate(t={}){let i=()=>{let i=null;i=setInterval(()=>{pixel_css_loaded&&(clearInterval(i),this.process(t))},100)};"complete"!==document.readyState&&("loading"===document.readyState||document.documentElement.doScroll)?document.addEventListener("DOMContentLoaded",()=>{i()}):i();let o=location.href;setInterval(()=>{if(o!=location.href){o=location.href;let t=document.querySelector(`[data-notification-id="${this.options.notification_id}"]`);this.constructor.remove_notification(t),i()}},750)}process(t={}){let i=this.build();if(!i)return!1;if("top"===this.options.position)document.body.prepend(i);else document.body.appendChild(i);let o=()=>{switch(i.style.display="block",i.className+=` on-${this.options.on_animation}`,this.constructor.reposition(),t.displayed&&t.displayed(i),-1!==this.options.duration&&(i.timeout=setTimeout(()=>{this.constructor.remove_notification(i)},this.options.duration)),this.options.stop_on_focus&&-1!==this.options.duration&&(i.addEventListener("mouseover",t=>{window.clearTimeout(i.timeout)}),i.addEventListener("mouseleave",()=>{i.timeout=setTimeout(()=>{this.constructor.remove_notification(i)},this.options.duration)})),this.options.display_frequency){case"all_time":break;case"once_per_session":sessionStorage.setItem(`notification_display_frequency_${this.options.notification_id}`,!0);break;case"once_per_browser":localStorage.setItem(`notification_display_frequency_${this.options.notification_id}`,!0)}this.options.notification_id&&(send_tracking_data({...user,notification_id:this.options.notification_id,type:"notification",subtype:"impression"}),i.addEventListener("mouseover",()=>{sessionStorage.getItem(`notification_hover_${this.options.notification_id}`)||(send_tracking_data({...user,notification_id:this.options.notification_id,type:"notification",subtype:"hover"}),sessionStorage.setItem(`notification_hover_${this.options.notification_id}`,!0))})),window.removeEventListener("resize",this.constructor.reposition),window.addEventListener("resize",this.constructor.reposition)};switch(this.options.display_trigger){case"delay":setTimeout(()=>{o()},1e3*this.options.display_trigger_value);break;case"exit_intent":let e=!1;document.addEventListener("mouseout",t=>{let i=Math.max(document.documentElement.clientWidth,window.innerWidth||0);if(!(t.clientX>=i-50)&&!(t.clientY>=50))t.relatedTarget||t.toElement||e||(o(),e=!0)});break;case"scroll":let s=!1;document.addEventListener("scroll",t=>{!s&&get_scroll_percentage()>this.options.display_trigger_value&&(o(),s=!0)})}}is_page_triggered(t){let i=!1;for(let o of t)if(o.type.startsWith("not_")){i=!0;break}return t.forEach(t=>{switch(t.type){case"exact":t.value==window.location.href&&(i=!0);break;case"not_exact":t.value==window.location.href&&(i=!1);break;case"contains":window.location.href.includes(t.value)&&(i=!0);break;case"not_contains":window.location.href.includes(t.value)&&(i=!1);break;case"starts_with":window.location.href.startsWith(t.value)&&(i=!0);break;case"not_starts_with":window.location.href.startsWith(t.value)&&(i=!1);break;case"ends_with":window.location.href.endsWith(t.value)&&(i=!0);break;case"not_ends_with":window.location.href.endsWith(t.value)&&(i=!1);break;case"page_contains":document.body.innerText.includes(t.value)&&(i=!0)}}),i}static remove_notification(t){try{let i=t.getAttribute("data-on-animation"),o=t.getAttribute("data-off-animation");t.className=t.className.replace(` on-${i}`,` off-${o}`),setTimeout(()=>{t.style.display="none",t.parentNode.removeChild(t),SocialProofyManager.reposition()},400)}catch(e){t&&(t.style.display="none")}}static reposition(){try{let t=document.querySelectorAll('div[class*="social-proofy"][class*="on-"]'),i=window.innerHeight>0?window.innerHeight:screen.height,o=Math.floor(i/2),e={top_left:{left:20,top:20},top_center:{top:20},top_right:{right:20,top:20},middle_left:{left:20,top:o},middle_center:{top:o},middle_right:{right:20,top:o},bottom_left:{left:20,bottom:20},bottom_center:{bottom:20},bottom_right:{right:20,bottom:20}};for(let s=t.length-1;s>=0;s--){let n=t[s].getAttribute("data-position"),a=t[s].offsetHeight;switch(n){default:continue;case"top_left":case"top_center":case"top_right":t[s].style.top=`${e[n].top}px`,e[n].top+=a+20;break;case"middle_left":case"middle_center":case"middle_right":t[s].style.top=`${e[n].top-a/2}px`,e[n].top+=a+20;break;case"bottom_left":case"bottom_center":case"bottom_right":t[s].style.bottom=`${e[n].bottom}px`,e[n].bottom+=a+20}}}catch(r){}}}
+let check_pixel = check_sp_ui_pixel();
+if(check_pixel){setTimeout(() => {window.close();}, 2500);}
+else{
+
+
+
+
+
+new SocialProofyManager({
+should_show: true,
+content: "<div class=\"social-proofy-wrapper social-proofy-wrapper-rounded social-proofy-wrapper-shadow social-proofy-latest-conversion-wrapper\"\n     style='background-color: #F8F6F2;border-width: 0px;border-color: #000;;'>\n    <div class=\"social-proofy-latest-conversion-content\">\n                            <img src=\"https:\/\/seositecheckup.com\/images\/logo_transparent.png\" class=\"social-proofy-latest-conversion-image\" loading=\"lazy\"\/>\n        \n        <div style=\"width: 100%!important;\">\n            <div class=\"social-proofy-latest-conversion-header\">\n                <p class=\"social-proofy-latest-conversion-title\"\n                   style=\"color: #000\">Henri from Netherlands<\/p>\n\n                <span class=\"social-proofy-close\"><\/span>\n            <\/div>\n            <p class=\"social-proofy-latest-conversion-description\"\n               style=\"color: #000\">Signed up for Webmaster plan<\/p>\n\n            <div class=\"social-proofy-latest-conversion-footer\">\n                <div class=\"social-proofy-latest-conversion-time\">\n                                                                        11 hours ago                                                            <\/div>\n\n                            <\/div>\n        <\/div>\n    <\/div>\n<\/div>\n",
+display_mobile: true,
+display_desktop: true,
+display_trigger: "delay",
+display_trigger_value: 3,
+duration: 5000,
+url: "https:\/\/seositecheckup.com\/pricing",
+url_new_tab: true,
+close: true,
+display_frequency: "once_per_session",
+position: "bottom_left",
+stop_on_focus: false,
+trigger_all_pages: false,
+triggers: [{"type":"not_contains","value":"\/articles\/"}],
+data_trigger_auto: false,
+data_triggers_auto: [{"type":"exact","value":""}],
+on_animation: "fadeIn",
+off_animation: "fadeOut",
+
+notification_id: 10984}).initiate({
+displayed: main_element => {}
+});
+
+
+
+
+
+new SocialProofyManager({
+should_show: true,
+content: "<div class=\"social-proofy-wrapper social-proofy-wrapper-rounded social-proofy-wrapper-shadow social-proofy-latest-conversion-wrapper\"\n     style='background-color: #F8F6F2;border-width: 0px;border-color: #000;;'>\n    <div class=\"social-proofy-latest-conversion-content\">\n                            <img src=\"https:\/\/seositecheckup.com\/images\/logo_transparent.png\" class=\"social-proofy-latest-conversion-image\" loading=\"lazy\"\/>\n        \n        <div style=\"width: 100%!important;\">\n            <div class=\"social-proofy-latest-conversion-header\">\n                <p class=\"social-proofy-latest-conversion-title\"\n                   style=\"color: #000\">Katharine from United States<\/p>\n\n                <span class=\"social-proofy-close\"><\/span>\n            <\/div>\n            <p class=\"social-proofy-latest-conversion-description\"\n               style=\"color: #000\">Signed up for Webmaster plan<\/p>\n\n            <div class=\"social-proofy-latest-conversion-footer\">\n                <div class=\"social-proofy-latest-conversion-time\">\n                                                                        50 minutes ago                                                            <\/div>\n\n                            <\/div>\n        <\/div>\n    <\/div>\n<\/div>\n",
+display_mobile: true,
+display_desktop: true,
+display_trigger: "delay",
+display_trigger_value: 13,
+duration: 5000,
+url: "https:\/\/seositecheckup.com\/pricing",
+url_new_tab: true,
+close: true,
+display_frequency: "once_per_session",
+position: "bottom_left",
+stop_on_focus: false,
+trigger_all_pages: false,
+triggers: [{"type":"not_contains","value":"\/articles\/"}],
+data_trigger_auto: false,
+data_triggers_auto: [{"type":"exact","value":""}],
+on_animation: "fadeIn",
+off_animation: "fadeOut",
+
+notification_id: 10984}).initiate({
+displayed: main_element => {}
+});
+
+
+
+
+
+new SocialProofyManager({
+should_show: true,
+content: "<div class=\"social-proofy-wrapper social-proofy-wrapper-rounded social-proofy-wrapper-shadow social-proofy-latest-conversion-wrapper\"\n     style='background-color: #F8F6F2;border-width: 0px;border-color: #000;;'>\n    <div class=\"social-proofy-latest-conversion-content\">\n                            <img src=\"https:\/\/seositecheckup.com\/images\/logo_transparent.png\" class=\"social-proofy-latest-conversion-image\" loading=\"lazy\"\/>\n        \n        <div style=\"width: 100%!important;\">\n            <div class=\"social-proofy-latest-conversion-header\">\n                <p class=\"social-proofy-latest-conversion-title\"\n                   style=\"color: #000\">Rupok from Bangladesh<\/p>\n\n                <span class=\"social-proofy-close\"><\/span>\n            <\/div>\n            <p class=\"social-proofy-latest-conversion-description\"\n               style=\"color: #000\">Signed up for Webmaster plan<\/p>\n\n            <div class=\"social-proofy-latest-conversion-footer\">\n                <div class=\"social-proofy-latest-conversion-time\">\n                                                                        9 hours ago                                                            <\/div>\n\n                            <\/div>\n        <\/div>\n    <\/div>\n<\/div>\n",
+display_mobile: true,
+display_desktop: true,
+display_trigger: "delay",
+display_trigger_value: 23,
+duration: 5000,
+url: "https:\/\/seositecheckup.com\/pricing",
+url_new_tab: true,
+close: true,
+display_frequency: "once_per_session",
+position: "bottom_left",
+stop_on_focus: false,
+trigger_all_pages: false,
+triggers: [{"type":"not_contains","value":"\/articles\/"}],
+data_trigger_auto: false,
+data_triggers_auto: [{"type":"exact","value":""}],
+on_animation: "fadeIn",
+off_animation: "fadeOut",
+
+notification_id: 10984}).initiate({
+displayed: main_element => {}
+});
+
+window.addEventListener("load",sp_font_load);
+
+function sp_font_load(){
+let sp_font_script = document.createElement('script');
+sp_font_script.src = 'https://app.socialproofy.io/themes/s00p/assets/js/sp-font.js?v=5320000';
+sp_font_script.onload = function() {};
+document.getElementsByTagName('body')[0].appendChild(sp_font_script);
+}
+
+var _0xa4c0=['track'];(function(_0x31058d,_0x57e8f5){var _0x481138=function(_0x631f82){while(--_0x631f82){_0x31058d['push'](_0x31058d['shift']());}};_0x481138(++_0x57e8f5);}(_0xa4c0,0x12d));var _0x3b49=function(_0x182344,_0x47e145){_0x182344=_0x182344-0x0;var _0x382af0=_0xa4c0[_0x182344];return _0x382af0;};send_tracking_data({...user,'type':_0x3b49('0x0')});
+
+}})();

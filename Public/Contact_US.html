@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | TallyTrack Africa</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp" />
+    <link rel="stylesheet" href="Assets/css/main.css" />
+    <link rel="stylesheet" href="Assets/css/contact.css" />
+    <style>
+      /* Additional styles for contact page */
+      @font-face {
+        font-family: 'Adam-Medium';
+        src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+      /* Improve touch targets */
+      .nav-link,
+      .btn,
+      .faq-question,
+      .submit-btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Prevent zoom on input focus on iOS */
+      @media (max-width: 768px) {
+        input,
+        select,
+        textarea {
+          font-size: 16px; /* Prevents zoom on focus in iOS */
+        }
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Better focus indicators for accessibility */
+      button:focus,
+      input:focus,
+      select:focus,
+      textarea:focus,
+      a:focus {
+        outline: 2px solid var(--primary-gold);
+        outline-offset: 2px;
+      }
+
+      /* Container */
+      .iti {
+        width: 100%;
+      }
+
+      /* The dropdown list */
+      .iti__country-list {
+        background: #2b2b3c; /* dark background */
+        border-radius: 5px;
+        border: 1px solid #444;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        color: #d91212;
+        font-size: 14px;
+        max-height: 750px; /* scroll if too long */
+        max-width: 300px;
+      }
+
+      /* Each option */
+      .iti__country {
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      /* Hover effect */
+      .iti__country:hover {
+        background: #3b3b44;
+        color: #ceb709;
+      }
+
+      /* Selected item */
+      .iti__country.iti__highlight {
+        background: #c5c5da;
+        color: #ff9d00;
+      }
+
+      /* Flag icons inside dropdown */
+      .iti__flag-box {
+        margin-right: 8px;
+      }
+
+      /* Dial code alignment */
+      .iti__dial-code {
+        color: #1a4a71; /* blue for dial code */
+        margin-left: 6px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <img
+              src="Assets/img/Asset7.png"
+              alt="TallyTrack Africa"
+              class="logo-img"
+              onclick="window.location.href='index.html'"
+            />
+            <span class="logo-text" style="display: none">TALLYTRACK</span>
+          </div>
+
+          <nav class="main-nav">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="category.html" class="nav-link">Categories</a>
+            <a href="About_Us.html" class="nav-link">About</a>
+            <a href="#contact" class="nav-link active">Contact Us</a>
+          </nav>
+
+          <div class="auth-container" style="display: none">
+            <a href="#" class="btn btn-outline">Login</a>
+            <a href="#" class="btn btn-primary">Register</a>
+          </div>
+
+          <a class="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contact Hero Section -->
+    <section class="contact-hero" id="contact">
+      <div class="contact-hero-image"></div>
+      <div class="contact-hero-overlay"></div>
+
+      <div class="container">
+        <div class="contact-hero-content">
+          <h1 class="contact-hero-title">Get In <span>Touch</span> With Us</h1>
+          <p class="contact-hero-description">
+            Have questions or need assistance? We're here to help you with any
+            inquiries about TallyTrack Africa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-container">
+          <!-- Contact Information -->
+          <div class="contact-info">
+            <h2 class="contact-info-title">Contact Information</h2>
+
+            <div class="contact-details">
+              <div class="contact-detail-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Our Location</h4>
+                  <p>Nairobi, Kenya</p>
+                </div>
+              </div>
+
+              <div class="contact-detail-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Phone Number</h4>
+                  <p>+254 700 123 456</p>
+                  <p>+254 711 987 654</p>
+                </div>
+              </div>
+
+              <div class="contact-detail-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h4>Email Address</h4>
+                  <p>info@tallytrackafrica.com</p>
+                  <p>support@tallytrackafrica.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="support-hours">
+              <h4>Support Hours</h4>
+              <p>Monday - Friday <span>8:00 AM - 6:00 PM EAT</span></p>
+              <p>Saturday <span>9:00 AM - 4:00 PM EAT</span></p>
+              <p>Sunday <span>Closed</span></p>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-container">
+            <h2 class="form-title">Send Us a Message</h2>
+
+            <form class="contact-form" id="contactForm">
+              <input type="checkbox" name="botcheck" id="" style="display: none;">
+              <div class="form-group">
+                <label for="enquiryTopic">Enquiry Topic</label>
+                <div class="input-container">
+                  <select id="enquiryTopic" name="enquiryTopic" required>
+                    <option value="">Select a topic</option>
+                    <option value="Voting Process">Voting Process</option>
+                    <option value="Nomination Process">Nomination Process</option>
+                    <option value="echnical Support">Technical Support</option>
+                    <option value="Partnership Opportunities">Partnership Opportunities</option>
+                    <option value="Sponsorship Inquiries">Sponsorship Inquiries</option>
+                    <option value="Media & Press">Media & Press</option>
+                    <option value="Award Categories">Award Categories</option>
+                    <option value="Account Verification">Account Verification</option>
+                    <option value="Results & Statistics">Results & Statistics</option>
+                    <option value="Other Inquiries">Other Inquiries</option>
+                  </select>
+                  <span class="error-icon" style="right: -23px">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please select an enquiry topic</div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <div class="input-container">
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      placeholder="Enter your first name"
+                      required
+                    />
+                    <span class="error-icon">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          stroke-width="0.666667"
+                        />
+                        <path
+                          d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          stroke-width="0.666667"
+                        />
+                        <path
+                          d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    <div class="hint-text">Please enter your first name</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <div class="input-container">
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      placeholder="Enter your last name"
+                      required
+                    />
+                    <span class="error-icon">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          stroke-width="0.666667"
+                        />
+                        <path
+                          d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          stroke-width="0.666667"
+                        />
+                        <path
+                          d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    <div class="hint-text">Please enter your last name</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-container">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                  <span class="error-icon">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please enter your email address</div>
+                </div>
+              </div>
+              <div class="form-row phone">
+                <div class="form-group">
+                  <label for="countryCode">Phone Number</label>
+                  <div class="input-container phone-input-container">
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Phone number"
+                      required
+                      inputmode="tel"
+                      maxlength="20"
+                    />
+                    <span class="error-icon">
+                      <i class="ti ti-exclamation-circle error-icon"></i>
+                    </span>
+                  </div>
+                  <div class="hint-text">Please enter a valid phone number</div>
+                </div>
+
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <select
+                    id="countrySelect"
+                    name="country"
+                    title="country"
+                    required
+                  >
+                    <option value="">Select Your Country</option>
+                  </select>
+                  <span class="error-icon" style="top: 715px; right: 55px">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please select your country</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <div class="input-container">
+                  <textarea
+                    type="text"
+                    id="message"
+                    name="message"
+                    placeholder="Enter your message"
+                    required
+                  ></textarea>
+                  <span class="error-icon">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7.95162 5.20606H7.97586C8.10692 5.20606 8.2001 5.29925 8.2001 5.4303C8.2001 5.55205 8.09213 5.65454 7.97586 5.65454H7.95162C7.82056 5.65454 7.72738 5.56136 7.72738 5.4303C7.72738 5.30856 7.83535 5.20606 7.95162 5.20606Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.75179 7.34545C7.75179 7.2237 7.85977 7.12121 7.97603 7.12121C8.11683 7.12121 8.20028 7.22399 8.20028 7.32121V11.0788C8.20028 11.2005 8.0923 11.303 7.97603 11.303C7.85429 11.303 7.75179 11.195 7.75179 11.0788V7.34545Z"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="0.666667"
+                      />
+                      <path
+                        d="M7.97583 0.678787C3.92734 0.678787 0.630371 3.95151 0.630371 8C0.630371 12.0485 3.92734 15.3455 7.97583 15.3455C12.0243 15.3455 15.297 12.0485 15.297 8C15.297 3.95151 12.0243 0.678787 7.97583 0.678787ZM7.97583 14.2545C4.5334 14.2545 1.72128 11.4424 1.72128 8C1.72128 4.55758 4.5334 1.74545 7.97583 1.74545C11.4183 1.74545 14.2061 4.55758 14.2061 8C14.2061 11.4424 11.4183 14.2545 7.97583 14.2545Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <div class="hint-text">Please enter your message</div>
+                </div>
+              </div>
+
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faqs-section" id="faqs">
+      <div class="container">
+        <div class="faqs-header">
+          <span class="section-subtitle">Help Center</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-description">
+            Find answers to common questions about TallyTrack Africa Awards
+          </p>
+        </div>
+
+        <div class="faqs-grid">
+          <div class="faq-column">
+            <div class="faq-item">
+              <div class="faq-question">
+                How do I vote for my favorite nominee?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  To vote for your favorite nominee, simply navigate to the
+                  Nominees section, select the category, find the nominee you
+                  wish to vote for, and click the "Vote Now" button. You'll need
+                  to be registered and logged in to cast your vote.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                Can I vote multiple times? <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  No, to ensure fairness, each registered user can vote only
+                  once per category. However, you can vote in multiple different
+                  categories.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                How are nominees selected? <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Nominees are selected through a rigorous process that includes
+                  public nominations, industry expert recommendations, and our
+                  internal research team's evaluation based on achievement,
+                  impact, and excellence in their respective fields.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                When will the voting period end?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  The voting period typically ends 14 days before the awards
+                  ceremony. Exact dates are announced on our website and social
+                  media channels. You can also check the countdown timer on the
+                  voting page.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                How can I become a nominee? <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Nominations for most categories are open to the public during
+                  specific nomination periods. You can submit nominations
+                  through our website or be recommended by industry experts.
+                  Some categories may have specific eligibility criteria.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-column">
+            <div class="faq-item">
+              <div class="faq-question">
+                Is the voting process secure and transparent?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Yes, we use advanced encryption and verification systems to
+                  ensure the integrity of the voting process. Our system
+                  prevents duplicate voting and maintains transparency through
+                  real-time result tracking (visible after voting closes).
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                How are the winners determined?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Winners are determined by a combination of public votes (70%
+                  weight) and judges' scores (30% weight). Our panel of judges
+                  consists of industry experts who evaluate nominees based on
+                  specific criteria for each category.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                Can I change my vote after submitting?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  No, once a vote is submitted, it cannot be changed. We
+                  recommend reviewing your selection carefully before confirming
+                  your vote.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                How can I attend the awards ceremony?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Information about attending the awards ceremony, including
+                  ticket sales and venue details, will be announced on our
+                  website and social media channels approximately one month
+                  before the event. Some nominees and sponsors may receive
+                  complimentary tickets.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                Who can I contact for partnership opportunities?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  For partnership, sponsorship, or media collaboration
+                  opportunities, please email partnerships@tallytrackafrica.com
+                  or use the contact form above and select "Partnership
+                  Opportunities" as your enquiry topic.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-pattern"></div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-grid">
+            <div class="footer-col">
+              <h4 style="width: 60%">
+                <img src="Assets/img/Asset2.png" alt="" />
+              </h4>
+              <p>
+                Celebrating excellence and outstanding achievements across
+                Africa through transparent public voting.
+              </p>
+
+              <div class="social-links">
+                <a href="#" class="social-link"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="fab fa-youtube"></i
+                ></a>
+              </div>
+            </div>
+
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul class="footer-links">
+                <li><a href="#home" class="footer-link">Home</a></li>
+                <li>
+                  <a href="dashboard.html" class="footer-link">Dashboard</a>
+                </li>
+                <li>
+                  <a href="Nominee.html" class="footer-link">Be A Nominee</a>
+                </li>
+                <li>
+                  <a href="Learn.html" class="footer-link">Voting Process</a>
+                </li>
+                <li>
+                  <a href="About_Us.html" class="footer-link">About Us</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>Categories</h4>
+              <ul class="footer-links">
+                <li><a href="#" class="footer-link">Content Creation</a></li>
+                <li>
+                  <a href="#" class="footer-link">Music & Entertainment</a>
+                </li>
+                <li><a href="#" class="footer-link">Business</a></li>
+                <li><a href="#" class="footer-link">Philanthropy</a></li>
+                <li><a href="#" class="footer-link">Innovation</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>Contact Us</h4>
+              <ul class="footer-links">
+                <li>
+                  <i class="fas fa-envelope"></i> info@tallytrackafrica.co.ke
+                </li>
+                <li><i class="fas fa-phone"></i> +254 700 123 456</li>
+                <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>&copy; 2025 TallyTrack Africa. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+      // Initialize EmailJS with your public key
+      (function() {
+        emailjs.init("pa_euojDe8ZkJ10tG"); // Replace with your actual EmailJS public key
+      })();
+    </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('header');
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = contactForm.querySelector('.submit-btn');
+    const originalBtnText = submitBtn.textContent;
+
+    // --- header scroll ---
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 100);
+    });
+
+    // --- FAQs ---
+    document.querySelectorAll('.faq-item .faq-question').forEach(q => {
+      q.addEventListener('click', () =>
+        q.parentElement.classList.toggle('active')
+      );
+    });
+
+    // --- error helpers ---
+    function showError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+      const group = field.closest('.form-group');
+      if (!group) return;
+      group.classList.add('error');
+      const hint = group.querySelector('.hint-text');
+      if (hint) {
+        hint.textContent = message;
+        hint.style.visibility = 'visible';
+      }
+    }
+
+    function clearError(fieldId) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+      const group = field.closest('.form-group');
+      if (!group) return;
+      group.classList.remove('error');
+      const hint = group.querySelector('.hint-text');
+      if (hint) hint.style.visibility = 'hidden';
+    }
+
+    const isValidEmail = val => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+    // --- clear errors on typing ---
+    contactForm.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('input', () => clearError(el.id));
+    });
+
+    // --- animations ---
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('animated');
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document
+      .querySelectorAll(
+        '.contact-info, .contact-form-container, .faqs-header, .faq-item'
+      )
+      .forEach(el => observer.observe(el));
+
+    // --- load countries ---
+    async function loadCountries() {
+      try {
+        const res = await fetch(
+          'https://countriesnow.space/api/v0.1/countries/positions'
+        );
+        const data = await res.json();
+        const select = document.getElementById('countrySelect');
+        while (select.options.length > 1) select.remove(1);
+        data.data.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.name;
+          opt.text = c.name;
+          select.appendChild(opt);
+        });
+      } catch (err) {
+        console.error('Error loading countries:', err);
+      }
+    }
+    loadCountries();
+
+    // --- intl-tel-input ---
+const phoneInput = document.getElementById('phone');
+let iti; // keep iti accessible
+
+if (phoneInput && window.intlTelInput) {
+  iti = window.intlTelInput(phoneInput, {
+    initialCountry: 'auto',
+    geoIpLookup: cb => {
+      fetch('https://ipwho.is/')
+        .then(r => r.json())
+        .then(d => {
+          cb((d && d.country_code ? d.country_code : 'US').toLowerCase());
+        })
+        .catch(() => cb('us'));
+    },
+    separateDialCode: true,
+    utilsScript:
+      'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+  });
+
+  phoneInput.addEventListener('blur', () => {
+    const container = phoneInput.closest('.form-group');
+    if (phoneInput.value.trim() && !iti.isValidNumber()) {
+      container.classList.add('error');
+      phoneInput.classList.add('invalid');
+    } else {
+      container.classList.remove('error');
+      phoneInput.classList.remove('invalid');
+    }
+  });
+
+  // Remove red border + error icon as soon as user corrects number
+  phoneInput.addEventListener('input', () => {
+    const container = phoneInput.closest('.form-group');
+    if (iti.isValidNumber()) {
+      container.classList.remove('error');
+      phoneInput.classList.remove('invalid');
+    }
+  });
+}
+
+
+
+    // --- form validation ---
+    function validateForm() {
+      let isValid = true;
+      
+      // Validate enquiry topic
+      const enquiryTopic = document.getElementById('enquiryTopic');
+      if (!enquiryTopic.value) {
+        showError('enquiryTopic', 'Please select an enquiry topic');
+        isValid = false;
+      }
+      
+      // Validate first name
+      const firstName = document.getElementById('firstName');
+      if (!firstName.value.trim()) {
+        showError('firstName', 'Please enter your first name');
+        isValid = false;
+      }
+      
+      // Validate last name
+      const lastName = document.getElementById('lastName');
+      if (!lastName.value.trim()) {
+        showError('lastName', 'Please enter your last name');
+        isValid = false;
+      }
+      
+      // Validate email
+      const email = document.getElementById('email');
+      if (!email.value.trim()) {
+        showError('email', 'Please enter your email address');
+        isValid = false;
+      } else if (!isValidEmail(email.value)) {
+        showError('email', 'Please enter a valid email address');
+        isValid = false;
+      }
+      
+      // Validate phone
+      if (phoneInput.value.trim() && !iti.isValidNumber()) {
+        showError('phone', 'Please enter a valid phone number');
+        isValid = false;
+      }
+      
+      // Validate country
+      const countrySelect = document.getElementById('countrySelect');
+      if (!countrySelect.value) {
+        showError('countrySelect', 'Please select your country');
+        isValid = false;
+      }
+      
+      // Validate message
+      const message = document.getElementById('message');
+      if (!message.value.trim()) {
+        showError('message', 'Please enter your message');
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+    
+    // --- show loading state ---
+    function showLoading() {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<div class="loading-spinner"></div>Sending...';
+    }
+    
+    // --- hide loading state ---
+    function hideLoading() {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
+    
+    // --- show toast notification ---
+    function showToast(message, type = 'success') {
+      // Remove existing toasts
+      const existingToasts = document.querySelectorAll('.custom-toast');
+      existingToasts.forEach(toast => toast.remove());
+      
+      // Create toast element
+      const toast = document.createElement('div');
+      toast.className = `custom-toast custom-toast-${type}`;
+      toast.innerHTML = `
+        <div class="toast-content">
+          <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+          <span>${message}</span>
+        </div>
+        <button class="toast-close">&times;</button>
+      `;
+      
+      // Add to document
+      document.body.appendChild(toast);
+      
+      // Show toast with animation
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 10);
+      
+      // Close toast on button click
+      toast.querySelector('.toast-close').addEventListener('click', () => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      });
+      
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 300);
+        }
+      }, 5000);
+    }
+
+    // Select all relevant inputs
+const fields = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+
+fields.forEach(field => {
+  field.addEventListener('blur', () => {  // When user leaves the field
+    if (!field.checkValidity()) {
+      field.classList.add('invalid');  // Add invalid class
+    } else {
+      field.classList.remove('invalid'); // Remove if fixed
+    }
+  });
+
+  // Optional: remove red border while typing
+  field.addEventListener('input', () => {
+    if (field.checkValidity()) {
+      field.classList.remove('invalid');
+    }
+  });
+});
+    
+    // --- form submission ---
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  showLoading();
+  const fullPhone = iti.getNumber(); // +2547XXXXXXX (E.164 format)
+const countryData = iti.getSelectedCountryData();
+const dialCode = countryData.dialCode; // e.g. "254"
+const countryIso2 = countryData.iso2; 
+
+  try {
+    // Prepare form data for Web3Forms
+    const formData = new FormData(contactForm);
+
+    // Add Web3Forms specific parameters
+    formData.append('access_key', '9d7a5aa4-725b-4f92-aef8-9785ba4679db'); // Replace with your actual access key
+    formData.append('subject', 'New Enquiry from TallyTrack Africa');
+    formData.append('from_name', 'TallyTrack Africa Website-Contact Page');
+    formData.append('phone_full', fullPhone);
+formData.append('phone_dial_code', `+${dialCode}`);
+formData.append('country_iso', countryIso2);
+
+    // Primary recipient + CC/BCC
+    formData.append('recipient', 'info@tallytrackafrica.co.ke');
+    formData.append('cc', 'support@tallytrackafrica.co.ke');
+    formData.append('bcc', 'admin@tallytrackafrica.co.ke');
+
+    // Auto-reply
+    formData.append('autoreply', 'true');
+    formData.append('autoreply_subject', 'Thank you for contacting TallyTrack Africa!');
+
+    // Prepare template parameters for EmailJS
+    const templateParams = {
+      enquiryTopic: document.getElementById('enquiryTopic').value,
+      firstName: document.getElementById('firstName').value,
+      lastName: document.getElementById('lastName').value,
+      email: document.getElementById('email').value,
+      phone: fullPhone,
+  phoneDialCode: `+${dialCode}`,
+  countryIso: countryIso2,
+      phone: iti.getNumber(),
+      country: document.getElementById('countrySelect').value,
+      message: document.getElementById('message').value,
+      to_email: document.getElementById('email').value, // Your recipient email
+      subject: 'New Contact Form Submission from TallyTrack Africa',
+      reply_to: document.getElementById('email').value
+    };
+
+    // --- Run both in parallel ---
+    const [web3Response, emailJSResponse] = await Promise.all([
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }),
+      emailjs.send('service_rtzvxoe', 'template_ufcbjms', templateParams)
+    ]);
+
+    const web3Data = await web3Response.json();
+
+    // Check results
+    if (web3Data.success && emailJSResponse.status === 200) {
+      showToast('Your message has been sent successfully! We will get back to you soon.', 'success');
+      contactForm.reset();
+      if (iti) iti.setNumber('');
+    } else {
+      throw new Error('One of the services failed to send the message');
+    }
+
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    showToast('Sorry, there was an error sending your message. Please try again later.', 'error');
+  } finally {
+    hideLoading();
+  }
+});
+
+    
+
+    // Mobile menu functionality
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const mobileOverlay = document.createElement('div');
+
+    // Create mobile menu overlay
+    mobileOverlay.className = 'mobile-menu-overlay';
+    document.body.appendChild(mobileOverlay);
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      mainNav.classList.toggle('active');
+      mobileOverlay.classList.toggle('active');
+      document.body.style.overflow = mainNav.classList.contains('active')
+        ? 'hidden'
+        : '';
+
+      // Change icon based on menu state
+      const icon = mobileMenuToggle.querySelector('i');
+      if (mainNav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    }
+
+    // Toggle menu when clicking the button
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking overlay
+    mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', toggleMobileMenu);
+    });
+
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+        toggleMobileMenu();
+      }
+    });
+
+    // Make mobile menu toggle visible
+    mobileMenuToggle.style.alignItems = 'center';
+    mobileMenuToggle.style.justifyContent = 'center';
+    mobileMenuToggle.style.width = '44px';
+    mobileMenuToggle.style.height = '44px';
+    mobileMenuToggle.style.fontSize = '1.5rem';
+    mobileMenuToggle.style.color = 'var(--primary-gold)';
+    mobileMenuToggle.style.zIndex = '1002';
+  });
+</script>
+  </body>
+</html>

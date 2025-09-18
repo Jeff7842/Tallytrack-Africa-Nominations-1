@@ -197,7 +197,7 @@ function initNomineesListeners() {
 
         // Scroll Animations
         function initScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.about-content, .about-image, .about-company-image, .about-company-content, .nominees-header, .view-all-btn, .categories-header, .category-card, .voting-content');
+            const animatedElements = document.querySelectorAll('.about-content, .about-image,.mobile-about-image, .about-company-image, .about-company-content, .nominees-header, .view-all-btn, .categories-header, .category-card, .voting-content');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -292,7 +292,7 @@ function animateValue(element, start, end, duration) {
       ) {
         nomineesScroller.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        nomineesScroller.scrollBy({ left: 370, behavior: "smooth" });
+        nomineesScroller.scrollBy({ left: 410, behavior: "smooth" });
       }
     }, 3000);
   }

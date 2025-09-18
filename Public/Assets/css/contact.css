@@ -660,23 +660,26 @@
         .faq-question i {
             transition: var(--transition);
             margin-left: auto;
+            color: var(--light-gold);
         }
         
         .faq-answer {
             padding: 0 1.5rem;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.2s ease;
             color: var(--text-gray);
         }
         
         .faq-item.active .faq-answer {
             max-height: 500px;
             padding: 0 1.5rem 1.5rem;
+            transition: var(--transition);
         }
         
         .faq-item.active .faq-question i {
             transform: rotate(180deg);
+            color: var(--primary-gold-solid);
         }
         
         /* Responsive Styles */

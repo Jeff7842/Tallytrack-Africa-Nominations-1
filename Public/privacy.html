@@ -205,7 +205,7 @@
         .mobile-menu-toggle {
             position: relative;
             display: block;
-            z-index: 10001;
+            z-index: 100001;
             top: -10px;
             display: none;
             background: none;
@@ -412,6 +412,8 @@
         @media (max-width: 1024px) {
             .privacy-sidebar {
                 width: 220px;
+                
+                
             }
             
             .privacy-content {
@@ -470,11 +472,19 @@
 
             .mobile-menu-toggle {
                 display: block;
+                top: -0px;
+                left: -15px;
             }
             
             .mobile-menu-toggle i {
                 display: block;
                 color: #ffcc00;
+            }
+
+            .logo-hero{
+             width: auto;
+             height: 20%;
+             min-height:15%;
             }
             
             /* Privacy page responsive */
@@ -487,8 +497,13 @@
                 position: relative;
                 width: 100%;
                 height: auto;
-                top: 0;
+                top: -230px;
                 margin-bottom: 2rem;
+                z-index: 100;
+            }
+            .sidebar-content{
+                position: relative;
+                margin-top: 40px;
             }
             
             .privacy-content {
@@ -536,7 +551,7 @@
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <div class="logo header-logo">
                     <img
                         src="Assets/img/Asset7.png"
                         alt="TallyTrack Africa Under 40 Years National Prestigious Awards"
@@ -571,6 +586,7 @@
     <div class="privacy-page">
         <!-- Sidebar Navigation -->
         <aside class="privacy-sidebar">
+            <div class="sidebar-content">
             <h3 class="sidebar-title">Privacy Policy</h3>
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item"><a href="#introduction" class="sidebar-nav-link active">1. Introduction</a></li>
@@ -587,8 +603,9 @@
                 <li class="sidebar-nav-item"><a href="#international-transfers" class="sidebar-nav-link">12. International Transfers</a></li>
                 <li class="sidebar-nav-item"><a href="#children-privacy" class="sidebar-nav-link">13. Children's Privacy</a></li>
                 <li class="sidebar-nav-item"><a href="#policy-changes" class="sidebar-nav-link">14. Policy Changes</a></li>
-                <li class="sidebar-nav-item"><a href="#contact-dpo" class="sidebar-nav-link">15. Contact & DPO</a></li>
+                <li class="sidebar-nav-item"><a href="#contact-support" class="sidebar-nav-link">15. Contact & support</a></li>
             </ul>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -627,7 +644,7 @@
                         <li><strong>"Data Controller"</strong> means the natural or legal person who determines the purposes and means of processing personal data.</li>
                         <li><strong>"Data Processor"</strong> means a natural or legal person who processes personal data on behalf of the data controller.</li>
                         <li><strong>"Consent"</strong> means any freely given, specific, informed, and unambiguous indication of the data subject's wishes.</li>
-                        <li><strong>"Data Protection Officer (DPO)"</strong> means the person designated to oversee data protection strategy and implementation.</li>
+                        <li><strong>"Data Protection Officer (support)"</strong> means the person designated to oversee data protection strategy and implementation.</li>
                     </ul>
                 </div>
             </section>
@@ -640,7 +657,7 @@
                     Email: info@tallytrackafrica.co.ke<br>
                     Phone: +254 115 289 871<br>
                     Address: Nairobi, Kenya</p>
-                    <p>We have appointed a Data Protection Officer (DPO) who is responsible for overseeing questions about this privacy policy. If you have any questions, please contact our DPO at <a href="mailto:dpo@tallytrackafrica.co.ke" class="internal-link">dpo@tallytrackafrica.co.ke</a>.</p>
+                    <p>We have appointed a Data Protection Officer (support) who is responsible for overseeing questions about this privacy policy. If you have any questions, please contact our support at <a href="mailto:support@tallytrackafrica.co.ke" class="internal-link">support@tallytrackafrica.co.ke</a>.</p>
                 </div>
             </section>
 
@@ -822,7 +839,7 @@
                     <p>You have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning you or similarly significantly affects you.</p>
                     
                     <div class="highlight">
-                        <p><strong>Exercising Your Rights:</strong> To exercise any of these rights, please contact us at <a href="mailto:dpo@tallytrackafrica.co.ke" class="internal-link">dpo@tallytrackafrica.co.ke</a>. We will respond to your request within 30 days as required by law.</p>
+                        <p><strong>Exercising Your Rights:</strong> To exercise any of these rights, please contact us at <a href="mailto:support@tallytrackafrica.co.ke" class="internal-link">support@tallytrackafrica.co.ke</a>. We will respond to your request within 30 days as required by law.</p>
                     </div>
                 </div>
             </section>
@@ -868,7 +885,7 @@
                 <div class="section-content">
                     <p>Our Platform is not intended for children under 18 years of age. We do not knowingly collect personal data from children under 18. If you are under 18, do not use or provide any information on our Platform or through any of its features.</p>
                     
-                    <p>If we learn we have collected or received personal data from a child under 18 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 18, please contact us at <a href="mailto:dpo@tallytrackafrica.co.ke" class="internal-link">dpo@tallytrackafrica.co.ke</a>.</p>
+                    <p>If we learn we have collected or received personal data from a child under 18 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 18, please contact us at <a href="mailto:support@tallytrackafrica.co.ke" class="internal-link">support@tallytrackafrica.co.ke</a>.</p>
                 </div>
             </section>
 
@@ -883,7 +900,7 @@
                 </div>
             </section>
 
-            <section id="contact-dpo" class="privacy-section">
+            <section id="contact-support" class="privacy-section">
                 <h2 class="section-title">15. Contact & Data Protection Officer</h2>
                 <div class="section-content">
                     <p>If you have any questions about this Privacy Policy or our privacy practices, please contact our Data Protection Officer:</p>

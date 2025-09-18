@@ -577,7 +577,7 @@
                 position: absolute;
                 top: 70px;
                 right: 20px;
-                z-index: 1000;
+                z-index: 10000;
             }
 
             .main-nav.active {
@@ -603,6 +603,7 @@
 
             .mobile-menu-toggle.active {
                 color: rgb(127, 3, 3);
+                z-index: 10000;
             }
 
             .nav-link {
@@ -612,11 +613,21 @@
 
             .mobile-menu-toggle {
                 display: block;
+                left: -15px;
+                top: 0px;
             }
+
             
             .mobile-menu-toggle i {
                 display: block;
                 color: #ffcc00;
+                z-index: 10000;
+            }
+
+            .logo-hero{
+             width: auto;
+             height: 20%;
+             min-height:15%;
             }
             
             /* Terms page responsive */
@@ -629,8 +640,14 @@
                 position: relative;
                 width: 100%;
                 height: auto;
-                top: 0;
+                top: -230px;
                 margin-bottom: 2rem;
+                z-index: 100;
+            }
+
+            .sidebar-content{
+              position: relative;
+                margin-top: 35px;  
             }
             
             .terms-content {
@@ -717,6 +734,7 @@
     <div class="terms-page">
         <!-- Sidebar Navigation -->
         <aside class="terms-sidebar">
+            <div class="sidebar-content">
             <h3 class="sidebar-title">Terms & Agreement</h3>
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item"><a href="#introduction" class="sidebar-nav-link active">1. Introduction</a></li>
@@ -733,6 +751,7 @@
                 <li class="sidebar-nav-item"><a href="#changes-terms" class="sidebar-nav-link">12. Changes to Terms</a></li>
                 <li class="sidebar-nav-item"><a href="#contact" class="sidebar-nav-link">13. Contact Information</a></li>
             </ul>
+            </div>
         </aside>
 
         <!-- Main Content -->

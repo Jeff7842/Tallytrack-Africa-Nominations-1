@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | TallyTrack Africa Under 40 Years National Prestigious Awards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
+    <style>
+        /* Font Face */
+        @font-face {
+            font-family: 'Adam-Medium';
+            src: url('Assets/fonts/Adam-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Variables */
+        :root {
+            --primary-dark: #1d260b;
+            --primary-gold: linear-gradient(135deg, #d4af37 0%, #f1e5b9 100%);
+            --primary-gold-solid: #d4af37;
+            --light-gold: #f1e5b9;
+            --white: #ffffff;
+            --black: #000000;
+            --dark-bg: #0a0e05;
+            --card-bg: rgba(29, 38, 11, 0.8);
+            --text-light: #e2e8f0;
+            --text-gray: #a0aec0;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glow: 0 0 20px rgba(212, 175, 55, 0.5);
+            --sidebar-width: 280px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Remove blue outline when buttons/links are tapped or focused */
+        button:focus,
+        a:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        button,
+        a,
+        input,
+        textarea,
+        select {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: inherit;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary-color-dark);
+            outline-offset: 2px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Adam-Medium', sans-serif;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header Styles */
+        .header {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2.5rem 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(10, 14, 5, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            visibility: hidden;
+        }
+
+        .header.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-family: 'Adam-Medium', sans-serif;
+            font-size: 1.8rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2.5rem;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            justify-items: center;
+            align-items: center;
+            text-align: center;
+            margin-right: 50px;
+            font-family: 'Adam-Medium';
+            font-size: 21px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--light-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .auth-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mobile-menu-toggle {
+            position: relative;
+            display: block;
+            z-index: 10001;
+            top: -10px;
+            display: none;
+            background: none;
+            border: none;
+            font-size: larger;
+        }
+
+        .mobile-menu-toggle i {
+            display: none;
+        }
+
+        /* Privacy Policy Page Layout */
+        .privacy-page {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .privacy-sidebar {
+            width: var(--sidebar-width);
+            position: fixed;
+            top: 0px;
+            left: 0;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            background: var(--card-bg);
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 2rem 1.5rem;
+            z-index: 10000;
+            height: 100%;
+        }
+
+        .privacy-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem 3rem 4rem;
+        }
+
+        /* Sidebar Scrollbar */
+        .privacy-sidebar {
+            direction: rtl;
+        }
+        .privacy-sidebar * {
+            direction: ltr;
+        }
+
+        /* Webkit Browsers (Chrome, Edge, Safari) */
+        .privacy-sidebar::-webkit-scrollbar {
+            width: 2px;
+        }
+        .privacy-sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .privacy-sidebar::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 10px;
+        }
+        .privacy-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #f1e5b9;
+        }
+
+        /* Firefox */
+        .privacy-sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #d4af37 transparent;
+        }
+
+        /* WebKit */
+        .privacy-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .privacy-sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .privacy-sidebar::-webkit-scrollbar-thumb {
+            background: #666;
+            border-radius: 10px;
+        }
+        .privacy-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+
+        .hero-logo {
+            margin-top: -150px;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer; 
+            margin-bottom: -20px;
+        }
+
+        .logo-hero {
+            position: relative;
+            height: 250px;
+            width: auto;
+            top: -40px;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .sidebar-nav-link {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .sidebar-nav-link:hover,
+        .sidebar-nav-link.active {
+            color: var(--light-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .privacy-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .privacy-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .last-updated {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .privacy-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-gold);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .section-content {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .section-content ul, 
+        .section-content ol {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--primary-gold-solid);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .internal-link {
+            color: var(--primary-gold-solid);
+            text-decoration: underline;
+            transition: var(--transition);
+        }
+
+        .internal-link:hover {
+            color: var(--light-gold);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .privacy-sidebar {
+                width: 220px;
+            }
+            
+            .privacy-content {
+                margin-left: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav,
+            .auth-container {
+                display: none;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background: #111;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                z-index: 1000;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column;
+                background: var(--primary-dark);
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                width: 200px;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle.active {
+                color: rgb(127, 3, 3);
+            }
+
+            .nav-link {
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+                width: 100%;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .mobile-menu-toggle i {
+                display: block;
+                color: #ffcc00;
+            }
+            
+            /* Privacy page responsive */
+            .privacy-page {
+                flex-direction: column;
+                padding-top: 100px;
+            }
+            
+            .privacy-sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .privacy-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .privacy-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img
+                        src="Assets/img/Asset7.png"
+                        alt="TallyTrack Africa Under 40 Years National Prestigious Awards"
+                        class="logo-img"
+                        onclick="window.location.href='index.html'"
+                    />
+                    <span class="logo-text" style="display: none">TALLYTRACK</span>
+                </div>
+
+                <nav class="main-nav">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="category.html" class="nav-link">Categories</a>
+                    <a href="About_Us.html" class="nav-link">About</a>
+                    <a href="Contact_US.html" class="nav-link">Contact Us</a>
+                    <a href="nominee.html#home" class="nav-link">Be A Nominee</a>
+                </nav>
+
+                <div class="auth-container" style="display: none">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Register</a>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Privacy Policy Page Content -->
+    <div class="privacy-page">
+        <!-- Sidebar Navigation -->
+        <aside class="privacy-sidebar">
+            <h3 class="sidebar-title">Privacy Policy</h3>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item"><a href="#introduction" class="sidebar-nav-link active">1. Introduction</a></li>
+                <li class="sidebar-nav-item"><a href="#definitions" class="sidebar-nav-link">2. Definitions</a></li>
+                <li class="sidebar-nav-item"><a href="#data-controller" class="sidebar-nav-link">3. Data Controller</a></li>
+                <li class="sidebar-nav-item"><a href="#information-collection" class="sidebar-nav-link">4. Information We Collect</a></li>
+                <li class="sidebar-nav-item"><a href="#legal-basis" class="sidebar-nav-link">5. Legal Basis for Processing</a></li>
+                <li class="sidebar-nav-item"><a href="#purpose-processing" class="sidebar-nav-link">6. Purpose of Processing</a></li>
+                <li class="sidebar-nav-item"><a href="#data-sharing" class="sidebar-nav-link">7. Data Sharing & Disclosure</a></li>
+                <li class="sidebar-nav-item"><a href="#data-retention" class="sidebar-nav-link">8. Data Retention</a></li>
+                <li class="sidebar-nav-item"><a href="#data-security" class="sidebar-nav-link">9. Data Security</a></li>
+                <li class="sidebar-nav-item"><a href="#data-subject-rights" class="sidebar-nav-link">10. Your Rights</a></li>
+                <li class="sidebar-nav-item"><a href="#cookies" class="sidebar-nav-link">11. Cookies & Tracking</a></li>
+                <li class="sidebar-nav-item"><a href="#international-transfers" class="sidebar-nav-link">12. International Transfers</a></li>
+                <li class="sidebar-nav-item"><a href="#children-privacy" class="sidebar-nav-link">13. Children's Privacy</a></li>
+                <li class="sidebar-nav-item"><a href="#policy-changes" class="sidebar-nav-link">14. Policy Changes</a></li>
+                <li class="sidebar-nav-item"><a href="#contact-dpo" class="sidebar-nav-link">15. Contact & DPO</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="privacy-content">
+            <div class="privacy-hero">
+                <div class="hero-logo">
+                    <img
+                        src="Assets/img/Symbol.png"
+                        alt="TallyTrack Africa Under 40 Years National Prestigious Awards"
+                        class="logo-hero"
+                        onclick="window.location.href='index.html'"
+                    />
+                </div>
+                <h1 class="privacy-title">Privacy Policy</h1>
+                <p class="last-updated">Last Updated: September 15, 2025</p>
+            </div>
+
+            <section id="introduction" class="privacy-section">
+                <h2 class="section-title">1. Introduction</h2>
+                <div class="section-content">
+                    <p>TallyTrack Africa Under 40 Years National Prestigious Awards ("we," "our," or "us") is committed to protecting your privacy and ensuring the security of your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Platform and Services.</p>
+                    <p>We comply with the Kenya Data Protection Act, 2019, and other applicable data protection laws, including the General Data Protection Regulation (GDPR) for users in the European Economic Area (EEA).</p>
+                    <div class="highlight">
+                        <p><strong>Important:</strong> By using our Platform, you consent to the practices described in this Privacy Policy. Please read this policy carefully to understand our views and practices regarding your personal data.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="definitions" class="privacy-section">
+                <h2 class="section-title">2. Definitions</h2>
+                <div class="section-content">
+                    <p>In this Privacy Policy, the following terms have these meanings:</p>
+                    <ul>
+                        <li><strong>"Personal Data"</strong> means any information relating to an identified or identifiable natural person ('data subject').</li>
+                        <li><strong>"Processing"</strong> means any operation performed on personal data, including collection, recording, storage, and use.</li>
+                        <li><strong>"Data Controller"</strong> means the natural or legal person who determines the purposes and means of processing personal data.</li>
+                        <li><strong>"Data Processor"</strong> means a natural or legal person who processes personal data on behalf of the data controller.</li>
+                        <li><strong>"Consent"</strong> means any freely given, specific, informed, and unambiguous indication of the data subject's wishes.</li>
+                        <li><strong>"Data Protection Officer (DPO)"</strong> means the person designated to oversee data protection strategy and implementation.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="data-controller" class="privacy-section">
+                <h2 class="section-title">3. Data Controller</h2>
+                <div class="section-content">
+                    <p>TallyTrack Africa Under 40 Years National Prestigious Awards is the data controller for the personal data processed through our Platform. Our contact information is:</p>
+                    <p><strong>TallyTrack Africa Under 40 Years National Prestigious Awards</strong><br>
+                    Email: info@tallytrackafrica.co.ke<br>
+                    Phone: +254 115 289 871<br>
+                    Address: Nairobi, Kenya</p>
+                    <p>We have appointed a Data Protection Officer (DPO) who is responsible for overseeing questions about this privacy policy. If you have any questions, please contact our DPO at <a href="mailto:dpo@tallytrackafrica.co.ke" class="internal-link">dpo@tallytrackafrica.co.ke</a>.</p>
+                </div>
+            </section>
+
+            <section id="information-collection" class="privacy-section">
+                <h2 class="section-title">4. Information We Collect</h2>
+                <div class="section-content">
+                    <p>We collect several types of information from and about users of our Platform:</p>
+                    
+                    <h3>4.1. Personal Information You Provide</h3>
+                    <ul>
+                        <li><strong>Registration Information:</strong> Name, email address, phone number, date of birth</li>
+                        <li><strong>Nomination Information:</strong> Biographical data, professional achievements, photographs, social media profiles</li>
+                        <li><strong>Voting Information:</strong> Voting history and preferences</li>
+                        <li><strong>Communication Data:</strong> Correspondence with us through email, contact forms, or other channels</li>
+                    </ul>
+                    
+                    <h3>4.2. Information Collected Automatically</h3>
+                    <ul>
+                        <li><strong>Technical Data:</strong> IP address, browser type, device information, operating system</li>
+                        <li><strong>Usage Data:</strong> Pages visited, time spent on pages, clickstream data</li>
+                        <li><strong>Location Data:</strong> General location information based on IP address</li>
+                    </ul>
+                    
+                    <h3>4.3. Information from Third Parties</h3>
+                    <p>We may receive information about you from third parties, such as social media platforms if you choose to connect your accounts.</p>
+                </div>
+            </section>
+
+            <section id="legal-basis" class="privacy-section">
+                <h2 class="section-title">5. Legal Basis for Processing</h2>
+                <div class="section-content">
+                    <p>We process your personal data based on one or more of the following legal grounds:</p>
+                    <ol>
+                        <li><strong>Consent:</strong> Where you have given clear consent for us to process your personal data for a specific purpose.</li>
+                        <li><strong>Contract Performance:</strong> When processing is necessary for the performance of a contract with you or to take steps at your request before entering into a contract.</li>
+                        <li><strong>Legal Obligation:</strong> When processing is necessary for compliance with a legal obligation to which we are subject.</li>
+                        <li><strong>Legitimate Interests:</strong> When processing is necessary for our legitimate interests or the legitimate interests of a third party, provided your interests and fundamental rights do not override those interests.</li>
+                        <li><strong>Vital Interests:</strong> When processing is necessary to protect someone's life.</li>
+                        <li><strong>Public Task:</strong> When processing is necessary for the performance of a task carried out in the public interest.</li>
+                    </ol>
+                    <div class="highlight">
+                        <p><strong>Withdrawal of Consent:</strong> Where we rely on consent as the legal basis for processing, you have the right to withdraw your consent at any time. This will not affect the lawfulness of processing based on consent before its withdrawal.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="purpose-processing" class="privacy-section">
+                <h2 class="section-title">6. Purpose of Processing</h2>
+                <div class="section-content">
+                    <p>We use your personal data for the following purposes:</p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+                        <thead>
+                            <tr style="background: rgba(212, 175, 55, 0.1);">
+                                <th style="padding: 12px; text-align: left; border: 1px solid rgba(212, 175, 55, 0.3);">Purpose</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid rgba(212, 175, 55, 0.3);">Legal Basis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To provide and maintain our Services</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Contract performance, Legitimate interests</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To process nominations and manage the awards program</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Contract performance, Consent</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To facilitate voting and ensure its integrity</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Legitimate interests, Consent</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To communicate with you about the awards program</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Legitimate interests, Consent</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To improve our Platform and Services</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Legitimate interests</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To comply with legal obligations</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Legal obligation</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">To protect our rights and prevent fraud</td>
+                                <td style="padding: 12px; border: 1px solid rgba(212, 175, 55, 0.3);">Legitimate interests, Legal obligation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="data-sharing" class="privacy-section">
+                <h2 class="section-title">7. Data Sharing & Disclosure</h2>
+                <div class="section-content">
+                    <p>We may share your personal data with the following categories of recipients:</p>
+                    
+                    <h3>7.1. Service Providers</h3>
+                    <p>We engage third-party companies and individuals to facilitate our Services ("Service Providers"), provide Services on our behalf, perform Service-related services, or assist us in analyzing how our Services are used. These third parties have access to your personal data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+                    
+                    <h3>7.2. Legal Requirements</h3>
+                    <p>We may disclose your personal data if required to do so by law or in response to valid requests by public authorities (e.g., a court or government agency).</p>
+                    
+                    <h3>7.3. Business Transfers</h3>
+                    <p>In connection with any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company, we may share your personal data with the prospective buyers.</p>
+                    
+                    <h3>7.4. With Your Consent</h3>
+                    <p>We may share your personal data with third parties when we have your consent to do so.</p>
+                    
+                    <div class="highlight">
+                        <p><strong>Data Processing Agreements:</strong> We ensure that all third parties respect the security of your personal data and treat it in accordance with the law. We do not allow our third-party service providers to use your personal data for their own purposes and only permit them to process your personal data for specified purposes and in accordance with our instructions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="data-retention" class="privacy-section">
+                <h2 class="section-title">8. Data Retention</h2>
+                <div class="section-content">
+                    <p>We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+                    
+                    <p>To determine the appropriate retention period for personal data, we consider the amount, nature, and sensitivity of the personal data, the potential risk of harm from unauthorized use or disclosure, the purposes for which we process it, and whether we can achieve those purposes through other means, and the applicable legal requirements.</p>
+                    
+                    <p>In some circumstances, we may anonymize your personal data (so that it can no longer be associated with you) for research or statistical purposes, in which case we may use this information indefinitely without further notice to you.</p>
+                    
+                    <h3>Retention Periods by Data Category:</h3>
+                    <ul>
+                        <li><strong>Nominee Data:</strong> 5 years after the last interaction or as required by award program guidelines</li>
+                        <li><strong>Voter Data:</strong> 3 years after the last voting activity</li>
+                        <li><strong>Website Usage Data:</strong> 2 years from collection</li>
+                        <li><strong>Financial Records:</strong> 7 years as required by Kenyan law</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="data-security" class="privacy-section">
+                <h2 class="section-title">9. Data Security</h2>
+                <div class="section-content">
+                    <p>We have implemented appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way, altered, or disclosed. These include:</p>
+                    
+                    <ul>
+                        <li>Encryption of data in transit using SSL/TLS protocols</li>
+                        <li>Secure storage with encryption at rest for sensitive data</li>
+                        <li>Regular security assessments and penetration testing</li>
+                        <li>Access controls and authentication mechanisms</li>
+                        <li>Staff training on data protection and security practices</li>
+                    </ul>
+                    
+                    <p>We have put in place procedures to deal with any suspected personal data breach and will notify you and any applicable regulator of a breach where we are legally required to do so.</p>
+                    
+                    <div class="highlight">
+                        <p><strong>Security Responsibility:</strong> While we implement appropriate technical and organizational measures to protect your personal data, no method of transmission over the Internet or electronic storage is 100% secure. We cannot guarantee absolute security but we commit to maintaining security measures in line with industry standards.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="data-subject-rights" class="privacy-section">
+                <h2 class="section-title">10. Your Rights</h2>
+                <div class="section-content">
+                    <p>Under the Kenya Data Protection Act, 2019, and other applicable data protection laws, you have the following rights regarding your personal data:</p>
+                    
+                    <h3>10.1. Right to Access</h3>
+                    <p>You have the right to request copies of your personal data that we hold.</p>
+                    
+                    <h3>10.2. Right to Rectification</h3>
+                    <p>You have the right to request that we correct any information you believe is inaccurate or complete information you believe is incomplete.</p>
+                    
+                    <h3>10.3. Right to Erasure</h3>
+                    <p>You have the right to request that we erase your personal data, under certain conditions.</p>
+                    
+                    <h3>10.4. Right to Restrict Processing</h3>
+                    <p>You have the right to request that we restrict the processing of your personal data, under certain conditions.</p>
+                    
+                    <h3>10.5. Right to Data Portability</h3>
+                    <p>You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
+                    
+                    <h3>10.6. Right to Object</h3>
+                    <p>You have the right to object to our processing of your personal data, under certain conditions.</p>
+                    
+                    <h3>10.7. Rights Related to Automated Decision Making</h3>
+                    <p>You have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning you or similarly significantly affects you.</p>
+                    
+                    <div class="highlight">
+                        <p><strong>Exercising Your Rights:</strong> To exercise any of these rights, please contact us at <a href="mailto:dpo@tallytrackafrica.co.ke" class="internal-link">dpo@tallytrackafrica.co.ke</a>. We will respond to your request within 30 days as required by law.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cookies" class="privacy-section">
+                <h2 class="section-title">11. Cookies & Tracking Technologies</h2>
+                <div class="section-content">
+                    <p>We use cookies and similar tracking technologies to track activity on our Platform and store certain information.</p>
+                    
+                    <h3>11.1. Types of Cookies We Use</h3>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Necessary for the operation of our Platform</li>
+                        <li><strong>Analytical/Performance Cookies:</strong> Allow us to recognize and count the number of visitors and see how visitors move around our Platform</li>
+                        <li><strong>Functionality Cookies:</strong> Enable us to personalize content and remember your preferences</li>
+                        <li><strong>Targeting Cookies:</strong> Record your visit to our Platform, the pages you visit, and the links you follow</li>
+                    </ul>
+                    
+                    <h3>11.2. Cookie Management</h3>
+                    <p>You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies. If you disable or refuse cookies, please note that some parts of our Platform may become inaccessible or not function properly.</p>
+                    
+                    <p>For more information about the cookies we use and how to manage them, please see our <a href="#" class="internal-link">Cookie Policy</a>.</p>
+                </div>
+            </section>
+
+            <section id="international-transfers" class="privacy-section">
+                <h2 class="section-title">12. International Transfers</h2>
+                <div class="section-content">
+                    <p>Your information may be transferred to and processed in countries other than Kenya. These countries may have data protection laws that are different from the laws of Kenya.</p>
+                    
+                    <p>Whenever we transfer your personal data out of Kenya, we ensure a similar degree of protection is afforded to it by implementing appropriate safeguards, such as:</p>
+                    
+                    <ul>
+                        <li>Transferring to countries that have been deemed to provide an adequate level of protection for personal data</li>
+                        <li>Using specific contracts approved for use in Kenya which give personal data the same protection it has in Kenya</li>
+                    </ul>
+                    
+                    <p>Please contact us if you want further information on the specific mechanism used by us when transferring your personal data out of Kenya.</p>
+                </div>
+            </section>
+
+            <section id="children-privacy" class="privacy-section">
+                <h2 class="section-title">13. Children's Privacy</h2>
+                <div class="section-content">
+                    <p>Our Platform is not intended for children under 18 years of age. We do not knowingly collect personal data from children under 18. If you are under 18, do not use or provide any information on our Platform or through any of its features.</p>
+                    
+                    <p>If we learn we have collected or received personal data from a child under 18 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 18, please contact us at <a href="mailto:dpo@tallytrackafrica.co.ke" class="internal-link">dpo@tallytrackafrica.co.ke</a>.</p>
+                </div>
+            </section>
+
+            <section id="policy-changes" class="privacy-section">
+                <h2 class="section-title">14. Policy Changes</h2>
+                <div class="section-content">
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the top of this Privacy Policy.</p>
+                    
+                    <p>We will also notify you via email and/or a prominent notice on our Platform, prior to the change becoming effective if the changes are material. You are advised to review this Privacy Policy periodically for any changes.</p>
+                    
+                    <p>Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                </div>
+            </section>
+
+            <section id="contact-dpo" class="privacy-section">
+                <h2 class="section-title">15. Contact & Data Protection Officer</h2>
+                <div class="section-content">
+                    <p>If you have any questions about this Privacy Policy or our privacy practices, please contact our Data Protection Officer:</p>
+                    
+                    <p><strong>Data Protection Officer</strong><br>
+                    TallyTrack Africa Under 40 Years National Prestigious Awards<br>
+                    Email: <a href="mailto:support@tallytrackafrica.co.ke" class="internal-link">support@tallytrackafrica.co.ke</a><br>
+                    Phone: +254 115 289 871<br>
+                    Address: Nairobi, Kenya</p>
+                    
+                    <p>You have the right to make a complaint at any time to the Office of the Data Protection Commissioner (ODPC) in Kenya, the supervisory authority for data protection issues. We would, however, appreciate the chance to deal with your concerns before you approach the ODPC, so please contact us first.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        const mobileMenuOverlay = document.createElement('div');
+        mobileMenuOverlay.className = 'mobile-menu-overlay';
+        document.body.appendChild(mobileMenuOverlay);
+
+        mobileMenuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        mobileMenuOverlay.addEventListener('click', function() {
+            mainNav.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        });
+
+        // Sidebar navigation highlighting
+        const sections = document.querySelectorAll('.privacy-section');
+        const navLinks = document.querySelectorAll('.sidebar-nav-link');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scrolling for sidebar navigation
+        document.querySelectorAll('.sidebar-nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update active class
+                navLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

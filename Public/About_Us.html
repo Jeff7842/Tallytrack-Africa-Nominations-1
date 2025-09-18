@@ -79,6 +79,168 @@ select:focus {
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards 0.8s;
         }
+
+        /* Who We Are Section */
+.who-we-are {
+  padding: 5rem 0;
+  background: linear-gradient(to bottom,var(--primary-dark),var(--dark-bg));
+  color: var(--text-light, #f5f5f5);
+  height: 90vh;
+}
+
+.who-we-are-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.who-we-are-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: var(--glow, 0 4px 20px rgba(0,0,0,0.3));
+}
+
+.who-we-are-content h2 {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-gold-solid);
+}
+
+.who-we-are-content p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  font-size: 1.15rem;
+  color: var(--text-gray, #ddd);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .who-we-are {
+      margin-bottom: 30px;
+      height: 100vh;
+    }
+  .who-we-are-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .who-we-are-image img {
+    margin: 0 auto 2rem;
+    max-width: 300px;
+  }
+}
+
+/* Stakeholder Value Cards */
+.stakeholders-section {
+  padding: 5rem 0;
+  background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+  color: var(--text-light, #f5f5f5);
+}
+
+.stakeholder-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stakeholder-card {
+  background: var(--card-bg);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.stakeholder-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--glow, 0 0 25px rgba(212,175,55,0.6));
+  border-color: var(--primary-gold-solid);
+}
+
+.stakeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: var(--primary-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stakeholder-card h3 {
+  color: var(--primary-gold-solid);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.stakeholder-card p {
+  color: var(--text-gray, #ddd);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .stakeholder-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Horizontal scroll on mobile */
+@media (max-width: 768px) {
+    .stakeholders-section{
+        margin-top:100px;
+    }
+  .stakeholder-cards.scroll-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+    padding-bottom: 1rem;
+  }
+
+  .stakeholder-card {
+    max-width: 380px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .stakeholder-cards.scroll-container {
+    scrollbar-width: thin;              /* Firefox */
+    scrollbar-color: var(--primary-gold-solid) var(--dark-bg);
+  }
+
+  /* Chrome, Edge, Safari */
+  .stakeholder-cards.scroll-container::-webkit-scrollbar {
+    height: 8px; /* thickness of the scrollbar */
+  }
+
+  .stakeholder-cards.scroll-container::-webkit-scrollbar-track {
+    background: var(--dark-bg); 
+    border-radius: 10px;
+  }
+
+  .stakeholder-cards.scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-gold-solid), var(--primary-gold));
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(212,175,55,0.6);
+  }
+
+  .stakeholder-cards.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ffd700, var(--primary-gold-solid));
+  }
+}
+
+
+
+
         
         /* Trust Section */
         .trust-section {
@@ -137,6 +299,7 @@ select:focus {
         .empowerment-section {
             padding: 6rem 0;
             position: relative;
+            background: linear-gradient(to bottom, var(--primary-dark), var(--dark-bg));
         }
         
         .empowerment-content {
@@ -187,7 +350,42 @@ select:focus {
             background-clip: text;
             color: transparent;
         }
-        
+        /* --- Additional About page styles --- */
+.mv-section { 
+    padding: 5.5rem 0; 
+    background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+     color: var(--text-gray, #e7e7e7); }
+.mv-grid { 
+    display:grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap:2rem; 
+    align-items:center; }
+.mv-text { 
+    font-size:1.05rem; 
+    line-height:1.6; 
+    color:var(--text-light); 
+    margin-top:.5rem;
+font-style:italic; }
+blockquote.mv-text {  
+    font-style:italic; 
+}
+
+    .mv-col{
+border-left:4px solid var(--primary-gold-solid);
+padding-left:1rem; 
+
+}
+
+/* Objectives */
+.objectives-section { padding:3rem 0; }
+.objectives-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; list-style:none; padding:0; margin-top:1.5rem; }
+.objectives-grid li { background:var(--card-bg); border-radius:12px; padding:1rem; border:1px solid rgba(212,175,55,0.08); }
+.objectives-grid li h3{
+    color: var(--primary-gold-solid);
+    font-size:1.15rem;
+}
+.objectives-grid li span { display:block; margin-top:.5rem; color:var(--text-light); font-size:.95rem; }
+
         /* Values Section */
         .values-section {
             padding: 6rem 0;
@@ -237,7 +435,7 @@ select:focus {
         /* Stats Section */
         .stats-section {
             padding: 6rem 0;
-            background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+            background: linear-gradient(to bottom, var(--primary-dark), var(--dark-bg));
             display: flex;
         }
 
@@ -295,6 +493,90 @@ select:focus {
             color: var(--text-gray);
         }
 
+        /* Testimonial Section */
+.testimonials-section {
+  padding: 5rem 0;
+  background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+  color: var(--text-light, #f5f5f5);
+  overflow: hidden;
+  height:70vh;
+}
+
+.testimonial-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.testimonial-track {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+  will-change: transform;
+}
+
+.testimonial-card {
+  min-width: 100%;
+  max-width: 100%;
+  text-align: center;
+  border-left: 4px solid var(--primary-gold-solid);
+  background: var(--card-bg);
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.);
+  margin: 0 auto;
+}
+
+.testimonial-card img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  border: 3px solid var(--primary-gold-solid);
+  box-shadow: 0 0 15px rgba(212,175,55,0.6);
+}
+
+.testimonial-text {
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var( #ffffff);
+}
+
+.testimonial-name {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--primary-gold-solid);
+}
+
+/* Luxury feel */
+.section-title {
+  text-align: center;
+  color: var(--primary-gold-solid);
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .testimonial-card {
+    padding: 2rem 1.5rem;
+  }
+  .testimonial-text {
+    font-size: 1rem;
+  }
+}
+/* Responsive */
+@media (max-width: 900px) {
+  .objectives-grid { grid-template-columns: repeat(2,1fr); }
+  .how-grid { grid-template-columns: repeat(2,1fr); }
+  .mv-grid { grid-template-columns: 1fr; text-align:center; }
+  .vetting-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(1,1fr); }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .timeline { flex-direction:column; }
+}
 
         /* CTA Section */
         .cta-section {
@@ -436,19 +718,43 @@ select:focus {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
     gap: 1rem;
     scroll-behavior: smooth;
     padding-bottom: 1rem;
     -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
+    height: 100%;
+}
+
+
+  .trust-grid.scroll-container {
+    scrollbar-width: thin;              /* Firefox */
+    scrollbar-color: var(--primary-gold-solid) var(--dark-bg);
   }
 
+  /* Chrome, Edge, Safari */
   .trust-grid.scroll-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for clean UI */
+    height: 8px; /* thickness of the scrollbar */
+  }
+
+  .trust-grid.scroll-container::-webkit-scrollbar-track {
+    background: var(--dark-bg); 
+    border-radius: 10px;
+  }
+
+  .trust-grid.scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-gold-solid), var(--primary-gold));
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(212,175,55,0.6);
+  }
+
+  .trust-card.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ffd700, var(--primary-gold-solid));
   }
 
   .trust-card {
-    min-width: 20px;
-    flex: 0 0 330px;
+    max-width:500px;
+    flex: 0 0 375px;
   }
 
   .opportunity-cards.scroll-container {
@@ -456,6 +762,7 @@ select:focus {
     height: fit-content;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
     gap: 1rem;
     scroll-behavior: smooth;
     padding-bottom: 1rem;
@@ -465,11 +772,39 @@ select:focus {
   .opportunity-cards.scroll-container::-webkit-scrollbar {
    display: none; /* Hide scrollbar for clean UI */
   }
+  .opportunity-cards.scroll-container {
+    scrollbar-width: thin;              /* Firefox */
+    scrollbar-color: var(--primary-gold-solid) var(--dark-bg);
+  }
+
+  /* Chrome, Edge, Safari */
+  .opportunity-cards.scroll-container::-webkit-scrollbar {
+    height: 8px; /* thickness of the scrollbar */
+  }
+
+  .opportunity-cards.scroll-container::-webkit-scrollbar-track {
+    background: var(--dark-bg); 
+    border-radius: 10px;
+  }
+
+  .opportunity-cards.scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-gold-solid), var(--primary-gold));
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(212,175,55,0.6);
+  }
+
+  .opportunity-card.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ffd700, var(--primary-gold-solid));
+  }
 
   .opportunity-card {
     min-width: 20px;
-    flex: 0 0 320px;
+    flex: 0 0 370px;
     text-align: center;
+    font-size: 1.1rem;
+  }
+  .opportunity-card h3{
+    font-size: 1.5rem;
   }
   .values-grid {
             grid-template-columns: repeat(1, 1fr);
@@ -560,6 +895,72 @@ html, body {
         </div>
     </section>
 
+
+<!-- Who We Are Section -->
+<section class="who-we-are">
+  <div class="container who-we-are-grid">
+    <div class="who-we-are-image">
+      <img src="Assets/img/TallyTrack_Africa_Logo_1.webp" alt="TallyTrack Africa Logo">
+    </div>
+    <div class="who-we-are-content">
+      <h2>Who We Are</h2>
+      <p>
+       The TallyTrack under 40 Years National Prestigious Awards is Kenya’s most credible and inspiring platform dedicated to celebrating the next generation of leaders. We recognize and honor young achievers under the age of 40 who are driving impact across business, governance, innovation, philanthropy, sports, arts, technology, and community service.
+    </p>
+      <p>
+       Unlike ordinary award events, TallyTrack is more than a trophy. We offer career capital, reputation boost, and the national spotlight building personal brands, visibility, and credibility for Kenya’s rising trailblazers. Our recognition opens doors, amplifies voices, and places nominees at the center of national conversations.
+    </p>
+    </div>
+  </div>
+</section>
+
+<!-- Stakeholder Value Cards Section -->
+<section id="stakeholders" class="stakeholders-section">
+  <div class="container">
+    <h2 class="section-title">Who Benefits from TallyTrack</h2>
+    <div class="stakeholder-cards scroll-container">
+      
+      <!-- Nominees Card -->
+      <div class="stakeholder-card">
+        <div class="stakeholder-icon"><i class="fas fa-user-graduate"></i></div>
+        <h3>For Nominees</h3>
+        <p>
+          This is not just an award it is a life-changing platform that validates hard work, 
+          showcases a clean and credible journey, and connects nominees to networks, mentorship, 
+          and opportunities across Kenya and beyond.
+        </p>
+      </div>
+
+      <!-- Corporates Card -->
+      <div class="stakeholder-card">
+        <div class="stakeholder-icon"><i class="fas fa-handshake"></i></div>
+        <h3>For Corporates & Sponsors</h3>
+        <p>
+          TallyTrack provides direct engagement with Gen Z and Millennial markets the largest, most dynamic, 
+          and brand-loyal demographic in Kenya. Sponsoring TallyTrack aligns your brand with prestige, 
+          youth empowerment, and national unity, while delivering unmatched visibility across media.
+        </p>
+      </div>
+
+      <!-- Governments Card -->
+      <div class="stakeholder-card">
+        <div class="stakeholder-icon"><i class="fas fa-landmark"></i></div>
+        <h3>For Governments</h3>
+        <p>
+          TallyTrack serves as a national unifier. With nominees drawn from all tribes and sectors, 
+          our awards reflect Kenya’s diversity and inclusivity. Supporting TallyTrack strengthens youth empowerment, 
+          innovation, and the values of clean leadership essential for Kenya’s future.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
     <!-- Trust Section -->
     <section class="trust-section" id="trust">
         <div class="container">
@@ -597,6 +998,23 @@ html, body {
         </div>
     </section>
 
+    <section id="mission-vision" class="mv-section animate-on-scroll">
+  <div class="container mv-grid">
+    <div class="mv-col">
+      <h3 class="section-subtitle">Our Mission</h3>
+      <blockquote class="mv-text">
+        "To celebrate, empower, and elevate Kenya’s under-40 achievers by recognizing clean leadership, innovation, and impact transforming recognition into career capital, visibility, and national credibility."
+      </blockquote>
+    </div>
+    <div class="mv-col">
+      <h3 class="section-subtitle">Our Vision</h3>
+      <p class="mv-text">
+        "To become Africa’s most prestigious and trusted youth recognition platform uniting the nation, shaping future leaders, and inspiring the world with Kenya’s next generation of trailblazers."
+      </p>
+    </div>
+  </div>
+</section>
+
     <!-- Empowerment Section -->
     <section class="empowerment-section" id="empowerment">
         <div class="container">
@@ -605,7 +1023,7 @@ html, body {
                 <h2 class="section-title">Empowering Africa's Next Generation</h2>
                 <p class="section-description">
                     TallyTrack Africa was built on the belief that young Africans deserve recognition for their outstanding contributions 
-                    and a platform that connects them with life-changing opportunities. We're not just about awards—we're about creating pathways to success.
+                    and a platform that connects them with life-changing opportunities. We're not just about awardwe're about creating pathways to success.
                 </p>
                 
                 <div class="opportunity-cards scroll-container">
@@ -644,6 +1062,25 @@ html, body {
             </div>
         </div>
     </section>
+
+    <section id="objectives" class="objectives-section animate-on-scroll">
+  <div class="container">
+    <div class="text-center">
+         <span class="section-subtitle">Our Key Objectives</span>
+    <h2 class="section-title">Strategic Objectives for Growth</h2>
+    <p class="section-description">Our strategic objectives strengthen credibility, expand recognition, and create opportunities that empower Kenya’s young leaders.</p>
+    </div>
+    <ul class="objectives-grid">
+      <li><h3>Celebrate Excellence</h3><span>Recognize young Kenyans driving positive change across sectors.</span></li>
+      <li><h3>Build Career Capital</h3><span>Boost visibility, credibility and personal brands.</span></li>
+      <li><h3>Promote National Unity</h3><span>Showcase leaders from all tribes, regions and sectors.</span></li>
+      <li><h3>Empower the Next Generation</h3><span>Mentorship, networking and partnership opportunities.</span></li>
+      <li><h3>Ensure Credibility & Integrity</h3><span>Research, independent vetting and transparent voting.</span></li>
+      <li><h3>Engage Corporates & Partners</h3><span>Create sustainable brand value and youth engagement.</span></li>
+      <li><h3>Align with National Goals</h3><span>Support development goals in youth empowerment and innovation.</span></li>
+    </ul>
+  </div>
+</section>
 
     <!-- Values Section -->
     <section class="values-section">
@@ -742,6 +1179,54 @@ html, body {
             </div>
         </div>
     </section>
+
+    <!-- Testimonial Section -->
+<section id="testimonials" class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">Voices from the Community</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial-track">
+        
+        <!-- Testimony 1 -->
+        <div class="testimonial-card">
+          <img src="Assets/img/test1.jpg" alt="Jane Doe">
+          <p class="testimonial-text">“Being shortlisted changed my career the exposure led to new partnerships and visibility I never imagined.”</p>
+          <h4 class="testimonial-name">Jane Doe</h4>
+        </div>
+
+        <!-- Testimony 2 -->
+        <div class="testimonial-card">
+          <img src="Assets/img/test2.jpg" alt="John Mwangi">
+          <p class="testimonial-text">“Sponsoring TallyTrack connected our brand to youth audiences in ways no other platform has.”</p>
+          <h4 class="testimonial-name">John Mwangi</h4>
+        </div>
+
+        <!-- Testimony 3 -->
+        <div class="testimonial-card">
+          <img src="Assets/img/test3.jpg" alt="Aisha Kamau">
+          <p class="testimonial-text">“TallyTrack gave me the confidence to grow my project nationally and reach new communities.”</p>
+          <h4 class="testimonial-name">Aisha Kamau</h4>
+        </div>
+
+        <!-- Testimony 4 -->
+        <div class="testimonial-card">
+          <img src="Assets/img/test4.jpg" alt="Michael Otieno">
+          <p class="testimonial-text">“The recognition provided credibility that opened doors to government partnerships and funding opportunities.”</p>
+          <h4 class="testimonial-name">Michael Otieno</h4>
+        </div>
+
+        <!-- Testimony 5 -->
+        <div class="testimonial-card">
+          <img src="Assets/img/test5.jpg" alt="Grace Wanjiru">
+          <p class="testimonial-text">“Through TallyTrack, I’ve gained mentorship that continues to shape my leadership journey.”</p>
+          <h4 class="testimonial-name">Grace Wanjiru</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- CTA Section -->
     <section class="cta-section">
@@ -910,6 +1395,20 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.style.fontSize = '1.5rem';
     mobileMenuToggle.style.color = 'var(--primary-gold)';
     mobileMenuToggle.style.zIndex = '1002';
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".testimonial-track");
+  const slides = document.querySelectorAll(".testimonial-card");
+  let index = 0;
+
+  function moveSlider() {
+    index = (index + 1) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  // Slide every 5 seconds
+  setInterval(moveSlider, 5000);
 });
     </script>
 </body>

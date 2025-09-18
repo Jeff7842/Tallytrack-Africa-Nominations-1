@@ -629,35 +629,7 @@
         margin-top:10px;
     }
 
-    .trust-grid.scroll-container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 1rem;
-    scroll-behavior: smooth;
-    padding-bottom: 1rem;
-    -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
-  }
-
-  .trust-grid.scroll-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for clean UI */
-  }
-
-  .trust-card {
-    min-width: 20px;
-    flex: 0 0 340px;
-  }
-
-  .opportunity-cards.scroll-container {
-    display: flex;
-    height: fit-content;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 1rem;
-    scroll-behavior: smooth;
-    padding-bottom: 1rem;
-    -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
-  }
+    
 
   .opportunity-cards.scroll-container::-webkit-scrollbar {
    display: none; /* Hide scrollbar for clean UI */

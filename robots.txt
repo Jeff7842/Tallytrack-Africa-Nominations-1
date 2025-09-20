@@ -1,0 +1,16 @@
+# Applies to all bots
+User-agent: *
+
+# Block sensitive files/folders
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /Assets/others/
+Disallow:/logs/
+
+# Don’t let bots index raw files
+Disallow: /*.php$
+Disallow: /*.html$
+Disallow: /*.js$
+Disallow: /*.json$
+Disallow: /*.txt$

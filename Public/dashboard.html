@@ -1620,6 +1620,14 @@ select:focus {
         background: rgba(255, 255, 255, 0.2);
       }
 
+      .cf-turnstile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto; /* top & bottom spacing */
+  width: fit-content; /* keeps it tight around widget */
+}
+
       /* Loading Animation */
       .btn-loading .btn-text {
         visibility: hidden;
@@ -3349,7 +3357,7 @@ color: var(--primary-gold-solid);
               <span class="cost-value" id="total-amount">KES 10</span>
             </div>
           </div>
-
+          <!--Cloudflare Turnstile-->
           <div class="cf-turnstile" data-sitekey="0x4AAAAAAB2eY3dJhw367KcE" data-theme="dark" data-size="small" data-callback="onSuccess"></div>
           <!-- Proceed Button -->
           <button class="btn btn-primary" id="proceed-payment">

@@ -15,7 +15,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdBUborAAAAACBmx1y8Nox6S98ohwkRArK78D0N"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="icon" type="image/png" href="Assets/img/Symboll.webp">
     <style>
       /* Font Face */
@@ -1722,18 +1722,7 @@ select:focus {
         margin-right: 2px;
       }
 
-      .recaptcha-indicator {
-        margin-top: 20px;
-        font-size: 0.85rem;
-        color: #888;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .recaptcha-indicator i {
-        margin-right: 6px;
-        color: #4285f4; /* Google blue */
-      }
+      
 
       /* Error Toast */
       #toast-container {
@@ -3361,14 +3350,12 @@ color: var(--primary-gold-solid);
             </div>
           </div>
 
+          <div class="cf-turnstile" data-sitekey="<0x4AAAAAAB2eY3dJhw367KcE>" data-theme="light"data-size="normal"data-callback="onSuccess"></div>
           <!-- Proceed Button -->
           <button class="btn btn-primary" id="proceed-payment">
             <span class="btn-text">Proceed to Pay</span>
           </button>
-          <!-- reCAPTCHA -->
-          <div id="recaptcha-indicator" class="recaptcha-indicator">
-            <i class="fas fa-shield-alt"></i> Protected by reCAPTCHA
-          </div>
+          
         </div>
       </div>
     </div>

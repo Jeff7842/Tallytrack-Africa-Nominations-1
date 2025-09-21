@@ -1620,16 +1620,16 @@ select:focus {
         background: rgba(255, 255, 255, 0.2);
       }
 
-      .turnstile-wrapper {
-  display: flex;
-  justify-content: center;  /* horizontal center */
-  align-items: center;      /* vertical center (if container has height) */
-}
-
       .cf-turnstile {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
   margin-top: 25px; /* top & bottom spacing */
   margin-bottom: 15px;
+  width: fit-content; /* keeps it tight around widget */
   scale: 0.8;
+  margin-right:-60px;
 }
 
       /* Loading Animation */
@@ -3362,9 +3362,7 @@ color: var(--primary-gold-solid);
             </div>
           </div>
           <!--Cloudflare Turnstile-->
-          <div class="turnstile-wrapper">
           <div class="cf-turnstile" data-sitekey="0x4AAAAAAB2eY3dJhw367KcE" data-theme="dark" data-size="compact"  data-callback="onSuccess"></div>
-          </div>
           <!-- Proceed Button -->
           <button class="btn btn-primary" id="proceed-payment">
             <span class="btn-text">Proceed to Pay</span>

@@ -56,7 +56,7 @@ async function getAccessToken() {
 }
 
 app.get("/", (req, res) => {
-  res.send("MPESA DARAJA API WITH NODE JS BY JEFFERSON KIMOTHO");
+  res.send("MPESA DARAJA API WITH NODE JS BY UMESKIA SOFTWARES");
   var timeStamp = moment().format("YYYYMMDDHHmmss");
   console.log(timeStamp);
 });
@@ -90,15 +90,15 @@ app.get("/stkpush", (req, res) => {
           url,
           {
             BusinessShortCode: "174379",
-            Password: "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjUwOTIyMjA1MzMy",
+            Password: password,
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
-            Amount: "1",
+            Amount: "10",
             PartyA: "254705550302", //phone number to receive the stk push
             PartyB: "174379",
             PhoneNumber: "254705550302",
-            CallBackURL: "https://dd3d-105-160-22-207.ngrok-free.app/callback",
-            AccountReference: "Tallytrack",
+            CallBackURL: "https://subintestinal-sheryll-waggly.ngrok-free.dev",
+            AccountReference: "Tallytrack Africa Under 40",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
           {

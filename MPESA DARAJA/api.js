@@ -8,7 +8,6 @@
   Phone: +254113015674
   
 */
-
 const express = require('express');
 const router = express.Router();
 const axios = require("axios");
@@ -33,7 +32,7 @@ async function getAccessToken() {
   const consumer_key = "8XJW8SOeGGwrAOpswERQXoNvGriJ2lYAGpbhIO9zDI3jZ1ck"; // REPLACE IT WITH YOUR CONSUMER KEY
   const consumer_secret = "Xy2pXRvklqGqHEU3WNh19RTND31tjNkaI1QlC08XQAXOo3LYL0yM2JyoREtWSRms"; // REPLACE IT WITH YOUR CONSUMER SECRET
   const url =
-    "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+    "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
 
   const auth =
     "Basic " +

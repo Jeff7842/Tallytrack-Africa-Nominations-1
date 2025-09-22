@@ -998,5 +998,172 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(votingModal, { attributes: true, attributeFilter: ["class"] });
   }
 });
+// Called when Turnstile challenge is solved
+/*const SECRET_KEY =process.env.CLOUDFLARE_SECRET_KEY || process.env.cloudflare_secrete_key;;
 
+async function validateTurnstile(token, remoteip) {
+const formData = new FormData();
+formData.append('secret', SECRET_KEY);
+formData.append('response', token);
+formData.append('remoteip', remoteip);
+
+      try {
+          const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+              method: 'POST',
+              body: formData
+          });
+
+          const result = await response.json();
+          return result;
+      } catch (error) {
+          console.error('Turnstile validation error:', error);
+          return { success: false, 'error-codes': ['internal-error'] };
+      }
+
+    } */
+// === Turnstile verification + enable button flow ===
+
+// Read backend URL from environment (Vite: import.meta.env)
+const BACKEND_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_BACKEND_URL)
+  ? import.meta.env.VITE_BACKEND_URL
+  : window.BACKEND_URL || 'https://your-backend.example.com';
+
+// UI elements
+const votingModal = document.getElementById('voting-modal');
+const proceedBtn = document.getElementById('proceed-payment');
+const feedbackEl = document.getElementById('vote-feedback');
+
+// Local token storage (keeps last token until used)
+let captchaToken = null;
+
+// Called whenever you open the voting modal
+function openVotingModal() {
+  // Reset previous token and disable proceed button
+  captchaToken = null;
+  setProceedDisabled(true);
+  clearFeedback();
+
+  // Show modal (your show logic may differ)
+  votingModal.setAttribute('aria-hidden', 'false');
+  votingModal.style.display = 'block';
+}
+
+// Called when modal closes / cancels
+function closeVotingModal() {
+  votingModal.setAttribute('aria-hidden', 'true');
+  votingModal.style.display = 'none';
+  // Optionally clear Turnstile widget if you want (see notes)
+}
+
+// Helper: enable/disable proceed button and keep aria state
+function setProceedDisabled(isDisabled) {
+  proceedBtn.disabled = isDisabled;
+  proceedBtn.setAttribute('aria-disabled', String(isDisabled));
+  if (isDisabled) proceedBtn.classList.add('disabled');
+  else proceedBtn.classList.remove('disabled');
+}
+
+// Helper: show messages to user
+function showFeedback(msg, isError = true) {
+  feedbackEl.textContent = msg || '';
+  feedbackEl.style.color = isError ? '#e03' : '#0a0';
+}
+
+function clearFeedback() {
+  feedbackEl.textContent = '';
+}
+
+// ------------- Turnstile callback (called by widget) -------------
+// Cloudflare Turnstile will call window.onTurnstileSuccess(token)
+window.onTurnstileSuccess = async function(token) {
+  // token is the short string produced by Turnstile in the browser
+  // temporarily disable proceed button while we verify with our server
+  setProceedDisabled(true);
+  showFeedback('Verifying you are human... please wait', false);
+
+  try {
+    // POST to your server for verification (server holds the secret)
+    const res = await fetch(`${BACKEND_URL}/verify-turnstile`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    });
+
+    const json = await res.json();
+
+    if (!res.ok || !json.success) {
+      // verification failed
+      captchaToken = null;
+      setProceedDisabled(true);
+      showFeedback('Captcha verification failed — try again.');
+      // optional: reset widget if API available
+      if (window.turnstile && typeof window.turnstile.reset === 'function') {
+        try { window.turnstile.reset(); } catch(e){ /* ignore */ }
+      }
+      return;
+    }
+
+    // Verified by server — enable proceed and keep token for submit
+    captchaToken = token;
+    setProceedDisabled(false);
+    showFeedback('Verified. You may proceed to payment.', false);
+  } catch (err) {
+    console.error('verify-turnstile error', err);
+    captchaToken = null;
+    setProceedDisabled(true);
+    showFeedback('Verification error — check your connection and try again.');
+  }
+};
+
+// ------------- Proceed to pay click handler -------------
+proceedBtn.addEventListener('click', async function (e) {
+  e.preventDefault();
+
+  // Ensure captchaToken exists (should, if we enabled the button)
+  if (!captchaToken) {
+    showFeedback('Please complete the captcha first.');
+    setProceedDisabled(true);
+    return;
+  }
+
+  // Example payload: include nominee_id, phone, votes_count etc.
+  const payload = {
+    token: captchaToken,
+    nominee_id: window.currentNomineeId || null,
+    voter_phone: window.currentVoterPhone || null,
+    votes_count: window.currentVotesCount || 1
+  };
+
+  // Disable button while we create the vote record
+  setProceedDisabled(true);
+  showFeedback('Recording vote and starting payment...');
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/submit-vote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const json = await res.json();
+    if (!res.ok) {
+      // show server-provided message if present
+      showFeedback(json.error || 'Failed to submit vote. Try again.');
+      // optionally reset captcha if you want user to re-verify
+      captchaToken = null;
+      return;
+    }
+
+    // Success: server created pending vote record (you will handle MPESA next)
+    showFeedback('Vote recorded. Proceeding to payment...', false);
+    // optionally redirect to payment flow or trigger STK push
+    // e.g. startMpesaFlow(json.vote.id)
+  } catch (err) {
+    console.error('submit-vote error', err);
+    showFeedback('Network error while submitting vote. Try again.');
+  } finally {
+    // leave button disabled to avoid double clicks; re-enable if you want:
+    // setProceedDisabled(false);
+  }
+});
 

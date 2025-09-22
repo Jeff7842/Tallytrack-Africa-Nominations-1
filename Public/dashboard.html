@@ -1169,8 +1169,7 @@ select:focus {
   outline: none;
   background:var(--card-bg) !important; /*#b5c2a6 your custom hover color */
   color: rgba(212, 175, 55, 0.9);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  
 }
 
       .search-bar {
@@ -3362,7 +3361,7 @@ color: var(--primary-gold-solid);
             </div>
           </div>
           <!--Cloudflare Turnstile-->
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAAB2eY3dJhw367KcE" data-theme="dark" data-size="small"  data-callback="onSuccess"></div>
+          <div class="cf-turnstile" id="turnstile-widget" data-sitekey="0x4AAAAAAB2eY3dJhw367KcE" data-theme="dark" data-size="flexible"  data-callback="onSuccess"></div>
           <!-- Proceed Button -->
           <button class="btn btn-primary" id="proceed-payment">
             <span class="btn-text">Proceed to Pay</span>
@@ -3651,6 +3650,79 @@ color: var(--primary-gold-solid);
   
 </script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "df0c7d6fe73e474e96b39f33aa3686f6"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+  // global variable to store the active token
+  let currentTurnstileToken = null;
 
+  // This function is called by the Turnstile widget when the user completes the challenge.
+  // Cloudflare docs: set `data-callback="onTurnstileSuccess"`
+  window.onTurnstileSuccess = function(token) {
+    currentTurnstileToken = token;
+    // enable vote buttons
+    document.querySelectorAll(".vote-btn").forEach(b => {
+      b.disabled = false;
+      b.dataset.captcha = token; // optional: store token on button
+    });
+  };
+
+  // Optional: make sure to disable vote buttons initially
+  document.querySelectorAll(".vote-btn").forEach(b => {
+    b.disabled = true;
+    b.addEventListener("click", async (e) => {
+      const btn = e.currentTarget;
+      // gather data from the modal / nominee card
+      const nominee_id = btn.getAttribute("data-nominee-code-uuid"); // wire this in your DOM
+      const nominee_code = btn.getAttribute("data-nominee-id-text");
+      const nominee_name = btn.getAttribute("data-nominee-name");
+      const voter_phone = document.getElementById("phone").value.trim(); // example input
+      const votes_count = Number(document.getElementById("vote-count").value) || 1;
+
+      if (!currentTurnstileToken) {
+        alert("Please complete the captcha.");
+        return;
+      }
+
+      // disable while sending
+      btn.disabled = true;
+      btn.textContent = "Voting...";
+
+      const payload = {
+        nominee_id,
+        nominee_code,
+        nominee_name,
+        voter_phone,
+        votes_count,
+        amount_theoretical: votes_count * 10, // example
+        turnstile_token: currentTurnstileToken
+      };
+
+      try {
+        const resp = await fetch("/vote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const json = await resp.json();
+
+        if (resp.ok && json.success) {
+          alert("Vote recorded! New total: " + json.nominee_votes);
+          // optional: close modal, refresh your UI
+        } else {
+          console.error("Vote failed:", json);
+          alert("Vote failed: " + (json.error || "unknown"));
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Network error");
+      } finally {
+        // clear token (Turnstile tokens are one-time use). Render widget again if needed.
+        currentTurnstileToken = null;
+        btn.textContent = "Vote Now";
+        // reset widget: for Turnstile you can call turnstile.reset() if you kept widget id reference.
+        // If you used default embed, you might just reload widget container or prompt user to redo it.
+      }
+    });
+  });
+</script>
   </body>
 </html>

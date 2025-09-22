@@ -237,3 +237,132 @@ Sent at: ${new Date().toISOString()}`,
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running on http://localhost:${process.env.PORT || 3000}`);
 });
+
+
+//
+// server.js (ESM)
+// Requires: express, dotenv, @supabase/supabase-js, node-fetch
+// npm i express dotenv @supabase/supabase-js node-fetch
+
+import express from "express";
+import dotenv from "dotenv";
+import fetch from "node-fetch";
+import { createClient } from "@supabase/supabase-js";
+
+dotenv.config();
+app.use(express.json());
+
+// ---------- Config from .env ----------
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const CLOUDFLARE_SECRET = process.env.CLOUDFLARE_SECRET_KEY || process.env.cloudflare_secrete_key;
+
+// quick startup checks
+if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+  console.error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env");
+  process.exit(1);
+}
+if (!CLOUDFLARE_SECRET) {
+  console.error("Missing CLOUDFLARE_SECRET_KEY in .env");
+  process.exit(1);
+}
+
+// Create Supabase client using service role key (server-only)
+const Supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+  auth: { persistSession: false }
+});
+
+// ---------- Helper: verify Cloudflare Turnstile token ----------
+async function verifyTurnstileToken(token, remoteIp) {
+  // Cloudflare expects a POST form
+  const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+  const params = new URLSearchParams();
+  params.append("secret", CLOUDFLARE_SECRET);
+  params.append("response", token);
+  if (remoteIp) params.append("remoteip", remoteIp);
+
+  const resp = await fetch(url, {
+    method: "POST",
+    body: params
+  });
+
+  const json = await resp.json();
+  // Typical Turnstile response has { success: true/false, ... }
+  return json;
+}
+
+// ---------- Route: record a vote (requires valid Turnstile token) ----------
+app.post("/vote", async (req, res) => {
+  try {
+    const {
+      nominee_id,        // uuid of nominee.code (mandatory)
+      nominee_code,      // nominee.id text (mandatory in your schema)
+      nominee_name,      // name (mandatory)
+      voter_phone,       // phone string (mandatory)
+      votes_count,       // integer (mandatory)
+      amount_theoretical,// integer optional, we'll default below
+      user_id,           // optional if logged-in user
+      turnstile_token    // token generated in the browser by the Turnstile widget
+    } = req.body;
+
+    // Basic validation
+    if (!nominee_id || !nominee_code || !nominee_name || !voter_phone || !votes_count) {
+      return res.status(400).json({ error: "missing_required_fields" });
+    }
+
+    if (!turnstile_token) {
+      return res.status(400).json({ error: "missing_captcha_token" });
+    }
+
+    // verify token with Cloudflare
+    const remoteIp = req.ip || req.headers["x-forwarded-for"]?.split(",")[0];
+    const verifyResult = await verifyTurnstileToken(turnstile_token, remoteIp);
+
+    if (!verifyResult || !verifyResult.success) {
+      // return server-side failure and any details Cloudflare gave
+      return res.status(400).json({ error: "captcha_verification_failed", details: verifyResult });
+    }
+
+    // compute defaults
+    const votesInt = Number(votes_count) || 1;
+    const amount = amount_theoretical ? Number(amount_theoretical) : votesInt * 10; // example KES 10/vote
+
+    // Call the stored procedure you created earlier to INSERT into votes and increment nominees.votes atomically
+    const rpcPayload = {
+      p_nominee_id: nominee_id,
+      p_nominee_code: nominee_code,
+      p_nominee_name: nominee_name,
+      p_user_id: user_id || null,
+      p_voter_phone: voter_phone,
+      p_votes_count: votesInt,
+      p_amount_theoretical: amount,
+      p_captcha_token: turnstile_token
+    };
+
+    const { data: rpcData, error: rpcError } = await Supabase.rpc("record_vote", rpcPayload);
+
+    if (rpcError) {
+      console.error("Supabase RPC error:", rpcError);
+      return res.status(500).json({ error: "db_error", details: rpcError });
+    }
+
+    // rpcData is usually an array; first row returns vote_id & nominee_votes
+    const resultRow = Array.isArray(rpcData) ? rpcData[0] : rpcData;
+    return res.json({
+      success: true,
+      vote_id: resultRow?.vote_id ?? null,
+      nominee_votes: resultRow?.nominee_votes ?? null
+    });
+
+  } catch (err) {
+    console.error("Server /vote error:", err);
+    return res.status(500).json({ error: "internal_server_error", details: err.message });
+  }
+});
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Vote server listening on http://localhost:${PORT}`);
+});

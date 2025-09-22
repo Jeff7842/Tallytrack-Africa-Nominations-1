@@ -839,6 +839,40 @@ img {
   font-weight: 600;
 }
 
+
+/* Countdown Section */
+.countdown-section {
+  background: linear-gradient(to bottom, var(--dark-bg), var(--primary-dark));
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.countdown-timer span {
+  display: block;
+  font-size: 3rem;
+  background: var(--primary-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.countdown-timer small {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+}
+
 /* Footer */
 .footer {
   position: relative;

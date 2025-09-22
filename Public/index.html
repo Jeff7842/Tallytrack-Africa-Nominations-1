@@ -135,6 +135,13 @@
             margin: 3rem 0;
         }
 
+        .countdown-stats{
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
         .stat-item {
             text-align: center;
         }
@@ -506,27 +513,39 @@
                     
                     <div class="stat-item">
                         <div class="stat-value" id="days-left">14</div>
-                        <div class="stat-label">Days Left</div>
+                        <div class="stat-label">Days Left To Vote</div>
                     </div>
                 </div>
-                
+
                 <a href="Learn.html" class="btn btn-primary">Start Learning</a>
+
+                <!-- Countdown Timer -->
+                 <div class="countdown-container">
+        <h2 class="section-title">Get Ready! Voting Starts Soon</h2>
+<div class="countdown-stats">
+  <div class="stat-item">
+    <div class="stat-value" id="days">00</div>
+    <div class="stat-label">Days</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value" id="hours">00</div>
+    <div class="stat-label">Hours</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value" id="minutes">00</div>
+    <div class="stat-label">Minutes</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value" id="seconds">00</div>
+    <div class="stat-label">Seconds</div>
+  </div>
+</div>
+</div>
+                
+                
             </div>
         </div>
     </section>
-
-    <!-- Countdown Section -->
-<section class="countdown-section">
-  <div class="container text-center">
-    <h2 class="section-title">Countdown to October 1</h2>
-    <div id="countdown" class="countdown-timer">
-      <span id="days">00</span><small>Days</small>
-      <span id="hours">00</span><small>Hours</small>
-      <span id="minutes">00</span><small>Minutes</small>
-      <span id="seconds">00</span><small>Seconds</small>
-    </div>
-  </div>
-</section>
 
 
     <!-- Footer -->

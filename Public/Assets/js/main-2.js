@@ -233,7 +233,7 @@ function initCounters() {
   animateValue(nomineesCount, 0, globalNominees.length, 1300)
             
             // Days left doesn't need animation
-          startCountdown("2025-10-15T00:00:00"); // <-- set your real deadline here
+          startCountdown("2025-12-01T00:00:00"); // <-- set your real deadline here
         }
 
         function startCountdown(deadline) {
@@ -432,11 +432,28 @@ catScroller.addEventListener('scroll', () => {
 });
 
 // ===== Countdown Timer =====
+// Animate numbers (count up/down smoothly)
+function animateValue(element, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+    element.textContent = value.toString().padStart(2, "0");
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
 function initCountdown(targetDate) {
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
   const minutesEl = document.getElementById("minutes");
   const secondsEl = document.getElementById("seconds");
+
+  let lastValues = { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
   function updateCountdown() {
     const now = new Date().getTime();
@@ -444,10 +461,9 @@ function initCountdown(targetDate) {
     const diff = end - now;
 
     if (diff <= 0) {
-      daysEl.textContent = "00";
-      hoursEl.textContent = "00";
-      minutesEl.textContent = "00";
-      secondsEl.textContent = "00";
+      ["days","hours","minutes","seconds"].forEach(id => {
+        document.getElementById(id).textContent = "00";
+      });
       clearInterval(timer);
       return;
     }
@@ -457,17 +473,21 @@ function initCountdown(targetDate) {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    daysEl.textContent = days.toString().padStart(2, "0");
-    hoursEl.textContent = hours.toString().padStart(2, "0");
-    minutesEl.textContent = minutes.toString().padStart(2, "0");
-    secondsEl.textContent = seconds.toString().padStart(2, "0");
+    // Animate only if value changed
+    if (days !== lastValues.days) animateValue(daysEl, lastValues.days, days, 700);
+    if (hours !== lastValues.hours) animateValue(hoursEl, lastValues.hours, hours, 1000);
+    if (minutes !== lastValues.minutes) animateValue(minutesEl, lastValues.minutes, minutes, 1100);
+    if (seconds !== lastValues.seconds) animateValue(secondsEl, lastValues.seconds, seconds, 1100);
+
+    lastValues = { days, hours, minutes, seconds };
   }
 
   updateCountdown();
   const timer = setInterval(updateCountdown, 1000);
 }
 
-// Start countdown to October 1, 2025
+// Example start (set your end date)
 document.addEventListener("DOMContentLoaded", () => {
   initCountdown("2025-10-01T00:00:00");
 });
+

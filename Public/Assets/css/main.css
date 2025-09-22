@@ -847,6 +847,14 @@ img {
   text-align: center;
 }
 
+.countdown-container{
+  margin-top: 5rem;
+}
+
+.countdown-stats{
+  margin-top: rem;
+}
+
 .countdown-timer {
   display: flex;
   justify-content: center;
@@ -872,6 +880,18 @@ img {
   margin-top: 0.3rem;
   text-transform: uppercase;
 }
+
+.countdown-stats .stat-value {
+  display: inline-block;
+  perspective: 200px;
+  transition: transform 0.5s ease, color 0.3s ease;
+}
+
+.countdown-stats .stat-value.flip {
+  transform: rotateX(360deg);
+  color: var(--primary-gold-solid);
+}
+
 
 /* Footer */
 .footer {

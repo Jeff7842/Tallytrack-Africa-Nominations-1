@@ -1,0 +1,25 @@
+2025-09-22T10:14:07.000000000Z [inf]  Starting Container
+2025-09-22T10:14:08.618485316Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-09-22T10:14:08.618489020Z [inf]  
+2025-09-22T10:14:08.618493128Z [inf]  > tallytrack-africa-nominations@1.0.0 start
+2025-09-22T10:14:08.618496637Z [inf]  > node server.js
+2025-09-22T10:14:08.618501515Z [inf]  
+2025-09-22T10:14:08.618505262Z [err]  node:internal/modules/cjs/loader:1386
+2025-09-22T10:14:08.618508925Z [err]    throw err;
+2025-09-22T10:14:08.618512576Z [err]    ^
+2025-09-22T10:14:08.618516527Z [err]  
+2025-09-22T10:14:08.618520734Z [err]  Error: Cannot find module '/app/server.js'
+2025-09-22T10:14:08.618524621Z [err]      at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2025-09-22T10:14:08.618528935Z [err]      at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2025-09-22T10:14:08.618532605Z [err]      at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2025-09-22T10:14:08.618536096Z [err]      at Function._load (node:internal/modules/cjs/loader:1192:37)
+2025-09-22T10:14:08.618539651Z [err]      at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+2025-09-22T10:14:08.618543291Z [err]      at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2025-09-22T10:14:08.618546983Z [err]      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2025-09-22T10:14:08.618550569Z [err]      at node:internal/main/run_main_module:36:49 {
+2025-09-22T10:14:08.618554402Z [err]    code: 'MODULE_NOT_FOUND',
+2025-09-22T10:14:08.618558155Z [err]    requireStack: []
+2025-09-22T10:14:08.618561991Z [err]  }
+2025-09-22T10:14:08.618566079Z [err]  
+2025-09-22T10:14:08.618570808Z [err]  Node.js v22.19.0
+2025-09-22T10:14:11.000000000Z [inf]  Stopping Container

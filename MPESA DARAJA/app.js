@@ -133,54 +133,12 @@ app.post("/callback", (req, res) => {
   console.log(req.body);
 });
 
-// REGISTER URL FOR C2B
-app.get("/registerurl", (req, resp) => {
-  getAccessToken()
-    .then((accessToken) => {
-      const url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl";
-      const auth = "Bearer " + accessToken;
-      axios
-        .post(
-          url,
-          {
-            ShortCode: "174379",
-            ResponseType: "Complete",
-            ConfirmationURL: "http://example.com/confirmation",
-            ValidationURL: "http://example.com/validation",
-          },
-          {
-            headers: {
-              Authorization: auth,
-            },
-          }
-        )
-        .then((response) => {
-          resp.status(200).json(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-          resp.status(500).send("❌ Request failed");
-        });
-    })
-    .catch(console.log);
-});
-
-app.get("/confirmation", (req, res) => {
-  console.log("All transaction will be sent to this URL");
-  console.log(req.body);
-});
-
-app.get("/validation", (req, resp) => {
-  console.log("Validating payment");
-  console.log(req.body);
-});
-
 // B2C ROUTE OR AUTO WITHDRAWAL
 app.get("/b2curlrequest", (req, res) => {
   getAccessToken()
     .then((accessToken) => {
       const securityCredential =
-        "N3Lx/hisedzPLxhDMDx80IcioaSO7eaFuMC52Uts4ixvQ/Fhg5LFVWJ3FhamKur/bmbFDHiUJ2KwqVeOlSClDK4nCbRIfrqJ+jQZsWqrXcMd0o3B2ehRIBxExNL9rqouKUKuYyKtTEEKggWPgg81oPhxQ8qTSDMROLoDhiVCKR6y77lnHZ0NU83KRU4xNPy0hRcGsITxzRWPz3Ag+qu/j7SVQ0s3FM5KqHdN2UnqJjX7c0rHhGZGsNuqqQFnoHrshp34ac/u/bWmrApUwL3sdP7rOrb0nWasP7wRSCP6mAmWAJ43qWeeocqrz68TlPDIlkPYAT5d9QlHJbHHKsa1NA==";
+        "p/hghvxCHJ8zqbC6glNQho6hAYzydE2Cbido6puRMPZ/Wp4b7YltR5+XuXzDrUHutfUGTg9Vfmwt0usTYTX5cCcCZ6/mfxKwguoB4yxmRnCAl+x5YTJ6i1ckvRpI/XuyQoZne35EvUyZAT5P2FLKtI8mB6vJkj7IRAc2VIlHBBRhCe3RjI874gWJ6Sozz4n9jiLEMt87Azh19LT/OzIDBFqy4Eo88gRfvkOzNaXSda0JZITds48Y5tjJkW/+032iaQH4W0G2T6Q6Ln7l9MHl0jPW9bL2r6yGvEqC1OL2q9LG26maAnXBmqBrVam6HDwznf/kPZwKn3evmxWt3oEKpA==";
       const url = "https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest";
       const auth = "Bearer " + accessToken;
       axios
@@ -191,8 +149,8 @@ app.get("/b2curlrequest", (req, res) => {
             SecurityCredential: securityCredential,
             CommandID: "PromotionPayment",
             Amount: "1",
-            PartyA: "600996",
-            PartyB: "",//phone number to receive the stk push
+            PartyA: "600984",
+            PartyB: "254705550302",//phone number to receive the stk push
             Remarks: "Withdrawal",
             QueueTimeOutURL: "https://mydomain.com/b2c/queue",
             ResultURL: "https://mydomain.com/b2c/result",

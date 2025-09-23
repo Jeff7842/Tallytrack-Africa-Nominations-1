@@ -751,8 +751,87 @@ const id = btn.dataset.id;
     votes = readVotes();
     updateVoteCounter();
   });
+
+  // --- Replace the existing proceed to payment handler with this ---
+proceedBtn.addEventListener('click', async (e) => {
+  e.preventDefault();
+
+  // Grab required values from modal
+  const phoneInput = document.getElementById('phone');
+  const phoneRaw = phoneInput.value.trim();
+  const votesCount = Number(document.getElementById('vote-count').value) || 1;
+  const nomineeId = window.currentNomineeId || document.querySelector('#voting-modal .nominee-id span')?.textContent;
+
+  if (!nomineeId) {
+    showVoteError('Nominee missing. Please reload and try again.');
+    return;
+  }
+
+  // Normalize phone to 2547XXXXXXXX
+  let phone = phoneRaw;
+  if (phone.startsWith('0')) phone = '254' + phone.slice(1);
+  if (!/^2547\d{8}$/.test(phone)) {
+    showVoteError('Please enter a valid phone number (07XXXXXXXX or 2547XXXXXXXX)');
+    return;
+  }
+
+  // Ensure captchaToken exists (your Turnstile flow stores it in captchaToken variable)
+  if (!captchaToken) {
+    showFeedback('Please complete the captcha first.');
+    return;
+  }
+
+  // UI
+  setProceedDisabled(true);
+  showFeedback('Recording vote and initiating payment... Please follow the M-Pesa prompt on your phone.', false);
+  proceedBtn.classList.add('btn-loading');
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/submit-vote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nominee_id: nomineeId,
+        voter_phone: phone,
+        votes_count: votesCount,
+        captchaToken
+      })
+    });
+
+    const json = await res.json();
+
+    if (!res.ok) {
+      console.error('submit-vote failed', json);
+      showFeedback(json.error || 'Failed to start payment. Try again.');
+      // optionally reset captcha here
+      setProceedDisabled(false);
+      return;
+    }
+
+    // success — STK Push initiated
+    showFeedback('STK Push sent. Check your phone and enter your M-Pesa PIN to complete payment.', false);
+
+    // you can store the returned ids if required
+    console.log('STK response', json);
+
+    // Optionally close modal and show success state (we keep modal open so user sees payment prompt)
+    // votingModal.classList.remove('active');
+
+    // You might want to poll server to detect completion, or rely on server callback to update DB.
+    // For better UX you can show a small "Waiting for payment..." state here.
+
+  } catch (err) {
+    console.error('Network error submit-vote', err);
+    showFeedback('Network error while starting payment. Check your connection and try again.');
+  } finally {
+    proceedBtn.classList.remove('btn-loading');
+    // keep disabled to prevent double click or re-enable if you prefer:
+    // setProceedDisabled(false);
+  }
+});
+
   
-  // Proceed to payment
+  /*/ Proceed to payment
   proceedBtn.addEventListener('click', async () => {
     // Validate phone number
     const phoneInput = document.getElementById('phone');
@@ -832,7 +911,7 @@ const id = btn.dataset.id;
       // Remove loading state
       proceedBtn.classList.remove('btn-loading');
     }
-  });
+  });*/
 
   proceedBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -1115,7 +1194,7 @@ window.onTurnstileSuccess = async function(token) {
   }
 };
 
-// ------------- Proceed to pay click handler -------------
+/*/ ------------- Proceed to pay click handler -------------
 proceedBtn.addEventListener('click', async function (e) {
   e.preventDefault();
 
@@ -1165,5 +1244,5 @@ proceedBtn.addEventListener('click', async function (e) {
     // leave button disabled to avoid double clicks; re-enable if you want:
     // setProceedDisabled(false);
   }
-});
+});*/
 

@@ -899,6 +899,19 @@ select:focus {
         transition: var(--transition);
       }
 
+      /*/.nominee-placeholder {
+  background:none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2a3515;
+  width: 100%;
+  height: 100%;
+  font-size: 25rem;
+}*/
+
+
       .nominee-photo {
   position: relative;
   width: 100%;
@@ -2027,9 +2040,219 @@ display: inline;
 }
 }
 
+/* iPad Mini Portrait (768x1024) */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) {
+  
+  /* Sidebar */
+  .main-container {
+    grid-template-columns: 240px 1fr; /* slightly smaller sidebar */
+  }
+  .category-sidebar {
+    width: 240px;
+    font-size: 0.95rem;
+  }
+  .category-item {
+    padding: 0.8rem 1rem;
+  }
+
+  /* Header */
+  .header {
+    padding: 1.5rem 0;
+  }
+  .logo-img {
+    height: 45px;
+  }
+  .nav-link {
+    font-size: 18px;
+    margin-right: 30px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .stat-card {
+    padding: 1.5rem;
+  }
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  /* Nominee Cards */
+  .nominee-card {
+    flex: 0 0 260px;
+    height: 360px;
+  }
+  .nominee-photo {
+    height: 60%;
+  }
+  .nominee-name {
+    font-size: 1.3rem;
+  }
+
+  /* All Votes Grid */
+  .all-votes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Category Page */
+  .category-page {
+    padding: 6rem 1.5rem 2rem;
+  }
+  .category-title {
+    font-size: 2rem;
+  }
+  .category-description {
+    font-size: 1rem;
+  }
+
+  /* Filters */
+  .filter-controls {
+    gap: 1rem;
+  }
+  .filter-select {
+    min-width: 150px;
+    font-size: 0.85rem;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 90%;
+    max-width: 480px;
+  }
+  .modal-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* iPad Air Portrait (820x1180) */
+@media only screen 
+  and (min-device-width: 820px) 
+  and (max-device-width: 1180px) 
+  and (orientation: portrait) {
+
+  /* Sidebar */
+  .main-container {
+    grid-template-columns: 280px 1fr; /* more space than iPad Mini */
+  }
+  .category-sidebar {
+    width: 280px;
+    font-size: 1rem;
+  }
+
+  /* Header */
+  .header {
+    padding: 2rem 0;
+  }
+  .logo-img {
+    height: 50px;
+  }
+  .nav-link {
+    font-size: 19px;
+    margin-right: 40px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .stat-card {
+    padding: 1.8rem;
+  }
+  .stat-value {
+    font-size: 2.2rem;
+  }
+
+  /* Nominee Cards */
+  .nominee-card {
+    flex: 0 0 280px;
+    height: 380px;
+  }
+  .nominee-photo {
+    height: 62%;
+  }
+  .nominee-name {
+    font-size: 1.4rem;
+  }
+
+  /* All Votes Grid */
+  .all-votes-grid {
+    grid-template-columns: repeat(3, 1fr); /* back to 3 columns */
+    gap: 2rem;
+  }
+
+  /* Category Page */
+  .category-page {
+    padding: 7rem 2rem 2rem;
+  }
+  .category-title {
+    font-size: 2.3rem;
+  }
+  .category-description {
+    font-size: 1.05rem;
+  }
+
+  /* Filters */
+  .filter-controls {
+    gap: 1.2rem;
+  }
+  .filter-select {
+    min-width: 170px;
+    font-size: 0.9rem;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 85%;
+    max-width: 520px;
+  }
+  .modal-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* iPad Air Landscape (1180x820) */
+@media only screen 
+  and (min-device-width: 820px) 
+  and (max-device-width: 1180px) 
+  and (orientation: landscape) {
+
+  /* Sidebar */
+  .main-container {
+    grid-template-columns: 300px 1fr;
+  }
+  .category-sidebar {
+    width: 300px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2rem;
+  }
+
+  /* All Votes Grid */
+  .all-votes-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2rem;
+  }
+
+  /* Nominee Cards */
+  .nominee-card {
+    flex: 0 0 300px;
+    height: 400px;
+  }
+}
+
 
 /* Tablets (portrait & landscape) */
-@media only screen and (min-width: 600px) and (max-width: 1024px) {
+@media only screen and (min-width: 600px) and (max-width:1024px) {
 .category-sidebar { width: 250px; }
 .category-item { font-size: 1rem; }
 .content-area { padding: 1rem; }
@@ -3034,6 +3257,91 @@ color: var(--primary-gold-solid);
             </div>
             <div class="category-desc">Influential voice shaping public conversation.</div>
           </li>
+          <!--Barber-->
+<li class="category-item" data-category="barber">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.25"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-razor-electric"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 3v2" /><path d="M12 3v2" /><path d="M16 3v2" /><path d="M9 12v6a3 3 0 0 0 6 0v-6h-6z" /><path d="M8 5h8l-1 4h-6z" /><path d="M12 17v1" /></svg>
+    <span>Barber of the Year</span>
+  </div>
+  <div class="category-desc">Excellence in grooming, style, and personal care.</div>
+</li>
+
+<!--Hotels-->
+<li class="category-item" data-category="hotels">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-skyscraper"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21l18 0" /><path d="M5 21v-14l8 -4v18" /><path d="M19 21v-10l-6 -4" /><path d="M9 9l0 .01" /><path d="M9 12l0 .01" /><path d="M9 15l0 .01" /><path d="M9 18l0 .01" /></svg>
+    <span>Hotels of the Year</span>
+  </div>
+  <div class="category-desc">Excellence in hospitality, comfort, and memorable experiences.</div>
+</li>
+
+<!--Chef-->
+<li class="category-item" data-category="chef">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chef-hat"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c1.918 0 3.52 1.35 3.91 3.151a4 4 0 0 1 2.09 7.723l0 7.126h-12v-7.126a4 4 0 1 1 2.092 -7.723a4 4 0 0 1 3.908 -3.151z" /><path d="M6.161 17.009l11.839 -.009" /></svg>
+    <span>Chef of the Year</span>
+  </div>
+  <div class="category-desc">Excellence in culinary artistry and innovation.</div>
+</li>
+
+<!--Fitness trainer-->
+<li class="category-item" data-category="fitness-trainer">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.25"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-barbell"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M2 12h1" /><path d="M6 8h-2a1 1 0 0 0 -1 1v6a1 1 0 0 0 1 1h2" /><path d="M6 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z" /><path d="M9 12h6" /><path d="M15 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z" /><path d="M18 8h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2" /><path d="M22 12h-1" /></svg>
+    <span>Fitness Trainer of the Year</span>
+  </div>
+  <div class="category-desc">Transforming lives through dedication to healthy living.</div>
+</li>
+
+<!--Photographer-->
+<li class="category-item" data-category="photographer">
+  <div class="category-name">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline icon-tabler-camera" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 7h16v13H4z" />
+      <path d="M12 13m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M9 7l1-3h4l1 3" />
+    </svg>
+    <span>Photographer of the Year</span>
+  </div>
+  <div class="category-desc">Excellence in photography</div>
+</li>
+
+<!--restaurant-->
+<li class="category-item" data-category="restaurant">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 4v17m-3 -17v3a3 3 0 1 0 6 0v-3" /><path d="M17 8m-3 0a3 4 0 1 0 6 0a3 4 0 1 0 -6 0" /><path d="M17 12v9" /></svg>
+    <span>Restaurant of the Year</span>
+  </div>
+  <div class="category-desc">Celebrating creativity in fine dining experiences.</div>
+</li>
+
+<!--Stylist / Fashion Brand / Designer-->
+<li class="category-item" data-category="stylist">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-hanger-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9l-7.971 4.428a2 2 0 0 0 -1.029 1.749v.823a2 2 0 0 0 2 2h1" /><path d="M18 18h1a2 2 0 0 0 2 -2v-.823a2 2 0 0 0 -1.029 -1.749l-7.971 -4.428c-1.457 -.81 -1.993 -2.333 -2 -4a2 2 0 1 1 4 0" /><path d="M6 16m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /></svg>
+    <span>Stylist / Fashion Brand / Designer of the Year</span>
+  </div>
+  <div class="category-desc">Creativity in fashion and style</div>
+</li>
+
+<!--hairdresser-->
+<li class="category-item" data-category="hairdresser">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-scissors"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M6 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M8.6 8.6l10.4 10.4" /><path d="M8.6 15.4l10.4 -10.4" /></svg>
+    <span>Hair Dresser of the Year</span>
+  </div>
+  <div class="category-desc">Redefining beauty through mastery in hair design</div>
+</li>
+<!--Makeup Artist-->
+<li class="category-item" data-category="makeup-artist">
+  <div class="category-name">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-closed"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 9c-2.4 2.667 -5.4 4 -9 4c-3.6 0 -6.6 -1.333 -9 -4" /><path d="M3 15l2.5 -3.8" /><path d="M21 14.976l-2.492 -3.776" /><path d="M9 17l.5 -4" /><path d="M15 17l-.5 -4" /></svg>
+    <span>Makeup Artist of the Year</span>
+  </div>
+  <div class="category-desc">Transforming faces with the power of creative beauty.</div>
+</li>
+
         </ul>
       </aside>
       <div class="content-area">
@@ -3304,7 +3612,11 @@ color: var(--primary-gold-solid);
         </button>
         <!-- Nominee Header -->
         <div class="nominee-header">
-          <img src="Assets/img/Asset.png" alt="Nominee" class="nominee-image" />
+          <!-- Placeholder icon (will be replaced by actual image when available)
+  <div class="nominee-placeholder nominee-image">
+    <i class="ti ti-user-filled"></i>
+  </div> -->
+          <img src="" alt="Nominee" class="nominee-image" />
           <div class="nominee-overlay">
             <h2 class="nominee-name">Nominee Name</h2>
             <p class="nominee-category">Category</p>

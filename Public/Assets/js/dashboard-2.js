@@ -340,7 +340,7 @@ function normalizeCategory(c) {
   const s = toSlug(c);
   const map = {
     "philanthropist-of-the-year": "philanthropist",
-    "artist-of-the-year":"artist",
+    "artist-of-the-year": "artist",
     "brand-ambassador-of-the-year": "brand-ambassador",
     "blogger-of-the-year": "blogger",
     "content-creator-of-the-year": "content-creator",
@@ -350,23 +350,37 @@ function normalizeCategory(c) {
     "comedian-of-the-year": "comedian",
     "community-champion-of-the-year": "community-champion",
     "influencer-of-the-year": "influencer",
-    "mc-of-the-year":"mc", 
+    "mc-of-the-year": "mc",
     "dj-of-the-year": "dj",
     "podcast-of-the-year": "podcast",
     "facebook-page-of-the-year": "facebook",
     "tiktok-page-of-the-year": "tiktok",
-    "ceo-page-of-the-year": "ceo",
-    "media-personality-of-the-year":"media",
+    "ceo-of-the-year": "ceo",
+    "media-personality-of-the-year": "media",
+
+    // ✅ Added missing ones
+    "chef-of-the-year": "chef",
+    "makeup-artist-of-the-year": "makeup-artist",
+    "fashion-designer-of-the-year": "fashion-designer",
+    "fitness-trainer-of-the-year": "fitness-trainer",
+    "photographer-of-the-year": "photographer",
+    "stylist-of-the-year": "stylist",
+    "restaurant-of-the-year": "restaurant",
+    "barber-of-the-year": "barber",
+    "hairdresser-of-the-year": "hairdresser",
+    "hotels-of-the-year": "Hotels",
   };
-  return map[s] || s; // if DB already stores slugs, this is a no-op
+
+  return map[s] || s; // fallback if slug is already normalized
 }
+
 
 
 // Get full category name from slug
 function getCategoryName(slug) {
   const categoryMap = {
     philanthropist: "Philanthropist of the Year",
-    artist:"Artist of the Year",
+    artist: "Artist of the Year",
     "brand-ambassador": "Brand Ambassador of the Year",
     blogger: "Blogger of the Year",
     "content-creator": "Content Creator of the Year",
@@ -376,56 +390,114 @@ function getCategoryName(slug) {
     comedian: "Comedian of the Year",
     "community-champion": "Community Champion of the Year",
     influencer: "Influencer of the Year",
-    mc:"MC of the Year",
+    mc: "MC of the Year",
     dj: "DJ of the Year",
     podcast: "Podcast of the Year",
     facebook: "Facebook Page of the Year",
     tiktok: "Tiktok Page of the Year",
-    ceo:"CEO of the Year",
-    media:"Media Personality of the Year",
+    ceo: "CEO of the Year",
+    media: "Media Personality of the Year",
+
+    // ✅ Added missing ones
+    chef: "Chef of the Year",
+    "makeup-artist": "Makeup Artist of the Year",
+    "fashion-designer": "Fashion Designer of the Year",
+    "fitness-trainer": "Fitness Trainer of the Year",
+    photographer: "Photographer of the Year",
+    stylist: "Stylist / Fashion Brand / Designer of the Year",
+    restaurant: "Restaurant of the Year",
+    barber: "Barber of the Year",
+    hairdresser: "Hairdresser of the Year",
+    hotels: "Hotels of the Year",
   };
 
   return categoryMap[slug] || "Category";
 }
 
+
 // Category descriptions
 const categoryDescriptions = {
   all: "Browse all nominees across every category in the TallyTrack Africa Awards.",
+
   philanthropist:
     "Recognizing individuals who have demonstrated exceptional generosity and commitment to charitable causes, making a significant impact on communities across Africa.",
-  artist:"Honoring artists who inspire through creativity, masterful expression, and the power to move audiences with their work.",
+
+  artist:
+    "Honoring artists who inspire through creativity, masterful expression, and the power to move audiences with their work.",
+
   "brand-ambassador":
     "Celebrating personalities who have excelled in representing brands with authenticity, positively influencing public perception and engagement.",
+
   blogger:
     "Honoring writers who create compelling, informative, and engaging content that resonates with audiences and contributes to the digital conversation.",
+
   "content-creator":
     "Acknowledging creators who produce innovative and impactful digital content across various platforms, inspiring and entertaining diverse audiences.",
+
   entrepreneur:
     "Recognizing visionary business leaders who have demonstrated innovation, growth, and significant impact in their industries and communities.",
+
   "youth-leader":
     "Celebrating young individuals who have shown exceptional leadership qualities, inspiring positive change and empowering their peers.",
+
   innovator:
     "Honoring those who have developed groundbreaking ideas, technologies, or solutions that address challenges and create new opportunities.",
+
   comedian:
     "Acknowledging comedic talents who have brought joy and laughter to audiences through exceptional performance and original content.",
+
   "community-champion":
     "Recognizing individuals dedicated to serving their communities, driving positive change, and improving the lives of others.",
+
   influencer:
     "Celebrating social media personalities who have built engaged communities and used their platforms to positively influence and inspire.",
-    mc:
+
+  mc:
     "Celebrating MCs who bring events to life with charm, flawless coordination, and the ability to keep audiences engaged from start to finish.",
-  dj: "Honoring disc jockeys who have demonstrated exceptional skill in music selection, mixing, and creating memorable experiences for audiences.",
+
+  dj: 
+    "Honoring disc jockeys who have demonstrated exceptional skill in music selection, mixing, and creating memorable experiences for audiences.",
+
   podcast:
     "Recognizing outstanding podcast creators who have produced engaging audio content that informs, entertains, and builds community.",
+
   facebook:
     "Celebrating Facebook pages that have excelled in community building, engagement, and content quality on the platform.",
-     tiktok:
+
+  tiktok:
     "Celebrating TikTok creators who inspire trends, spark conversations, and bring communities together through authentic and creative content.",
-    ceo:
+
+  ceo:
     "Celebrating visionary leadership, innovation, and lasting impact on business growth and community development in Africa.",
-    media:
+
+  media:
     "Recognizing media personalities who captivate audiences with their voice, charisma, and creativity, using their platforms to inform, and spark meaningful conversations.",
+
+  chef:
+    "Honoring emerging and young chefs who showcase creativity, skill, and cultural pride while shaping the future of culinary arts in Africa.",
+
+  "makeup-artist":
+    "Recognizing makeup artists who bring artistry, creativity, and innovation to beauty and fashion through their exceptional talent.",
+
+  barber:
+    "Celebrating barbers who demonstrate precision, creativity, and influence, transforming grooming into an art form.",
+
+  stylist:
+    "Acknowledging fashion stylists, brands, and designers who push boundaries with bold, creative, and expressive designs that inspire.",
+
+  "fitness-trainer":
+    "Honoring fitness trainers who empower individuals to achieve wellness goals through expertise, motivation, and consistency.",
+
+  restaurant:
+    "Celebrating restaurants that redefine dining experiences with innovation, creativity, and cultural pride.",
+
+  hotels:
+    "Recognizing hotels that deliver outstanding service, unique experiences, and excellence in hospitality.",
+
+  hairdresser:
+    "Acknowledging hairdressers who combine technical skill, creativity, and innovation to inspire confidence and beauty.",
 };
+
 
 // Navigate to a category page
 async function navigateToCategory(category) {

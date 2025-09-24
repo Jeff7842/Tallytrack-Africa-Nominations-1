@@ -328,6 +328,8 @@ function populateGrid(grid, nominees) {
   });
 }
 
+
+
 // --- Data normalization helpers ---
 function toSlug(val) {
   if (!val) return "";
@@ -501,51 +503,59 @@ const categoryDescriptions = {
 
 // Navigate to a category page
 async function navigateToCategory(category) {
-  // Update active state in sidebar
-  categoryItems.forEach(i => i.classList.remove('active'));
+  // Remove active state from all category items
+  categoryItems.forEach((i) => i.classList.remove("active"));
   const target = document.querySelector(`.category-item[data-category="${category}"]`);
-  if (target) target.classList.add('active');
-  
+  if (target) target.classList.add("active");
+
   currentCategory = category;
 
+  // Reset sort filter to "recent"
+  sortFilter.value = "all";
+
   if (category === "dashboard") {
-    // Show dashboard again
     dashboardSection.style.display = "block";
     categoryPage.style.display = "none";
     updateDashboardViews();
-    return;
+  } else {
+    dashboardSection.style.display = "none";
+    categoryPage.style.display = "block";
+
+    // Update title + description
+    categoryTitle.textContent =
+      category === "all" ? "All Categories" : getCategoryName(category);
+    categoryDescription.textContent = categoryDescriptions[category];
+
+    // Filter nominees by category
+    let filteredNominees =
+      category === "all"
+        ? [...nomineesData]
+        : nomineesData.filter((nominee) => nominee.category_slug === category);
+
+    // Apply filters (sort + gender + search)
+    filteredNominees = applyFilters(filteredNominees);
+
+    // Populate grid
+    populateGrid(categoryNomineesGrid, filteredNominees);
   }
 
-  // Update UI to show category page
-  dashboardSection.style.display = "none";
-  categoryPage.style.display = "block";
-
-  // Set category title and description
-  categoryTitle.textContent =
-    category === "all" ? "All Categories" : getCategoryName(category);
-  categoryDescription.textContent = categoryDescriptions[category];
-
-  // Filter nominees by category
-  let filteredNominees =
-    category === "all"
-      ? [...nomineesData]
-      : nomineesData.filter((nominee) => nominee.category_slug === category);
-
-  // Apply additional filters
-  filteredNominees = applyFilters(filteredNominees);
-
-  // Populate the category grid
-  populateGrid(categoryNomineesGrid, filteredNominees);
+  // 🔥 Always scroll to top when entering a new category
+  if (contentArea) {
+    contentArea.scrollTo({ top: 0, behavior: "auto" });
+  }
+  // Also ensure full page scroll resets in case contentArea doesn't handle it
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
+
+
+
 
 // Apply filters to nominees
 function applyFilters(nominees) {
   // Gender filter
   const genderValue = genderFilter.value;
   if (genderValue !== "all") {
-    nominees = nominees.filter(
-      (nominee) => nominee.gender === genderValue
-    );
+    nominees = nominees.filter(nominee => nominee.gender === genderValue);
   }
 
   // Sort filter
@@ -564,8 +574,9 @@ function applyFilters(nominees) {
         return b.votes - a.votes;
       });
       break;
+    case "all":
     default:
-      // No sorting
+      // leave nominees as-is
       break;
   }
 
@@ -579,6 +590,7 @@ function applyFilters(nominees) {
 
   return nominees;
 }
+
 
 // Set up event listeners
 function setupEventListeners() {

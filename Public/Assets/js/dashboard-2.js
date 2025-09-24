@@ -510,8 +510,7 @@ async function navigateToCategory(category) {
 
   currentCategory = category;
 
-  // Reset sort filter to "recent"
-  sortFilter.value = "all";
+
 
   if (category === "dashboard") {
     dashboardSection.style.display = "block";

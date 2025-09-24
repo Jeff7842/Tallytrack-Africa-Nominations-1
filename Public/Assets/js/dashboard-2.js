@@ -546,9 +546,6 @@ async function navigateToCategory(category) {
   window.scrollTo({ top: 0, behavior: "auto" });
 }
 
-
-
-
 // Apply filters to nominees
 function applyFilters(nominees) {
   // Gender filter

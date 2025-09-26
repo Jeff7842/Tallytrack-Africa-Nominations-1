@@ -93,7 +93,7 @@ app.get("/stkpush", (req, res) => {
             Password: password,
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
-            Amount: "10",
+            Amount: "1",
             PartyA: "254705550302", //phone number to receive the stk push
             PartyB: "174379",
             PhoneNumber: "254705550302",

@@ -348,6 +348,7 @@ function normalizeCategory(c) {
     "content-creator-of-the-year": "content-creator",
     "entrepreneur-of-the-year": "entrepreneur",
     "youth-leader-of-the-year": "youth-leader",
+    "Tech-and-Craft-of-the-year": "Tech-and-Craft",
     "innovator-of-the-year": "innovator",
     "comedian-of-the-year": "comedian",
     "community-champion-of-the-year": "community-champion",
@@ -388,6 +389,7 @@ function getCategoryName(slug) {
     "content-creator": "Content Creator of the Year",
     entrepreneur: "Entrepreneur of the Year",
     "youth-leader": "Youth Leader of the Year",
+    "Tech-and-Craft": "Tech and Craft of the Year",
     innovator: "Innovator of the Year",
     comedian: "Comedian of the Year",
     "community-champion": "Community Champion of the Year",
@@ -447,7 +449,8 @@ const categoryDescriptions = {
 
   comedian:
     "Acknowledging comedic talents who have brought joy and laughter to audiences through exceptional performance and original content.",
-
+  "Tech-and-Craft":
+  "Celebrating visionaries who merge innovation with craftsmanship, creating practical solutions,and impactful technologies that shape everyday life .",
   "community-champion":
     "Recognizing individuals dedicated to serving their communities, driving positive change, and improving the lives of others.",
 
@@ -462,7 +465,7 @@ const categoryDescriptions = {
 
   podcast:
     "Recognizing outstanding podcast creators who have produced engaging audio content that informs, entertains, and builds community.",
-
+  
   facebook:
     "Celebrating Facebook pages that have excelled in community building, engagement, and content quality on the platform.",
 
@@ -1195,6 +1198,84 @@ window.onTurnstileSuccess = async function(token) {
   }
 };
 
+// global variable to store the active token
+  let currentTurnstileToken = null;
+
+  // This function is called by the Turnstile widget when the user completes the challenge.
+  // Cloudflare docs: set `data-callback="onTurnstileSuccess"`
+  window.onTurnstileSuccess = function(token) {
+    currentTurnstileToken = token;
+    // enable vote buttons
+    document.querySelectorAll(".vote-btn").forEach(b => {
+      b.disabled = false;
+      b.dataset.captcha = token; // optional: store token on button
+    });
+  };
+
+  // Optional: make sure to disable vote buttons initially
+  document.querySelectorAll(".vote-btn").forEach(b => {
+    b.disabled = true;
+    b.addEventListener("click", async (e) => {
+      const btn = e.currentTarget;
+      // gather data from the modal / nominee card
+      const nominee_id = btn.getAttribute("data-nominee-code-uuid"); // wire this in your DOM
+      const nominee_code = btn.getAttribute("nominee-id");
+      const nominee_name = btn.getAttribute("nominee-name");
+      const voter_phone = document.getElementById("phone").value.trim(); // example input
+      const votes_count = Number(document.getElementById("vote-count").value) || 1;
+
+      if (!currentTurnstileToken) {
+        alert("Please complete the captcha.");
+        return;
+      }
+
+      // disable while sending
+      btn.disabled = true;
+      btn.textContent = "Voting...";
+
+      const payload = {
+        nominee_id,
+        nominee_code,
+        nominee_name,
+        voter_phone,
+        votes_count,
+        amount_theoretical: votes_count * 10, // example
+        turnstile_token: currentTurnstileToken
+      };
+
+      try {
+        const resp = await fetch("/vote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const json = await resp.json();
+
+        if (resp.ok && json.success) {
+          await loadNominees();
+
+    // Show success modal
+    document.getElementById('voting-modal').classList.remove('active');
+    document.getElementById('success-modal').classList.add('active');
+          // optional: close modal, refresh your UI
+        } else {
+          console.error("Vote failed:", json);
+          document.getElementById('voting-modal').classList.remove('active');
+    document.getElementById('error-modal').classList.add('active');
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Network error");
+      } finally {
+        // clear token (Turnstile tokens are one-time use). Render widget again if needed.
+        currentTurnstileToken = null;
+        
+    proceedBtn.classList.remove('btn-loading');
+        // reset widget: for Turnstile you can call turnstile.reset() if you kept widget id reference.
+        // If you used default embed, you might just reload widget container or prompt user to redo it.
+      }
+    });
+  });
 /*/ ------------- Proceed to pay click handler -------------
 proceedBtn.addEventListener('click', async function (e) {
   e.preventDefault();

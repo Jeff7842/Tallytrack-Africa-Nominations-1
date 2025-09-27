@@ -3023,6 +3023,40 @@ color: var(--primary-gold-solid);
             </div>
             <div class="category-desc">Groundbreaking ideas and solutions</div>
           </li>
+          <!--Tech and Craft-->
+          <li class="category-item" data-category="tech-and-craft">
+            <div class="category-name">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-cpu"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M9 4h-2a2 2 0 0 0 -2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2z"
+                />
+                <path
+                  d="M17 4h-2a2 2 0 0 0 -2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2z"
+                />
+                <path
+                  d="M9 14h-2a2 2 0 0 0 -2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2z"
+                />
+                <path
+                  d="M17 14h-2a2 2 0 0 0 -2 2v2a2 2 0 0 0 2 2h-1m3 -4h1m-1 -4h1m-7 -4h1m-1 -4h1m-7.5 .5l.5 .5m-1 .5l.5 -.5m12.5 .5l.5 .5m-1 .5l.5 -.5m-12.5 12.5l.5 .5m-1 .5l.5 -.5m12.5 .5l.5 .5m-1 .5l.5 -.5"
+                />
+              </svg>
+              <span>Tech & Craft of the Year</span>
+            </div>
+            <div class="category-desc">Mastery in Technology and Craftsmanship</div>
+          </li>
+
           <!--Comedian-->
           <li class="category-item" data-category="comedian">
             <div class="category-name">
@@ -3748,9 +3782,9 @@ color: var(--primary-gold-solid);
   </div> -->
           <img src="" alt="Nominee" class="nominee-image" />
           <div class="nominee-overlay">
-            <h2 class="nominee-name">Nominee Name</h2>
+            <h2 class="nominee-name" id="nominee-name">Nominee Name</h2>
             <p class="nominee-category">Category</p>
-            <div class="nominee-id">
+            <div class="nominee-id" id="nominee-id">
               <i class="fas fa-id-card"></i>
               <span>ID: </span>
             </div>
@@ -3848,6 +3882,8 @@ color: var(--primary-gold-solid);
         </div>
       </div>
     </div>
+
+    
 
     <!-- Error Toast -->
      <div id="toast-container"></div>
@@ -4095,78 +4131,7 @@ color: var(--primary-gold-solid);
 </script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "df0c7d6fe73e474e96b39f33aa3686f6"}'></script><!-- End Cloudflare Web Analytics -->
 <script>
-  // global variable to store the active token
-  let currentTurnstileToken = null;
-
-  // This function is called by the Turnstile widget when the user completes the challenge.
-  // Cloudflare docs: set `data-callback="onTurnstileSuccess"`
-  window.onTurnstileSuccess = function(token) {
-    currentTurnstileToken = token;
-    // enable vote buttons
-    document.querySelectorAll(".vote-btn").forEach(b => {
-      b.disabled = false;
-      b.dataset.captcha = token; // optional: store token on button
-    });
-  };
-
-  // Optional: make sure to disable vote buttons initially
-  document.querySelectorAll(".vote-btn").forEach(b => {
-    b.disabled = true;
-    b.addEventListener("click", async (e) => {
-      const btn = e.currentTarget;
-      // gather data from the modal / nominee card
-      const nominee_id = btn.getAttribute("data-nominee-code-uuid"); // wire this in your DOM
-      const nominee_code = btn.getAttribute("data-nominee-id-text");
-      const nominee_name = btn.getAttribute("data-nominee-name");
-      const voter_phone = document.getElementById("phone").value.trim(); // example input
-      const votes_count = Number(document.getElementById("vote-count").value) || 1;
-
-      if (!currentTurnstileToken) {
-        alert("Please complete the captcha.");
-        return;
-      }
-
-      // disable while sending
-      btn.disabled = true;
-      btn.textContent = "Voting...";
-
-      const payload = {
-        nominee_id,
-        nominee_code,
-        nominee_name,
-        voter_phone,
-        votes_count,
-        amount_theoretical: votes_count * 10, // example
-        turnstile_token: currentTurnstileToken
-      };
-
-      try {
-        const resp = await fetch("/vote", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-        const json = await resp.json();
-
-        if (resp.ok && json.success) {
-          alert("Vote recorded! New total: " + json.nominee_votes);
-          // optional: close modal, refresh your UI
-        } else {
-          console.error("Vote failed:", json);
-          alert("Vote failed: " + (json.error || "unknown"));
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Network error");
-      } finally {
-        // clear token (Turnstile tokens are one-time use). Render widget again if needed.
-        currentTurnstileToken = null;
-        btn.textContent = "Vote Now";
-        // reset widget: for Turnstile you can call turnstile.reset() if you kept widget id reference.
-        // If you used default embed, you might just reload widget container or prompt user to redo it.
-      }
-    });
-  });
+  
 </script>
   </body>
 </html>

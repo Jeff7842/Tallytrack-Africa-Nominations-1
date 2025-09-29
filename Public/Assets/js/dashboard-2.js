@@ -359,7 +359,7 @@ function normalizeCategory(c) {
     "facebook-page-of-the-year": "facebook",
     "tiktok-page-of-the-year": "tiktok",
     "ceo-of-the-year": "ceo",
-    "cartoonist-of-the-year": "cartoonist",
+    "cartoonist-of-the-year": "cartoon",
     "media-personality-of-the-year": "media",
 
     // ✅ Added missing ones

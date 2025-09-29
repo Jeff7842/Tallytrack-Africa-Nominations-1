@@ -359,6 +359,7 @@ function normalizeCategory(c) {
     "facebook-page-of-the-year": "facebook",
     "tiktok-page-of-the-year": "tiktok",
     "ceo-of-the-year": "ceo",
+    "cartoonist-of-the-year": "cartoonist",
     "media-personality-of-the-year": "media",
 
     // ✅ Added missing ones
@@ -400,6 +401,7 @@ function getCategoryName(slug) {
     facebook: "Facebook Page of the Year",
     tiktok: "Tiktok Page of the Year",
     ceo: "CEO of the Year",
+    cartoon: "Cartoonist of the Year",
     media: "Media Personality of the Year",
 
     // ✅ Added missing ones
@@ -460,7 +462,7 @@ const categoryDescriptions = {
   mc:
     "Celebrating MCs who bring events to life with charm, flawless coordination, and the ability to keep audiences engaged from start to finish.",
 
-  dj: 
+  dj:
     "Honoring disc jockeys who have demonstrated exceptional skill in music selection, mixing, and creating memorable experiences for audiences.",
 
   podcast:
@@ -474,6 +476,8 @@ const categoryDescriptions = {
 
   ceo:
     "Celebrating visionary leadership, innovation, and lasting impact on business growth and community development in Africa.",
+  cartoon:
+    "Honoring cartoonists who use their artistic talents to entertain, provoke thought, and comment on societal issues through humor and creativity.",
 
   media:
     "Recognizing media personalities who captivate audiences with their voice, charisma, and creativity, using their platforms to inform, and spark meaningful conversations.",

@@ -1249,7 +1249,7 @@ select:focus {
 
       .share-button {
         display: inline-flex;
-        align-items: center;
+        align-items: flex-end;
         gap: 6px;
         font-size: 0.9rem;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -1258,8 +1258,8 @@ select:focus {
         margin-bottom: 20px;
         margin-left: auto; /* push to right if in flex container */
         transition: color 0.2s ease, transform 0.2s ease;
-        top: 140px;
-        margin-right: 60px;
+        
+        position: fixed;
       }
 
       .share-link {
@@ -1277,6 +1277,7 @@ select:focus {
       }
 
       .share-link svg {
+        display: flex;
         width: 20px;
         height: 20px;
         stroke: currentColor;
@@ -2333,6 +2334,12 @@ font-size:20px;
       }
 
       @media (max-width: 768px) {
+        body{
+         overflow-x:hidden;
+        }
+        .content-area{
+          overflow-x: hidden;
+        }
         .main-nav,
         .auth-container {
           display: none;
@@ -2380,6 +2387,16 @@ font-size:20px;
 
         .modal-content{
           scale: 0.85;
+        }
+        #toast-container{
+          font-size: smaller;
+          width:350px;
+          left:200px;
+          scale: 0.8;
+          top: 100px;
+        }
+        #turnstile-widget{
+          margin-left:-40px;
         }
       }
 

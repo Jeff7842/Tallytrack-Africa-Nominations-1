@@ -328,8 +328,6 @@ function populateGrid(grid, nominees) {
   });
 }
 
-
-
 // --- Data normalization helpers ---
 function toSlug(val) {
   if (!val) return "";
@@ -342,12 +340,12 @@ function normalizeCategory(c) {
   const s = toSlug(c);
   const map = {
     "philanthropist-of-the-year": "philanthropist",
-    "artist-of-the-year": "artist",
+    "female-artist-of-the-year": "female artist",
     "brand-ambassador-of-the-year": "brand-ambassador",
     "blogger-of-the-year": "blogger",
     "content-creator-of-the-year": "content-creator",
     "entrepreneur-of-the-year": "entrepreneur",
-    "youth-leader-of-the-year": "youth-leader",
+    "student-leader-of-the-year": "student-leader",
     "Tech-and-Craft-of-the-year": "Tech-and-Craft",
     "innovator-of-the-year": "innovator",
     "comedian-of-the-year": "comedian",
@@ -358,9 +356,19 @@ function normalizeCategory(c) {
     "podcast-of-the-year": "podcast",
     "facebook-page-of-the-year": "facebook",
     "tiktok-page-of-the-year": "tiktok",
+    "instagram-page-of-the-year": "instagram",
     "ceo-of-the-year": "ceo",
     "cartoonist-of-the-year": "cartoon",
     "media-personality-of-the-year": "media",
+    "plug-of-the-year": "plug",
+    "PWD-of-the-year":"pwd",
+    "male-artist-of-the-year":"male artist",
+    "Digital-creator-of-the-year":"Digital Creator",
+    "male-gospel-artist-of-the-year":"male-gospel",
+    "female-gospel-artist-of-the-year":"female-gospel",
+    "footballer-of-the-year":"football",
+    "volleyballer-of-the-year":"volleyball",
+
 
     // ✅ Added missing ones
     "chef-of-the-year": "chef",
@@ -384,12 +392,19 @@ function normalizeCategory(c) {
 function getCategoryName(slug) {
   const categoryMap = {
     philanthropist: "Philanthropist of the Year",
-    artist: "Artist of the Year",
+    "female-artist": "Female Artist of the Year",
+    "male-artist": "Male Artist of the Year",
+    "male-gospel": "Male Gospel Artist of the Year",
+    pwd:"Persons with disability of the year",
+    football:"Footballer of the Year",
+    volleyball:"Volleyballer of the Year",
+    "digital-creator":"Digital Creator of the Year",
+    "female-gospel": "Female Gospel Artist of the Year",
     "brand-ambassador": "Brand Ambassador of the Year",
     blogger: "Blogger of the Year",
     "content-creator": "Content Creator of the Year",
     entrepreneur: "Entrepreneur of the Year",
-    "youth-leader": "Youth Leader of the Year",
+    "student-leader": "Student Leader of the Year",
     "Tech-and-Craft": "Tech and Craft of the Year",
     innovator: "Innovator of the Year",
     comedian: "Comedian of the Year",
@@ -400,6 +415,7 @@ function getCategoryName(slug) {
     podcast: "Podcast of the Year",
     facebook: "Facebook Page of the Year",
     tiktok: "Tiktok Page of the Year",
+    instagram: "Instagram Page of the Year",
     ceo: "CEO of the Year",
     cartoon: "Cartoonist of the Year",
     media: "Media Personality of the Year",
@@ -428,8 +444,24 @@ const categoryDescriptions = {
   philanthropist:
     "Recognizing individuals who have demonstrated exceptional generosity and commitment to charitable causes, making a significant impact on communities across Africa.",
 
-  artist:
-    "Honoring artists who inspire through creativity, masterful expression, and the power to move audiences with their work.",
+  "female-artist":
+    "Honoring female artists who inspire through creativity, masterful expression, and the power to move audiences with their work.",
+  "male-artist":
+    "Honoring male artists who inspire through creativity, masterful expression, and the power to move audiences with their work.",
+  "male-gospel":  
+    "Celebrating male gospel artists who uplift and inspire through their powerful voices and impactful messages.",
+  "female-gospel":
+    "Celebrating female gospel artists who uplift and inspire through their powerful voices and impactful messages.",
+  "student-leader":
+    "Acknowledging student leaders who have demonstrated exceptional leadership, advocacy, and positive influence within their educational communities.",
+  pwd:
+    "Honoring persons with disabilities who have shown remarkable resilience, achievements, and contributions to society, inspiring others through their stories.",
+  football:
+    "Celebrating outstanding footballers who have demonstrated exceptional skill, sportsmanship, and contributions to the sport in Kenya.",
+  volleyball:
+    "Recognizing volleyball players who have shown excellence, teamwork, and dedication to the sport, inspiring fans and aspiring athletes alike.",
+  "digital-creator":
+    "Acknowledging digital creators who produce innovative and engaging content that resonates with audiences across various online platforms.",
 
   "brand-ambassador":
     "Celebrating personalities who have excelled in representing brands with authenticity, positively influencing public perception and engagement.",
@@ -442,9 +474,6 @@ const categoryDescriptions = {
 
   entrepreneur:
     "Recognizing visionary business leaders who have demonstrated innovation, growth, and significant impact in their industries and communities.",
-
-  "youth-leader":
-    "Celebrating young individuals who have shown exceptional leadership qualities, inspiring positive change and empowering their peers.",
 
   innovator:
     "Honoring those who have developed groundbreaking ideas, technologies, or solutions that address challenges and create new opportunities.",
@@ -473,6 +502,9 @@ const categoryDescriptions = {
 
   tiktok:
     "Celebrating TikTok creators who inspire trends, spark conversations, and bring communities together through authentic and creative content.",
+
+  instagram:
+    "Honoring Instagram pages that showcase creativity, engagement, and influence, inspiring their followers through compelling visual content.",
 
   ceo:
     "Celebrating visionary leadership, innovation, and lasting impact on business growth and community development in Africa.",
@@ -773,7 +805,7 @@ document.addEventListener('click', (e) => {
   const btn = e.target.closest('.vote-btn');
   if (!btn) return;
 
-const id = btn.dataset.id;
+ const id = btn.dataset.id;
   const nominee = nomineesData.find(n => n.id === id);
   if (!nominee) {
     console.warn('Nominee not found for id', id);
@@ -798,6 +830,23 @@ const id = btn.dataset.id;
   if (phone) phone.value = '';
 
   modal.classList.add('active');
+
+  const voteBtn = card.querySelector(".vote-btn");
+  voteBtn.addEventListener("click", () => {
+  // Store globally for payment
+  window.currentNomineeId = nominee.id;
+  window.currentNomineeName = nominee.name;
+
+  // Update modal UI
+  document.getElementById("nominee-name").textContent = nominee.name;
+  document.getElementById("nominee-id").innerHTML =
+    `<i class="fas fa-id-card"></i> <span>ID: ${nominee.id}</span>`;
+  const modalImg = document.querySelector("#voting-modal .nominee-image");
+  if (modalImg) modalImg.src = nominee.image || "";
+
+  // Show modal
+  document.getElementById("voting-modal").classList.add("active");
+});
 });
   
   // Close voting modal
@@ -883,15 +932,16 @@ const id = btn.dataset.id;
       // Record the vote in the database
       const { data, error } = await window.supabase
         .from('votes')
-        .insert([
-          { 
-            nominee_id: currentNomineeId, 
-            phone_number: phoneNumber,
-            votes_count: votes,
-            amount_paid: votes * votePrice,
-            status: 'completed'
-          }
-        ]);
+  .insert([
+    { 
+      nominee_id: currentNomineeId, 
+      phone_number: phoneNumber,
+      votes_count: votes,
+      amount_paid: votes * votePrice,
+      status: 'completed'
+    }
+  ]);
+
       
       if (error) throw error;
       
@@ -950,7 +1000,7 @@ async function processVotePayment(captchaToken) {
         votes_count: votes,
         amount_paid: votes * 10,
         status: 'completed',
-        captcha_token: captchaToken // save for audit if needed
+        //captcha_token: captchaToken // save for audit if needed
       }
     ]);
     if (error) throw error;
@@ -976,6 +1026,25 @@ async function processVotePayment(captchaToken) {
   } finally {
     proceedBtn.classList.remove('btn-loading');
   }
+  window.processVotePayment = async function(captchaToken) {
+  try {
+    // refresh nominees list to update vote counts
+    await loadNominees();
+    votingModal.classList.remove('active');
+    successModal.classList.add('active');
+  } catch (err) {
+    console.error('Vote finalization error', err);
+    votingModal.classList.remove('active');
+    errorModal.classList.add('active');
+  } finally {
+    proceedBtn.classList.remove('btn-loading');
+  }
+};
+
+  
+  // make this callable from mpesa-payment.js
+window.processVotePayment = processVotePayment;
+
 }
   
   // Success button action
@@ -1280,6 +1349,9 @@ window.onTurnstileSuccess = async function(token) {
       }
     });
   });
+
+  
+
 /*/ ------------- Proceed to pay click handler -------------
 proceedBtn.addEventListener('click', async function (e) {
   e.preventDefault();

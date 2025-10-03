@@ -11,10 +11,19 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+  defer
+></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <link rel="icon" type="image/png" href="Assets/img/Symboll.webp" />
     <link rel="stylesheet" href="Assets/css/Nominee.css">
@@ -2144,7 +2153,9 @@ select {
                 <div class="hint-text" style="margin-top: -25px;">Please fill the text area</div>
                 </div>
             </div>
-           
+           <!--Cloudflare Turnstile-->
+          <div class="cf-turnstile" id="turnstile-widget" data-sitekey="0x4AAAAAAB4tprGmmvyZdzPh" data-theme="dark" data-size="normal" data-callback="onSuccess"></div>
+
             
              <!-- Terms and Agreement -->
 <div class="form-group terms-group">
@@ -2162,8 +2173,10 @@ select {
   </div>
 </p>
 </div>
+
+
             <button type="submit" value="Submit" class="submit-btn">Submit Application</button>
-          </form>
+          </form enctype="multipart/form-data">
 
           <div class="preview-card">
             <h3 class="preview-title">Nominee Preview</h3>
@@ -2397,7 +2410,7 @@ select {
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
   (function(){
-    emailjs.init("EtsG0gJGwsf2sv9WZ");
+    emailjs.init("lXagO3ea0_pXyyKGs");
   })();
 </script>
 
@@ -2909,8 +2922,8 @@ function hideLoading() {
       const description = document.getElementById('description');
       if (description) {
         const words = description.value.trim() === '' ? 0 : description.value.trim().split(/\s+/).length;
-        if (words > 300) {
-          showToast('Description must be 300 words or less.', false);
+        if (words > 80) {
+          showToast('Description must be 70 words or less.', false);
           return false;
         }
       }
@@ -2964,8 +2977,8 @@ function hideLoading() {
     // Create a NEW FormData object without h-captcha
     const cleanformData = new FormData(form)
         // Required: your Web3Forms access key
-       cleanformData.delete('photo');
-       cleanformData.append('access_key', '1612f587-666d-4c7d-9e3d-7dc85329557d');
+      cleanformData.delete('photo');
+       cleanformData.append('access_key', '9d7a5aa4-725b-4f92-aef8-9785ba4679db');
         
 
         // IMPORTANT: send to your admin email via Web3Forms

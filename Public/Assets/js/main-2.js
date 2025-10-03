@@ -488,6 +488,6 @@ function initCountdown(targetDate) {
 
 // Example start (set your end date)
 document.addEventListener("DOMContentLoaded", () => {
-  initCountdown("2025-10-01T00:00:00");
+  initCountdown("2025-10-03T00:00:00");
 });
 

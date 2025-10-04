@@ -346,7 +346,7 @@ function normalizeCategory(c) {
     "content-creator-of-the-year": "content-creator",
     "entrepreneur-of-the-year": "entrepreneur",
     "student-leader-of-the-year": "student-leader",
-    "Tech-and-Craft-of-the-year": "Tech",
+    "Tech-and-Craft-of-the-year":"tech",
     "innovator-of-the-year": "innovator",
     "comedian-of-the-year": "comedian",
     "community-champion-of-the-year": "community-champion",
@@ -405,7 +405,7 @@ function getCategoryName(slug) {
     "content-creator": "Content Creator of the Year",
     entrepreneur: "Entrepreneur of the Year",
     "student-leader": "Student Leader of the Year",
-    "Tech-and-Craft": "Tech and Craft of the Year",
+    tech: "Tech and Craft of the Year",
     innovator: "Innovator of the Year",
     comedian: "Comedian of the Year",
     "community-champion": "Community Champion of the Year",
@@ -480,7 +480,7 @@ const categoryDescriptions = {
 
   comedian:
     "Acknowledging comedic talents who have brought joy and laughter to audiences through exceptional performance and original content.",
-  "Tech-and-Craft":
+  tech:
   "Celebrating visionaries who merge innovation with craftsmanship, creating practical solutions,and impactful technologies that shape everyday life .",
   "community-champion":
     "Recognizing individuals dedicated to serving their communities, driving positive change, and improving the lives of others.",

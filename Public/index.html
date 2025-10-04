@@ -384,103 +384,111 @@
       <div class="category-card" data-category="philanthropist">
         <div class="category-icon"><i class="fas fa-heart"></i></div>
         <h3 class="category-title">Philanthropist of the Year</h3>
-        <p class="category-count">12 Nominees</p>
+        <p class="category-count" id="category-count">12 Nominees</p>
       </div>
 
       <!-- Brand Ambassador -->
-      <div class="category-card" data-category="ambassador">
+      <div class="category-card" data-category="brand-ambassador">
         <div class="category-icon"><i class="fas fa-flag"></i></div>
         <h3 class="category-title">Brand Ambassador of the Year</h3>
-        <p class="category-count">10 Nominees</p>
+        <p class="category-count" id="category-count">10 Nominees</p>
       </div>
 
       <!-- Blogger -->
       <div class="category-card" data-category="blogger">
         <div class="category-icon"><i class="fas fa-pen-nib"></i></div>
         <h3 class="category-title">Blogger of the Year</h3>
-        <p class="category-count">8 Nominees</p>
+        <p class="category-count" id="category-count">8 Nominees</p>
       </div>
 
       <!-- Content Creator -->
       <div class="category-card" data-category="content-creator">
         <div class="category-icon"><i class="fas fa-microphone"></i></div>
         <h3 class="category-title">Content Creator of the Year</h3>
-        <p class="category-count">24 Nominees</p>
+        <p class="category-count" id="category-count">24 Nominees</p>
       </div>
 
       <!-- Entrepreneur -->
       <div class="category-card" data-category="entrepreneur">
         <div class="category-icon"><i class="fas fa-briefcase"></i></div>
         <h3 class="category-title">Entrepreneur of the Year</h3>
-        <p class="category-count">16 Nominees</p>
+        <p class="category-count" id="category-count">16 Nominees</p>
       </div>
 
-      <!-- Youth Leader -->
-      <div class="category-card" data-category="youth-leader">
+      <!-- Student Leader -->
+      <div class="category-card" data-category="student-leader">
         <div class="category-icon"><i class="fas fa-user-check"></i></div>
-        <h3 class="category-title">Youth Leader of the Year</h3>
-        <p class="category-count">9 Nominees</p>
+        <h3 class="category-title">Student Leader of the Year</h3>
+        <p class="category-count" id="category-count">9 Nominees</p>
       </div>
 
       <!-- Innovator -->
       <div class="category-card" data-category="innovator">
         <div class="category-icon"><i class="fas fa-lightbulb"></i></div>
         <h3 class="category-title">Innovator of the Year</h3>
-        <p class="category-count">14 Nominees</p>
+        <p class="category-count" id="category-count">14 Nominees</p>
       </div>
 
       <!-- Comedian -->
       <div class="category-card" data-category="comedian">
         <div class="category-icon"><i class="fas fa-theater-masks"></i></div>
         <h3 class="category-title">Comedian of the Year</h3>
-        <p class="category-count">11 Nominees</p>
+        <p class="category-count" id="category-count">11 Nominees</p>
       </div>
 
       <!-- Community Champion -->
       <div class="category-card" data-category="community-champion">
         <div class="category-icon"><i class="fas fa-users"></i></div>
         <h3 class="category-title">Community Champion of the Year</h3>
-        <p class="category-count">15 Nominees</p>
+        <p class="category-count" id="category-count">15 Nominees</p>
       </div>
 
       <!-- Influencer -->
       <div class="category-card" data-category="influencer">
         <div class="category-icon"><i class="fas fa-bullhorn"></i></div>
         <h3 class="category-title">Influencer of the Year</h3>
-        <p class="category-count">13 Nominees</p>
+        <p class="category-count" id="category-count">13 Nominees</p>
       </div>
 
       <!-- DJ -->
       <div class="category-card" data-category="dj">
         <div class="category-icon"><i class="fas fa-music"></i></div>
         <h3 class="category-title">DJ of the Year</h3>
-        <p class="category-count">18 Nominees</p>
+        <p class="category-count" id="category-count">18 Nominees</p>
       </div>
 
       <!-- Podcast -->
       <div class="category-card" data-category="podcast">
         <div class="category-icon"><i class="fas fa-podcast"></i></div>
         <h3 class="category-title">Podcast of the Year</h3>
-        <p class="category-count">7 Nominees</p>
+        <p class="category-count" id="category-count">7 Nominees</p>
       </div>
 
       <!-- Facebook -->
       <div class="category-card" data-category="facebook">
         <div class="category-icon"><i class="fab fa-facebook"></i></div>
         <h3 class="category-title">Facebook Page of the Year</h3>
-        <p class="category-count">10 Nominees</p>
+        <p class="category-count" id="category-count">10 Nominees</p>
       </div>
 
       <!-- TikTok -->
       <div class="category-card" data-category="tiktok">
         <div class="category-icon"><i class="fab fa-tiktok"></i></div>
         <h3 class="category-title">TikTok Page of the Year</h3>
-        <p class="category-count">20 Nominees</p>
+        <p class="category-count" id="category-count">20 Nominees</p>
       </div>
-      <div class="category-card" data-category="tiktok">
+
+      <!-- CEO -->
+      <div class="category-card" data-category="ceo">
         <div class="category-icon"><i class="ti ti-buildings"></i></div>
         <h3 class="category-title">CEO of the Year</h3>
-        <p class="category-count">30 Nominees</p>
+        <p class="category-count" id="category-count">0 Nominees</p>
+      </div>
+      <!-- Instagram -->
+      <div class="category-card" data-category="instagram">
+        <div class="category-icon"><i class="ti ti-buildings"></i></div>
+        <h3 class="category-title">Instagram Page of the Year</h3>
+        <p class="category-count" id="category-count">0 Nominees</p>
       </div>
     </div>
     <div class="view-all-btn">
@@ -619,8 +627,7 @@
 
   // Make supabase available globally for your dashboard.js
   window.supabase = supabase;
-</script>
-<script>
+
   document.addEventListener("DOMContentLoaded", function() {
     turnstile.render('#turnstile-container', {
       sitekey: '0x4AAAAAAB2eY3dJhw367KcE',
@@ -630,7 +637,136 @@
       }
     });
   });
+
+function normalizeCategory(raw) {
+  if (!raw) return '';
+  let s = String(raw).trim().toLowerCase();
+
+  // quick canonical replacements (ampersand -> and, etc)
+  s = s.replace(/\s*&\s*/g, '-and-');
+
+  // remove undesirable chars -> hyphens, trim hyphens
+  s = s.replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  // strip common suffix like "-of-the-year" to match your short slugs
+  if (s.endsWith('-of-the-year')) s = s.replace(/-of-the-year$/, '');
+
+  // optional map for known irregular DB names (extend if needed)
+  const map = {
+    "philanthropist-of-the-year": "philanthropist",
+    "female-artist-of-the-year": "female artist",
+    "brand-ambassador-of-the-year": "brand-ambassador",
+    "blogger-of-the-year": "blogger",
+    "content-creator-of-the-year": "content-creator",
+    "entrepreneur-of-the-year": "entrepreneur",
+    "student-leader-of-the-year": "student-leader",
+    "Tech-and-Craft-of-the-year": "Tech-and-Craft",
+    "innovator-of-the-year": "innovator",
+    "comedian-of-the-year": "comedian",
+    "community-champion-of-the-year": "community-champion",
+    "influencer-of-the-year": "influencer",
+    "mc-of-the-year": "mc",
+    "dj-of-the-year": "dj",
+    "podcast-of-the-year": "podcast",
+    "facebook-page-of-the-year": "facebook",
+    "tiktok-page-of-the-year": "tiktok",
+    "instagram-page-of-the-year": "instagram",
+    "ceo-of-the-year": "ceo",
+    "cartoonist-of-the-year": "cartoon",
+    "media-personality-of-the-year": "media",
+    "plug-of-the-year": "plug",
+    "PWD-of-the-year":"pwd",
+    "male-artist-of-the-year":"male artist",
+    "Digital-creator-of-the-year":"Digital Creator",
+    "male-gospel-artist-of-the-year":"male-gospel",
+    "female-gospel-artist-of-the-year":"female-gospel",
+    "footballer-of-the-year":"football",
+    "volleyballer-of-the-year":"volleyball",
+
+
+    // ✅ Added missing ones
+    "chef-of-the-year": "chef",
+    "makeup-artist-of-the-year": "makeup-artist",
+    "fashion-designer-of-the-year": "fashion-designer",
+    "fitness-trainer-of-the-year": "fitness-trainer",
+    "photographer-of-the-year": "photographer",
+    "stylist-of-the-year": "stylist",
+    "restaurant-of-the-year": "restaurant",
+    "barber-of-the-year": "barber",
+    "hairdresser-of-the-year": "hairdresser",
+    "hotels-of-the-year": "Hotels",
+  };
+
+  return map[s] || s;
+}
+
+async function fetchCounts() {
+  try {
+    // fetch only the category column (lightweight)
+    const { data, error } = await supabase.from('nominees').select('category');
+    if (error) {
+      console.error('Error fetching nominees for counts:', error);
+      return {};
+    }
+    const counts = {};
+    for (const row of data || []) {
+      const slug = normalizeCategory(row.category || row.category_name || '');
+      if (!slug) continue;
+      counts[slug] = (counts[slug] || 0) + 1;
+    }
+    return counts;
+  } catch (err) {
+    console.error('Unexpected error fetching counts:', err);
+    return {};
+  }
+}
+
+function updateIndexCounts(counts) {
+  // update each category card
+  document.querySelectorAll('.category-card').forEach(card => {
+    const cat = (card.dataset.category || '').toString();
+    const el = card.querySelector('.category-count');
+    const count = counts[cat] || 0;
+    if (el) el.textContent = `${count} ${count === 1 ? 'Nominee' : 'Nominees'}`;
+
+    // make card clickable: User lands on dashboard with ?category=slug
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      const url = new URL('Public/dashboard.html', window.location.origin);
+      url.searchParams.set('category', cat);
+      window.location.href = url.toString();
+    });
+  });
+
+  // update the small "Nominees" stat on index (if present)
+  const nomineesStat = document.getElementById('nominees-count');
+  if (nomineesStat) {
+    const total = Object.values(counts).reduce((a,b)=>a+b,0);
+    nomineesStat.textContent = total;
+  }
+}
+
+(async function initCategoryCounts() {
+  const counts = await fetchCounts();
+  updateIndexCounts(counts);
+})();
+
+// inside loadNominees(), after you check for `nominee` param:
+const params = new URLSearchParams(window.location.search);
+const nomineeId = params.get("nominee");
+const categoryParam = params.get("category");
+if (nomineeId) {
+  openVotingModal(nomineeId);
+}
+if (categoryParam) {
+  // small delay to ensure UI setup finished; navigateToCategory is defined later but will be hoisted
+  setTimeout(() => {
+    try { navigateToCategory(categoryParam); } catch (e) { console.warn('navigateToCategory failed', e); }
+  }, 40);
+}
+
 </script>
+
 
 </body>
 </html>

@@ -346,7 +346,7 @@ function normalizeCategory(c) {
     "content-creator-of-the-year": "content-creator",
     "entrepreneur-of-the-year": "entrepreneur",
     "student-leader-of-the-year": "student-leader",
-    "Tech-and-Craft-of-the-year": "Tech-and-Craft",
+    "Tech-and-Craft-of-the-year": "Tech",
     "innovator-of-the-year": "innovator",
     "comedian-of-the-year": "comedian",
     "community-champion-of-the-year": "community-champion",

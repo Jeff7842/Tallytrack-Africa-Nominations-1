@@ -161,11 +161,16 @@ select {
             left: 0;
         }
 
-        .btn-inactive {
+        .btn-inactive[aria-disabled="true"] {
             background: transparent;
             color: var(--inactive);
             border: 2px solid var(--inactive);
             cursor: not-allowed;
+        }
+
+        .nominee-count.zero {
+  background: var(--inactive);
+  color: var(--text-gray);
         }
 
         /* Header Styles */
@@ -476,6 +481,15 @@ select {
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             color: var(--light-gold);
+        }
+
+        .total-count{
+            display: inline-block;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-gold);
+            margin-left: 5px;
+            margin-right: 3px;
         }
 
         .nominee-count.zero {
@@ -887,6 +901,9 @@ select {
                 <p class="section-description">
                     Browse through our categories below to learn more about each field of recognition and discover the nominees who are shaping Africa's future.
                 </p>
+                <p class="section-description total-nominees">
+        Currently featuring <strong id="nominees-count" class="total-count">0</strong> remarkable nominees across all categories.
+      </p>
             </div>
         </div>
     </section>
@@ -895,13 +912,13 @@ select {
     <section class="categories-grid-section" id="categories">
         <div class="container">
             <!-- Philanthropist of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="philanthropist">
                 <div class="category-image">
                     <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Philanthropist of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Philanthropist of the Year</h3>
-                    <div class="nominee-count">12 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">12 Nominees</div>
                     <p class="category-description">
                         Recognizing individuals who have demonstrated exceptional generosity and commitment to charitable causes, making significant positive impacts on communities across Africa through their philanthropic efforts and humanitarian initiatives.
                     </p>
@@ -910,13 +927,13 @@ select {
             </div>
 
             <!-- Brand Ambassador of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="brand-ambassador">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1563013546-7e567a0cbbded?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brand Ambassador of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/BRAND-AMBASSADOR-1.png" alt="Brand Ambassador of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Brand Ambassador of the Year</h3>
-                    <div class="nominee-count">8 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">8 Nominees</div>
                     <p class="category-description">
                         Celebrating individuals who have exceptionally represented brands with authenticity and influence, effectively bridging the gap between companies and consumers while building meaningful connections across diverse African markets.
                     </p>
@@ -925,13 +942,13 @@ select {
             </div>
 
             <!-- Blogger of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="blogger">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1545239351-ef35f43d514b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Blogger of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/blogger.jpg" alt="Blogger of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Blogger of the Year</h3>
-                    <div class="nominee-count">6 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">6 Nominees</div>
                     <p class="category-description">
                         Honoring exceptional writers and content creators who have built engaged communities through their insightful blogs, sharing unique perspectives on African culture, lifestyle, business, and innovation with authentic storytelling.
                     </p>
@@ -940,13 +957,13 @@ select {
             </div>
 
             <!-- Content Creator of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="content-creator">
                 <div class="category-image">
                     <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Content Creator of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Content Creator of the Year</h3>
-                    <div class="nominee-count">24 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">24 Nominees</div>
                     <p class="category-description">
                         Celebrating innovative creators who produce engaging, original content across multiple platforms, captivating audiences with their unique voice, creativity, and ability to tell compelling stories that resonate with African audiences.
                     </p>
@@ -955,13 +972,13 @@ select {
             </div>
 
             <!-- Entrepreneur of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="entrepreneur">
                 <div class="category-image">
                     <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Entrepreneur of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Entrepreneur of the Year</h3>
-                    <div class="nominee-count">16 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">16 Nominees</div>
                     <p class="category-description">
                         Recognizing visionary business leaders who have demonstrated exceptional innovation, resilience, and growth in their ventures, contributing significantly to economic development and job creation across African markets.
                     </p>
@@ -969,29 +986,29 @@ select {
                 </div>
             </div>
 
-            <!-- Youth Leader of the Year -->
-            <div class="category-item">
+            <!-- Student Leader of the Year -->
+            <div class="category-item" data-category="student-leader">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Youth Leader of the Year">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Student Leader of the Year">
                 </div>
                 <div class="category-content">
-                    <h3 class="category-name">Youth Leader of the Year</h3>
-                    <div class="nominee-count">9 Nominees</div>
+                    <h3 class="category-name">Student Leader of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">9 Nominees</div>
                     <p class="category-description">
                         Honoring young visionaries who are driving positive change in their communities, demonstrating exceptional leadership, initiative, and impact in various sectors while inspiring the next generation of African leaders.
                     </p>
-                    <a href="dashboard.html#youth-leader" class="btn btn-primary">View Nominees</a>
+                    <a href="dashboard.html#student-leader" class="btn btn-primary">View Nominees</a>
                 </div>
             </div>
 
             <!-- Innovator of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="innovator">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Innovator of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/innovation.avif" alt="Innovator of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Innovator of the Year</h3>
-                    <div class="nominee-count">14 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">14 Nominees</div>
                     <p class="category-description">
                         Celebrating brilliant minds who have developed groundbreaking solutions to African challenges, demonstrating exceptional creativity, technical expertise, and potential for significant impact across various industries and communities.
                     </p>
@@ -1000,13 +1017,13 @@ select {
             </div>
 
             <!-- Comedian of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="comedian">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Comedian of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/commedy.jpg" alt="Comedian of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Comedian of the Year</h3>
-                    <div class="nominee-count">11 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">11 Nominees</div>
                     <p class="category-description">
                         Recognizing talented comedians who have brought laughter and joy to audiences across Africa, using humor to address social issues, bridge cultural divides, and showcase the vibrant diversity of African comedy.
                     </p>
@@ -1015,13 +1032,13 @@ select {
             </div>
 
             <!-- Community Champion of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="community-champion">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Community Champion of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/community-champions-2.png" alt="Community Champion of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Community Champion of the Year</h3>
-                    <div class="nominee-count">15 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">15 Nominees</div>
                     <p class="category-description">
                         Honoring individuals who have made exceptional contributions to their local communities, demonstrating selflessness, dedication, and significant positive impact through various initiatives and development projects.
                     </p>
@@ -1030,13 +1047,13 @@ select {
             </div>
 
             <!-- Influencer of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="influencer">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Influencer of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/influencer.jpg" alt="Influencer of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Influencer of the Year</h3>
-                    <div class="nominee-count">13 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">13 Nominees</div>
                     <p class="category-description">
                         Celebrating digital creators who have built substantial influence and engaged communities, using their platforms to inspire, educate, and drive positive change while authentically representing African culture and values.
                     </p>
@@ -1045,13 +1062,13 @@ select {
             </div>
 
             <!-- DJ of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="dj">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="DJ of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/dj%20kenya.jpg" alt="DJ of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">DJ of the Year</h3>
-                    <div class="nominee-count">18 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">18 Nominees</div>
                     <p class="category-description">
                         Recognizing exceptional disc jockeys who have showcased remarkable talent, innovation, and influence in the music industry, shaping soundscapes and entertaining audiences across Africa and beyond with their unique mixes.
                     </p>
@@ -1060,13 +1077,13 @@ select {
             </div>
 
             <!-- Podcast of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="podcast">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1589903308904-d969a5ad15d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Podcast of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/podcast.jpg" alt="Podcast of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Podcast of the Year</h3>
-                    <div class="nominee-count">7 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">7 Nominees</div>
                     <p class="category-description">
                         Celebrating outstanding podcasts that have captivated audiences with compelling content, exceptional production quality, and meaningful conversations that highlight African stories, perspectives, and expertise across various topics.
                     </p>
@@ -1075,13 +1092,13 @@ select {
             </div>
 
             <!-- Facebook Page of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="facebook">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Facebook Page of the Year">
+                    <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Facebook Page of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Facebook Page of the Year</h3>
-                    <div class="nominee-count">10 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">10 Nominees</div>
                     <p class="category-description">
                         Honoring Facebook pages that have demonstrated exceptional engagement, content quality, and community building, effectively utilizing the platform to share valuable information, entertainment, and meaningful connections.
                     </p>
@@ -1090,13 +1107,13 @@ select {
             </div>
 
             <!-- TikTok Page of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="tiktok">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="TikTok Page of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/tiktok.jpg" alt="TikTok Page of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">TikTok Page of the Year</h3>
-                    <div class="nominee-count">20 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">20 Nominees</div>
                     <p class="category-description">
                         Recognizing TikTok creators who have mastered short-form video content, demonstrating creativity, viral appeal, and significant cultural impact while entertaining and engaging with diverse audiences across Africa.
                     </p>
@@ -1105,13 +1122,13 @@ select {
             </div>
 
             <!-- CEO of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="ceo">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/ceo.jpg" alt="CEO of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">CEO of the Year</h3>
-                    <div class="nominee-count">30 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">30 Nominees</div>
                     <p class="category-description">
                         Celebrating exceptional chief executives who have demonstrated visionary leadership, strategic acumen, and remarkable results in steering their organizations to new heights while creating significant value and impact.
                     </p>
@@ -1120,13 +1137,13 @@ select {
             </div>
 
             <!-- Instagram Page of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="instagram">
                 <div class="category-image">
                     <img src="https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Instagram Page of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Instagram Page of the Year</h3>
-                    <div class="nominee-count">22 Nominees</div>
+                    <div class="nominee-count" id="nominees-count">22 Nominees</div>
                     <p class="category-description">
                         Honoring Instagram creators who have built engaging communities through visually stunning content, authentic storytelling, and meaningful interactions, effectively utilizing the platform's features to connect with audiences.
                     </p>
@@ -1134,44 +1151,89 @@ select {
                 </div>
             </div>
 
-            <!-- Twitter Page of the Year -->
-            <div class="category-item">
+            <!--  Digital Creator of the Year -->
+            <div class="category-item" data-category="digital-creator">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Twitter Page of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/digital%20creator.webp" alt=" Digital Creator of the Year">
                 </div>
                 <div class="category-content">
-                    <h3 class="category-name">Twitter Page of the Year</h3>
-                    <div class="nominee-count">5 Nominees</div>
+                    <h3 class="category-name"> Digital Creator of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">22 Nominees</div>
                     <p class="category-description">
-                        Recognizing Twitter accounts that have mastered the art of concise communication, driving meaningful conversations, sharing valuable insights, and building engaged communities around relevant topics and discussions.
+                        Honoring digital creators who have built engaging communities through visually stunning content, authentic storytelling, and meaningful interactions, effectively utilizing the platform's features to connect with audiences.
+                    </p>
+                    <a href="dashboard.html#instagram" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!--  MC of the Year -->
+            <div class="category-item" data-category="mc">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/mc%20of%20the%20year.jpg" alt="Twitter Page of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name"> MC of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">5 Nominees</div>
+                    <p class="category-description">
+                        Celebrating master of ceremonies who have demonstrated exceptional charisma, professionalism, and ability to engage audiences, effectively hosting events and creating memorable experiences across various platforms in Africa.
                     </p>
                     <a href="dashboard.html#twitter" class="btn btn-primary">View Nominees</a>
                 </div>
             </div>
 
-            <!-- YouTube Channel of the Year -->
-            <div class="category-item">
+            <!-- Media Personality of the Year  -->
+            <div class="category-item" data-category="media">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="YouTube Channel of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/media.jpg" alt="YouTube Channel of the Year">
                 </div>
                 <div class="category-content">
-                    <h3 class="category-name">YouTube Channel of the Year</h3>
-                    <div class="nominee-count">17 Nominees</div>
+                    <h3 class="category-name">Media Personality of the Year </h3>
+                    <div class="nominee-count" id="nominees-count">17 Nominees</div>
                     <p class="category-description">
-                        Celebrating outstanding YouTube channels that have consistently delivered high-quality video content, built substantial subscriber bases, and made significant cultural impact through entertainment, education, or inspiration.
+                        Honoring influential media personalities who have made significant contributions to journalism, broadcasting, and content creation, shaping public discourse and engaging audiences across Africa with integrity and professionalism.
                     </p>
                     <a href="dashboard.html#youtube" class="btn btn-primary">View Nominees</a>
                 </div>
             </div>
 
-            <!-- Artist of the Year -->
-            <div class="category-item">
+            <!--Female Artist of the Year -->
+            <div class="category-item" data-category="female-artist">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artist of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/female%20artist.jpg" alt="Artist of the Year">
                 </div>
                 <div class="category-content">
-                    <h3 class="category-name">Artist of the Year</h3>
-                    <div class="nominee-count">19 Nominees</div>
+                    <h3 class="category-name">Female Artist of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">19 Nominees</div>
+                    <p class="category-description">
+                        Honoring visual female artists who have demonstrated exceptional creativity, technical skill, and cultural relevance through their work, contributing to the vibrant and diverse contemporary art scene across Africa.
+                    </p>
+                    <a href="dashboard.html#artist" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Male Artist of the Year -->
+            <div class="category-item" data-category="male-artist">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/male%20artist.jpg" alt="Artist of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Male Artist of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">9 Nominees</div>
+                    <p class="category-description">
+                        Honoring visual male artists who have demonstrated exceptional creativity, technical skill, and cultural relevance through their work, contributing to the vibrant and diverse contemporary art scene across Africa.
+                    </p>
+                    <a href="dashboard.html#artist" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Female Gospel Artist of the Year -->
+            <div class="category-item" data-category="female-gospel">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/Female%20gospel%20artist.jpg" alt="Gospel artist of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Female Gospel of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">34 Nominees</div>
                     <p class="category-description">
                         Honoring visual artists who have demonstrated exceptional creativity, technical skill, and cultural relevance through their work, contributing to the vibrant and diverse contemporary art scene across Africa.
                     </p>
@@ -1179,46 +1241,196 @@ select {
                 </div>
             </div>
 
-            <!-- Designer of the Year -->
-            <div class="category-item">
+            <!-- Male Gospel Artist of the Year -->
+            <div class="category-item" data-category="male-gospel">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1562142355-4c0df6727233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Designer of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/male.jpeg" alt="Gospel artist of the Year">
                 </div>
                 <div class="category-content">
-                    <h3 class="category-name">Designer of the Year</h3>
-                    <div class="nominee-count">4 Nominees</div>
+                    <h3 class="category-name">Male Gospel of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">21 Nominees</div>
                     <p class="category-description">
-                        Recognizing talented designers who have demonstrated exceptional creativity, innovation, and impact in their respective design fields, whether in fashion, graphics, product, or interior design, with work that reflects African aesthetics.
+                        Honoring visual artists who have demonstrated exceptional creativity, technical skill, and cultural relevance through their work, contributing to the vibrant and diverse contemporary art scene across Africa.
+                    </p>
+                    <a href="dashboard.html#artist" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!--  Hair Dresser of the Year  -->
+            <div class="category-item" data-category="hairdresser">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/hair-dresser.jpg" alt="Hair Dresser of the Year ">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name"> Hair Dresser of the Year  </h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Celebrating exceptional hairstylists who have demonstrated outstanding creativity, skill, and influence in the beauty industry, shaping trends and empowering individuals across Africa with their artistry and expertise.
                     </p>
                     <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
                 </div>
             </div>
 
-            <!-- Gamer of the Year -->
-            <div class="category-item">
+            <!-- Person with Disability (PWD) of the Year -->
+            <div class="category-item" data-category="pwd">
                 <div class="category-image">
-                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gamer of the Year">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/PWD.jpg" alt="Designer of the Year">
                 </div>
                 <div class="category-content">
-                    <h3 class="category-name">Gamer of the Year</h3>
-                    <div class="nominee-count">0 Nominees</div>
+                    <h3 class="category-name">Person with Disability (PWD) of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
                     <p class="category-description">
-                        Celebrating exceptional gamers who have demonstrated remarkable skill, sportsmanship, and contribution to the gaming community, whether through competitive achievements, content creation, or community building efforts.
+                        Celebrating individuals with disabilities who have overcome challenges to achieve remarkable success and make significant contributions in their respective fields, inspiring others through their resilience, talent, and determination.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+            
+             <!--  Stylist / Fashion Brand / Designer of the Year  -->
+            <div class="category-item" data-category="stylist">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/stylist.jpg" alt="Stylist / Fashion Brand / Designer of the Year ">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name"> Stylist / Fashion Brand / Designer of the Year  </h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Celebrating innovative fashion designers and brands that have made significant contributions to the African fashion industry, showcasing exceptional creativity, craftsmanship, and cultural influence through their unique styles and designs.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+            <!-- Barber of the Year  -->
+            <div class="category-item" data-category="barber">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/barber.jpg" alt="Designer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Barber of the Year </h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Honoring skilled barbers who have demonstrated exceptional craftsmanship, creativity, and dedication to their profession, contributing to the grooming and style culture across Africa while inspiring others in the industry.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Tech & Craft of the Year -->
+            <div class="category-item" data-category="tech-and-craft">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/Teach%20and%20craft.jpg" alt="Designer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Tech & Craft of the Year </h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Honoring artisans and technologists who have demonstrated exceptional skill, creativity, and innovation in their crafts, contributing to the preservation of cultural heritage and the advancement of technology across Africa.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+
+            <!-- Cartoon of the Year -->
+            <div class="category-item" data-category="cartoon">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/cartoonist.jpg" alt="Gamer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Cartoonist of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">0 Nominees</div>
+                    <p class="category-description">
+                        Celebrating exceptional cartoon artists who have used their talent to entertain, educate, and inspire audiences through compelling storytelling, humor, and unique artistic styles that resonate with African culture and experiences.
                     </p>
                     <a href="dashboard.html#gamer" class="btn btn-inactive">View Nominees</a>
                 </div>
             </div>
 
+            <!--  Chef of the Year -->
+            <div class="category-item" data-category="chef">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/Chef.jpg" alt=" Chef of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name"> Chef of the Year </h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Honoring culinary artists who have demonstrated exceptional skill, creativity, and passion in their craft, contributing to the rich and diverse food culture across Africa while inspiring others in the culinary industry.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!-- Makeup Artist of the Year -->
+            <div class="category-item" data-category="makeup-artist">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/Makeup.jpg" alt="Makeup Artist of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name"> Makeup Artist of the Year</h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Celebrating talented makeup artists who have showcased exceptional creativity, technical skill, and influence in the beauty industry, enhancing individual confidence and empowering clients across Africa with their artistry and expertise.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
             <!-- Photographer of the Year -->
-            <div class="category-item">
+            <div class="category-item" data-category="photographer">
                 <div class="category-image">
                     <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Photographer of the Year">
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">Photographer of the Year</h3>
-                    <div class="nominee-count">1 Nominee</div>
+                    <div class="nominee-count">16 Nominee</div>
                     <p class="category-description">
                         Honoring photographers who have captured compelling images that tell powerful stories, showcase African beauty, and demonstrate exceptional technical skill, creativity, and artistic vision in their photographic work.
+                    </p>
+                    <a href="dashboard.html#photographer" class="btn">View Nominees</a>
+                </div>
+            </div>
+
+            <!--  Fitness Trainer of the Year -->
+            <div class="category-item" data-category="fitness-trainer">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/Fitness.jpg" alt=" Fitness Trainer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name"> Fitness Trainer of the Year </h3>
+                    <div class="nominee-count" id="nominees-count">4 Nominees</div>
+                    <p class="category-description">
+                        Honoring fitness trainers who have demonstrated exceptional dedication, expertise, and impact in promoting health and wellness, inspiring individuals and communities across Africa to lead healthier lifestyles.
+                    </p>
+                    <a href="dashboard.html#designer" class="btn btn-primary">View Nominees</a>
+                </div>
+            </div>
+
+            <!--  Footballer of the Year -->
+            <div class="category-item" data-category="footballer">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/Football.jpg" alt="Photographer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Footballer of the Year</h3>
+                    <div class="nominee-count">1 Nominee</div>
+                    <p class="category-description">
+                     Celebrating outstanding footballers who have demonstrated exceptional skill, sportsmanship, and impact on and off the field, inspiring fans and contributing to the growth of football across Africa.
+                    </p>
+                    <a href="dashboard.html#photographer" class="btn btn-inactive">View Nominees</a>
+                </div>
+            </div>
+
+            <!--  volleyballer of the Year -->
+            <div class="category-item" data-category="volleyballer">
+                <div class="category-image">
+                    <img src="https://cijjwarijqkaihehjskw.supabase.co/storage/v1/object/public/Category%20page/volleyball.jpg" alt="Volleyballer of the Year">
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">Volleyballer of the Year</h3>
+                    <div class="nominee-count">1 Nominee</div>
+                    <p class="category-description">
+                        Honoring exceptional volleyball players who have showcased remarkable talent, teamwork, and dedication to the sport, making significant contributions to the growth and popularity of volleyball across Africa.
                     </p>
                     <a href="dashboard.html#photographer" class="btn btn-inactive">View Nominees</a>
                 </div>
@@ -1333,7 +1545,7 @@ select {
             checkScroll();
             window.addEventListener('scroll', checkScroll);
             
-            // Simulate loading unavailable categories
+            /* Simulate loading unavailable categories
             setTimeout(() => {
                 // These would normally come from an API
                 const unavailableCategories = ['Gamer of the Year', 'Photographer of the Year'];
@@ -1358,7 +1570,7 @@ select {
                         }
                     }
                 });
-            }, 1000);
+            }, 1000);*/
         });
          // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -1415,5 +1627,200 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.style.zIndex = '1002';
 });
     </script>
+    <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+  // Defensive check for import.meta.env
+  const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
+  const supabaseUrl = env.VITE_SUPABASE_URL || 'https://cijjwarijqkaihehjskw.supabase.co';
+  const supabaseKey = env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpamp3YXJpanFrYWloZWhqc2t3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0MzAxODQsImV4cCI6MjA3MjAwNjE4NH0.h0VWs07u1mPGCBKc7wcOAG_ejH8LK8CdyFFHVyoILp8';
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  // Make supabase available globally for your dashboard.js
+  window.supabase = supabase;
+
+  function normalizeCategory(raw) {
+  if (!raw) return '';
+  let s = String(raw).trim().toLowerCase();
+
+  // quick canonical replacements (ampersand -> and, etc)
+  s = s.replace(/\s*&\s*/g, '-and-');
+
+  // remove undesirable chars -> hyphens, trim hyphens
+  s = s.replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  // strip common suffix like "-of-the-year" to match your short slugs
+  if (s.endsWith('-of-the-year')) s = s.replace(/-of-the-year$/, '');
+
+  // optional map for known irregular DB names (extend if needed)
+  const map = {
+    "philanthropist-of-the-year": "philanthropist",
+    "female-artist-of-the-year": "female artist",
+    "brand-ambassador-of-the-year": "brand-ambassador",
+    "blogger-of-the-year": "blogger",
+    "content-creator-of-the-year": "content-creator",
+    "entrepreneur-of-the-year": "entrepreneur",
+    "student-leader-of-the-year": "student-leader",
+    "Tech-and-Craft-of-the-year": "Tech-and-Craft",
+    "innovator-of-the-year": "innovator",
+    "comedian-of-the-year": "comedian",
+    "community-champion-of-the-year": "community-champion",
+    "influencer-of-the-year": "influencer",
+    "mc-of-the-year": "mc",
+    "dj-of-the-year": "dj",
+    "podcast-of-the-year": "podcast",
+    "facebook-page-of-the-year": "facebook",
+    "tiktok-page-of-the-year": "tiktok",
+    "instagram-page-of-the-year": "instagram",
+    "ceo-of-the-year": "ceo",
+    "cartoonist-of-the-year": "cartoon",
+    "media-personality-of-the-year": "media",
+    "plug-of-the-year": "plug",
+    "PWD-of-the-year":"pwd",
+    "male-artist-of-the-year":"male artist",
+    "Digital-creator-of-the-year":"Digital Creator",
+    "male-gospel-artist-of-the-year":"male-gospel",
+    "female-gospel-artist-of-the-year":"female-gospel",
+    "footballer-of-the-year":"football",
+    "volleyballer-of-the-year":"volleyball",
+
+
+    // ✅ Added missing ones
+    "chef-of-the-year": "chef",
+    "makeup-artist-of-the-year": "makeup-artist",
+    "fashion-designer-of-the-year": "fashion-designer",
+    "fitness-trainer-of-the-year": "fitness-trainer",
+    "photographer-of-the-year": "photographer",
+    "stylist-of-the-year": "stylist",
+    "restaurant-of-the-year": "restaurant",
+    "barber-of-the-year": "barber",
+    "hairdresser-of-the-year": "hairdresser",
+    "hotels-of-the-year": "Hotels",
+  };
+
+  return map[s] || s;
+}
+
+async function fetchCounts() {
+  try {
+    // fetch only the category column (lightweight)
+    const { data, error } = await supabase.from('nominees').select('category');
+    if (error) {
+      console.error('Error fetching nominees for counts:', error);
+      return {};
+    }
+    const counts = {};
+    for (const row of data || []) {
+      const slug = normalizeCategory(row.category || row.category_name || '');
+      if (!slug) continue;
+      counts[slug] = (counts[slug] || 0) + 1;
+    }
+    return counts;
+  } catch (err) {
+    console.error('Unexpected error fetching counts:', err);
+    return {};
+  }
+}
+
+function updateIndexCounts(counts) {
+  // Update each category card based on counts returned from Supabase
+  document.querySelectorAll('.category-item').forEach(card => {
+    const cat = (card.dataset.category || '').toString();
+    const el = card.querySelector('.nominee-count');
+    const btn = card.querySelector('.btn');
+    const count = counts[cat] || 0;
+
+    // Update the displayed count text (handles pluralization)
+    if (el) el.textContent = `${count} ${count === 1 ? 'Nominee' : 'Nominees'}`;
+
+    // If 0 or 1 -> mark as inactive + grey the count
+    if (count <= 1) {
+      if (el) el.classList.add('zero');          // grey style
+      if (btn) {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-inactive');
+        btn.setAttribute('aria-disabled', 'true'); // accessibility
+        btn.setAttribute('tabindex', '-1');       // remove from tab order
+        btn.dataset.disabled = 'true';
+      }
+    } else {
+      // restore active state
+      if (el) el.classList.remove('zero');
+      if (btn) {
+        btn.classList.remove('btn-inactive');
+        btn.classList.add('btn-primary');
+        btn.removeAttribute('aria-disabled');
+        btn.removeAttribute('tabindex');
+        delete btn.dataset.disabled;
+      }
+    }
+  });
+
+  // Update the small total nominees stat in the intro:
+  const nomineesStat = document.querySelector('.total-count') || document.getElementById('nominees-count');
+  if (nomineesStat) {
+    const total = Object.values(counts).reduce((a,b)=>a+b,0);
+    nomineesStat.textContent = total;
+  }
+}
+
+// Delegated handler: block navigation for any anchor/button set to aria-disabled="true"
+document.addEventListener('click', function(e) {
+  const el = e.target.closest('.btn-inactive[aria-disabled="true"]');
+  if (el) {
+    e.preventDefault();
+    // optional: show a tiny tooltip or toast here if you want to explain why it's disabled
+  }
+});
+
+
+(async function initCategoryCounts() {
+  const counts = await fetchCounts();
+  updateIndexCounts(counts);
+})();
+
+// Simulate loading unavailable categories
+setTimeout(() => {
+    // These would normally come from an API
+    const unavailableCategories = ['Gamer of the Year', 'Photographer of the Year'];
+    
+    document.querySelectorAll('.category-item').forEach(item => {
+        const categoryName = item.querySelector('.category-name').textContent;
+    
+        if (unavailableCategories.includes(categoryName)) {
+        const button = item.querySelector('.btn');
+        const count = item.querySelector('.nominee-count');
+    
+        if (categoryName === 'Gamer of the Year') {
+            count.textContent = '0 Nominees';
+            count.classList.add('zero');
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-inactive');
+        } else if (categoryName === 'Photographer of the Year') {
+            count.textContent = '1 Nominee';
+            count.classList.add('zero');
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-inactive');
+        }
+        }
+    });
+}, 1000);
+
+
+// inside loadNominees(), after you check for `nominee` param:
+const params = new URLSearchParams(window.location.search);
+const nomineeId = params.get("nominee");
+const categoryParam = params.get("category");
+if (nomineeId) {
+  openVotingModal(nomineeId);
+}
+if (categoryParam) {
+  // small delay to ensure UI setup finished; navigateToCategory is defined later but will be hoisted
+  setTimeout(() => {
+    try { navigateToCategory(categoryParam); } catch (e) { console.warn('navigateToCategory failed', e); }
+  }, 40);
+}
+</script>
 </body>
 </html>
